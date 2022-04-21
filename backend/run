@@ -1,1 +1,1 @@
-java -cp target/backend-1.0-SNAPSHOT.jar com.brown.app.App
+mvn compile exec:java -Dexec.mainClass="com.brown.app.App" -Dmongodb.uri="mongodb+srv://parker:1234@cluster0.oxr9i.mongodb.net/Cluster0?retryWrites=true&w=majority"
