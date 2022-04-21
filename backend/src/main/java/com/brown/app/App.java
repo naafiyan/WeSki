@@ -35,7 +35,7 @@ public class App
             MongoDatabase db = mongoClient.getDatabase("notSkiQL");
             MongoCollection<Weather> weatherCollection = db.getCollection("weather", Weather.class);
 
-            Weather testWeather = new Weather().setTemp(5).setImg(2).setDesc("howdy");
+            Weather testWeather = new Weather(5, 2, "hi");
             weatherCollection.insertOne(testWeather);
         }
     }

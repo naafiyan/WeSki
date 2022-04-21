@@ -1,11 +1,20 @@
 package com.brown.app.models;
 
+import org.bson.types.ObjectId;
+
 import java.util.Objects;
 
 public class Weather {
+  private ObjectId id;
   private double temp;
   private int img;
   private String desc;
+
+  public Weather(double temp, int img, String desc) {
+    this.temp=temp;
+    this.img=img;
+    this.desc=desc;
+  }
 
   public double getTemp() {
     return this.temp;
@@ -34,10 +43,13 @@ public class Weather {
     return this;
   }
 
+  //Todo: fix the .equals here and in others
+
   @Override
   public String toString() {
     final StringBuffer sb = new StringBuffer("Weather{");
-    sb.append("temp=").append(this.temp);
+    sb.append("id=").append(this.id);
+    sb.append(", temp=").append(this.temp);
     sb.append(", img=").append(this.img);
     sb.append(", desc=").append(this.desc);
     sb.append('}');
@@ -54,6 +66,14 @@ public class Weather {
 
   @Override
   public int hashCode() {
-    return Objects.hash(temp, img, desc);
+    return Objects.hash(id, temp, img, desc);
+  }
+
+  public ObjectId getId() {
+    return id;
+  }
+
+  public void setId(ObjectId id) {
+    this.id = id;
   }
 }
