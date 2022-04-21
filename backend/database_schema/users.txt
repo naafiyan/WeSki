@@ -12,11 +12,17 @@ validator: {
                 description: "must be a string and is required"
             },
             prefs: {
-                bsonType: [ "objectId" ],
+                bsonType: "array",
+                items: {
+                    bsonType: "objectId"
+                },
                 description: "must be an array of objectIds and is required"
             },
             comments: {
-                bsonType: [ "objectId" ],
+                bsonType: "array",
+                items: {
+                    bsonType: "objectId"
+                },
                 description: "must be an array of objectIds and is required"
             },
             type: {

@@ -1,5 +1,12 @@
 package com.brown.app;
 
+import com.brown.app.models.Area;
+import com.brown.app.models.Comment;
+import com.brown.app.models.Preference;
+import com.brown.app.models.SkierType;
+import com.brown.app.models.SnowType;
+import com.brown.app.models.Trip;
+import com.brown.app.models.User;
 import com.brown.app.models.Weather;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -9,6 +16,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -33,10 +44,10 @@ public class App
 
         try (MongoClient mongoClient = MongoClients.create(clientSettings)) {
             MongoDatabase db = mongoClient.getDatabase("notSkiQL");
-            MongoCollection<Weather> weatherCollection = db.getCollection("weather", Weather.class);
+            MongoCollection<User> collection = db.getCollection("users", User.class);
 
-            Weather testWeather = new Weather(5, 2, "hi");
-            weatherCollection.insertOne(testWeather);
+            User usr = new User("purple", "nurple", new ArrayList<ObjectId>(), new ArrayList<ObjectId>(), SkierType.Adaptive, "home", new ObjectId());
+            collection.insertOne(usr);
         }
     }
 }

@@ -8,7 +8,10 @@ validator: {
                 description: "must be a string and is required"
             },
             comments: {
-                bsonType: [ "objectId" ],
+                bsonType: "array",
+                items: {
+                    bsonType: "objectId"
+                },
                 description: "must be an array of objectIds and is required"
             },
             weather: {
@@ -28,7 +31,10 @@ validator: {
                 description: "can only be one of the enum values and is required"
             },
             trails: {
-                bsonType: [ "int" ],
+                bsonType: "array",
+                items: {
+                    bsonType: "int"
+                },
                 minItems: 4,
                 maxItems: 4,
                 description: "must be an array of ints of length 4 and is required"

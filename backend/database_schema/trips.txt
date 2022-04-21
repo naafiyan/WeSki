@@ -8,7 +8,10 @@ validator: {
                 description: "must be an objectId and is required"
             },
             members: {
-                bsonType: [ "objectId" ],
+                bsonType: "array",
+                items: {
+                    bsonType: "objectId"
+                },
                 description: "must be an array of objectIds and is required"
             },
             start_date: {
