@@ -1,0 +1,36 @@
+validator: {
+    $jsonSchema: {
+        bsonType: "object",
+        required: [ "name", "email", "prefs", "comments", "type", "location", "pref_area" ],
+        properties: {
+            name: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            email: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            prefs: {
+                bsonType: [ "objectId" ],
+                description: "must be an array of objectIds and is required"
+            },
+            comments: {
+                bsonType: [ "objectId" ],
+                description: "must be an array of objectIds and is required"
+            },
+            type: {
+                enum: [ "Ski", "Snowboard", "Adaptive", "Undecided" ],
+                description: "can only be one of the enum values and is required"
+            },
+            location: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            pref_area: {
+                bsonType: "objectId",
+                description: "must be an objectId and is required"
+            }
+        }
+    }
+}

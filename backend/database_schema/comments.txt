@@ -1,0 +1,26 @@
+validator: {
+    $jsonSchema: {
+        bsonType: "object",
+        required: [ "ski_area", "user", "rating", "text" ],
+        properties: {
+            ski_area: {
+                bsonType: "objectId",
+                description: "must be an objectId and is required"
+            },
+            user: {
+                bsonType: "objectId",
+                description: "must be an objectId and is required"
+            },
+            rating: {
+                bsonType: "int",
+                minimum: 1,
+                maximum: 5,
+                description: "must be a n integer in [ 1, 5 ] and is required"
+            },
+            text: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            }
+        }
+    }
+}

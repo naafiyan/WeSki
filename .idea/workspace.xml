@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2662c4fa-4510-4c7b-a598-52f1c597fd9d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/brown/app/models/Weather.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/brown/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/brown/app/App.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +35,7 @@
       <option name="presentableId" value="Default" />
       <updated>1650560575054</updated>
       <workItem from="1650560577803" duration="381000" />
+      <workItem from="1650573057884" duration="779000" />
     </task>
     <servers />
   </component>

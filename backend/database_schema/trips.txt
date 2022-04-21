@@ -1,0 +1,24 @@
+validator: {
+    $jsonSchema: {
+        bsonType: "object",
+        required: [ "owner", "members", "start_date", "end_date" ],
+        properties: {
+            owner: {
+                bsonType: "objectId",
+                description: "must be an objectId and is required"
+            },
+            members: {
+                bsonType: [ "objectId" ],
+                description: "must be an array of objectIds and is required"
+            },
+            start_date: {
+                bsonType: "date",
+                description: "must be a real date and is required"
+            },
+            end_date: {
+                bsonType: "date",
+                description: "must be a real date and is required"
+            }
+        }
+    }
+}

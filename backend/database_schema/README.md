@@ -1,0 +1,1 @@
+This folder contains MongoDB validation schema. The name of the txt files is the same as the database table

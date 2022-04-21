@@ -1,0 +1,20 @@
+validator: {
+    $jsonSchema: {
+        bsonType: "object",
+        required: [ "temp", "img", "desc" ],
+        properties: {
+            temp: {
+                bsonType: "double",
+                description: "must be a double and is required"
+            },
+            img: {
+                bsonType: "int",
+                description: "must be an int and is required"
+            },
+            desc: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            }
+        }
+    }
+}
