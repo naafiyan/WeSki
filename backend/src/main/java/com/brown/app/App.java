@@ -19,7 +19,10 @@ public class App
         System.out.println("This is a test to see if the running changes");
         String connectionString = System.getProperty("mongodb.uri");
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
-            System.out.println(mongoClient.listDatabaseNames().into(new ArrayList<>()));
+            List<Object> databases = mongoClient.listDatabases().into(new ArrayList<>());
+            for(Object db : databases) {
+                System.out.println(((Document) db).toJson());
+            }
         }
     }
 }
