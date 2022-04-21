@@ -91,4 +91,12 @@ public class Trip {
   public void setArea(ObjectId area) {
     this.area = area;
   }
+
+  public void setId(ObjectId id) {
+    this.id = id;
+  }
+
+  public ObjectId getId() {
+    return this.id;
+  }
 }

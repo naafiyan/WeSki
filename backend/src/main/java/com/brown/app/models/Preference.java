@@ -55,4 +55,12 @@ public class Preference {
   public void setValue(double value) {
     this.value = value;
   }
+
+  public ObjectId getId() {
+    return this.id;
+  }
+
+  public void setId(ObjectId id) {
+    this.id = id;
+  }
 }

@@ -111,4 +111,12 @@ public class User {
   public void setPref_area(ObjectId pref_area) {
     this.pref_area = pref_area;
   }
+
+  public void setId(ObjectId id) {
+    this.id = id;
+  }
+
+  public ObjectId getId() {
+    return this.id;
+  }
 }
