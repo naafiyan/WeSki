@@ -11,6 +11,8 @@ public class Comment {
   private int rating;
   private String text;
 
+  public Comment(){}
+
   public Comment(ObjectId ski_area, ObjectId user, int rating, String text) {
     this.ski_area=ski_area;
     this.user=user;

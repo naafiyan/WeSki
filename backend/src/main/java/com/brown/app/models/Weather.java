@@ -10,6 +10,8 @@ public class Weather {
   private int img;
   private String desc;
 
+  public Weather(){}
+
   public Weather(double temp, int img, String desc) {
     this.temp=temp;
     this.img=img;

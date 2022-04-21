@@ -16,6 +16,8 @@ public class Area {
   private List<Integer> trails;
   private double recent_snowfall;
 
+  public Area() {}
+
   public Area(String name, List<ObjectId> comments, ObjectId weather, double acreage,
               double base, SnowType snow_type, List<Integer> trails, double recent_snowfall) {
     this.name=name;

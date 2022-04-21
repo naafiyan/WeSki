@@ -15,6 +15,8 @@ public class User {
   private String location;
   private ObjectId pref_area;
 
+  public User() {}
+
   public User(String name, String email, List<ObjectId> prefs, List<ObjectId> comments,
               SkierType type, String location, ObjectId pref_area) {
     this.name=name;

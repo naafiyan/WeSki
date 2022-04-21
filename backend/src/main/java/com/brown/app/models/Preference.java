@@ -9,6 +9,8 @@ public class Preference {
   private String name;
   private double value;
 
+  public Preference(){}
+
   public Preference(String name, double value) {
     this.name=name;
     this.value=value;

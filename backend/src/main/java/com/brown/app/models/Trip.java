@@ -14,6 +14,8 @@ public class Trip {
   private Date end_date;
   private ObjectId area;
 
+  public Trip(){}
+
   public Trip(ObjectId owner, List<ObjectId> members,
               Date start_date, Date end_date, ObjectId area) {
     this.owner=owner;
