@@ -46,8 +46,9 @@ public class App
             MongoDatabase db = mongoClient.getDatabase("notSkiQL");
             MongoCollection<User> collection = db.getCollection("users", User.class);
 
-            User usr = new User("purple", "nurple", new ArrayList<ObjectId>(), new ArrayList<ObjectId>(), SkierType.Adaptive, "home", new ObjectId());
-            collection.insertOne(usr);
+
+            User usr = collection.find().first();
+            System.out.println(usr.getEmail());
         }
     }
 }
