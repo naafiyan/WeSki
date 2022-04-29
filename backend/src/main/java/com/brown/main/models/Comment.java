@@ -1,10 +1,10 @@
-package com.brown.app.models;
+package com.brown.main.models;
 
 import org.bson.types.ObjectId;
 
 import java.util.Objects;
 
-public class Comment {
+public class Comment implements Model{
   private ObjectId id;
   private ObjectId ski_area;
   private ObjectId user;
@@ -18,6 +18,16 @@ public class Comment {
     this.user=user;
     this.rating=rating;
     this.text=text;
+  }
+
+  @Override
+  public Class<Comment> getThisClass() {
+    return Comment.class;
+  }
+
+  @Override
+  public String getCollectionName() {
+    return "comments";
   }
 
   @Override
@@ -42,7 +52,7 @@ public class Comment {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, ski_area, user, rating, text);
+    return 1;
   }
 
   public ObjectId getSki_area() {

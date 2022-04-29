@@ -1,11 +1,11 @@
-package com.brown.app.models;
+package com.brown.main.models;
 
 import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Objects;
 
-public class User {
+public class User implements Model{
   private ObjectId id;
   private String name;
   private String email;
@@ -26,6 +26,16 @@ public class User {
     this.type=type;
     this.location=location;
     this.pref_area=pref_area;
+  }
+
+  @Override
+  public Class<User> getThisClass() {
+    return User.class;
+  }
+
+  @Override
+  public String getCollectionName() {
+    return "users";
   }
 
   @Override
@@ -53,7 +63,7 @@ public class User {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, email, prefs, comments, type, location, pref_area);
+    return 4;
   }
 
   public String getName() {

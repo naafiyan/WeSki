@@ -1,11 +1,11 @@
-package com.brown.app.models;
+package com.brown.main.models;
 
 import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Area {
+public class Area implements Model{
   private ObjectId id;
   private String name;
   private List<ObjectId> comments;
@@ -28,6 +28,16 @@ public class Area {
     this.snow_type=snow_type;
     this.trails=trails;
     this.recent_snowfall=recent_snowfall;
+  }
+
+  @Override
+  public Class<Area> getThisClass() {
+    return Area.class;
+  }
+
+  @Override
+  public String getCollectionName() {
+    return "areas";
   }
 
   @Override
@@ -56,7 +66,7 @@ public class Area {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, comments, weather, acreage, base, snow_type, trails, recent_snowfall);
+    return 0;
   }
 
   public String getName() {
