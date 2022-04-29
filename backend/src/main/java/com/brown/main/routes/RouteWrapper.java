@@ -14,6 +14,7 @@ public class RouteWrapper {
   }
 
   public void initRoutes() {
+    // route handled by static methods called inside lamba functions in individual handler classes
     Spark.get("/", (req, res) -> AreasHandler.getAllAreas(db));
   }
 }
