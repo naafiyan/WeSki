@@ -3,8 +3,7 @@ package com.brown.main;
 import com.brown.main.database.Database;
 import com.brown.main.database.MongoHelper;
 import com.brown.main.routes.RouteWrapper;
-import jdk.internal.joptsimple.OptionParser;
-import jdk.internal.joptsimple.OptionSet;
+import com.mongodb.client.MongoDatabase;
 import spark.Spark;
 
 public final class App {
@@ -46,8 +45,8 @@ public final class App {
     Spark.before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
     // create new db
-    Database db = new MongoHelper("notSkiQL");
-    RouteWrapper rw = new RouteWrapper(db);
+    Database<MongoDatabase> db = new MongoHelper("notSkiQL");
+    RouteWrapper rw = new RouteWrapper(db.getDb("notSkiQL"));
     rw.initRoutes();
 
     Spark.init();
