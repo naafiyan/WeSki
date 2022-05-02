@@ -1,4 +1,4 @@
-package com.brown.app.models;
+package com.brown.main.models;
 
 import org.bson.BsonDateTime;
 import org.bson.types.ObjectId;
@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Trip {
+public class Trip implements Model{
   private ObjectId id;
   private ObjectId owner;
   private List<ObjectId> members;
@@ -23,6 +23,16 @@ public class Trip {
     this.start_date=start_date;
     this.end_date=end_date;
     this.area=area;
+  }
+
+  @Override
+  public Class<Trip> getThisClass() {
+    return Trip.class;
+  }
+
+  @Override
+  public String getCollectionName() {
+    return "trips";
   }
 
   @Override
@@ -48,7 +58,7 @@ public class Trip {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, owner, members, start_date, end_date, area);
+    return 3;
   }
 
 

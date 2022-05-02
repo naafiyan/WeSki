@@ -1,10 +1,10 @@
-package com.brown.app.models;
+package com.brown.main.models;
 
 import org.bson.types.ObjectId;
 
 import java.util.Objects;
 
-public class Weather {
+public class Weather implements Model{
   private ObjectId id;
   private double temp;
   private int img;
@@ -16,6 +16,16 @@ public class Weather {
     this.temp=temp;
     this.img=img;
     this.desc=desc;
+  }
+
+  @Override
+  public Class<Weather> getThisClass() {
+    return Weather.class;
+  }
+
+  @Override
+  public String getCollectionName() {
+    return "weather";
   }
 
   public double getTemp() {
@@ -68,7 +78,7 @@ public class Weather {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, temp, img, desc);
+    return 5;
   }
 
   public ObjectId getId() {

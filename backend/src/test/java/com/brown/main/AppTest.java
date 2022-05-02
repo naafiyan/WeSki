@@ -1,4 +1,4 @@
-package com.brown.app;
+package com.brown.main;
 
 import static org.junit.Assert.assertTrue;
 

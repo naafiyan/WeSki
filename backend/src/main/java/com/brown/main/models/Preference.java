@@ -1,10 +1,10 @@
-package com.brown.app.models;
+package com.brown.main.models;
 
 import org.bson.types.ObjectId;
 
 import java.util.Objects;
 
-public class Preference {
+public class Preference implements Model{
   private ObjectId id;
   private String name;
   private double value;
@@ -14,6 +14,16 @@ public class Preference {
   public Preference(String name, double value) {
     this.name=name;
     this.value=value;
+  }
+
+  @Override
+  public Class<Preference> getThisClass() {
+    return Preference.class;
+  }
+
+  @Override
+  public String getCollectionName() {
+    return "prefs";
   }
 
   @Override
@@ -36,7 +46,7 @@ public class Preference {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, value);
+    return 2;
   }
 
 
