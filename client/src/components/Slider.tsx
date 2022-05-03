@@ -1,14 +1,12 @@
 import { Slider } from "@mui/material";
 import React from "react";
-
-export default function Header() {
-    // const { user, loading } = props;
-
+type SliderProps = {marks?: { value: number; label: string; }[]};
+export default function StyledSlider(props: SliderProps) {
     return (
         <Slider
             step={10}
             valueLabelDisplay="auto"
-            marks={true}
+            marks={props.marks}
             sx={{
                 width: 450,
                 color: "teal"

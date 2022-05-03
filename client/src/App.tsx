@@ -7,13 +7,7 @@ import TestPage from "./pages/Test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Header from "./components/Header";
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#04080F",
-        },
-    },
-});
+
 
 function App() {
     return (

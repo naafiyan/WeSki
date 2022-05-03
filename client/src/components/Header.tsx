@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import {Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Header() {
@@ -30,7 +30,8 @@ export default function Header() {
                     ) : (
                         // <UserNavDropdown user={user} />
                     )} */}
-                </Nav>
+                        </Nav>
+
         </Navbar>
     );
 }
