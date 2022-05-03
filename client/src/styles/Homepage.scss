@@ -1,0 +1,35 @@
+$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:       $font-family-sans-serif !default;
+
+$theme-colors: (
+        "info": tomato,
+        "danger": teal,
+        "primary": #587B7F,
+        "secondary": white
+);
+
+
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-child-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  }
+.flex-child-right {
+  display: flex;
+  flex-direction: column;
+}
+.button {
+  display: flex;
+  justify-content:center;
+  font-family: "Times New Roman", sans-serif
+}
+
+/* import bootstrap to set changes */
+@import "node_modules/bootstrap/scss/bootstrap";

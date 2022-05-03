@@ -9,19 +9,14 @@ export default function Header() {
     // const { user, loading } = props;
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-            <Navbar.Brand as={Link} to="/">
-                <img
-                    alt="logo"
-                    src="" // TODO: add logo here
-                    width="30"
-                    height="30"
-                    className="d-inline-block align-top"
-                />{" "}
+        <Navbar collapseOnSelect expand="lg" bg="primary" sticky="top" text-align="center">
+            <div className="title">
+            <Navbar.Brand as={Link} to="/" text-align="center">
                 WeSki
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
+            <img src="./images/logo.jpg" width={"30px"} height={"30px"}/>
+            </div>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" align-items={"center"}/>
                 <Nav className="mr-auto">
                     <Nav.Link as={Link} to="/">
                         Home
@@ -37,7 +32,6 @@ export default function Header() {
                         // <UserNavDropdown user={user} />
                     )} */}
                 </Nav>
-            </Navbar.Collapse>
         </Navbar>
     );
 }
