@@ -4,10 +4,15 @@ $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier Ne
 $font-family-base:       $font-family-sans-serif !default;
 
 $theme-colors: (
-        "info": tomato,
-        "danger": teal,
-        "primary": #587B7F,
-        "secondary": white
+        "primary": #04080F,
+        "secondary": #5A9B85,
+        "success": #C4E0F9,
+        "info":       #FFFFFF,
+        "warning":    #FFFFFF,
+        "danger":     #FFFFFF,
+        "light": #FFFFFF,
+        "dark":   #FFFFFF
+
 );
 
 
