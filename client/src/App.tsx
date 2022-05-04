@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MountainPage from "./pages/MountainPage";
-import HomePage from "./pages/HomePage";
+import Homepage from "./pages/Homepage";
 import TestPage from "./pages/Test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Header from "./components/Header";
@@ -15,7 +15,7 @@ function App() {
         <Router>
             <Header />
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<Homepage />} />
                 <Route path="/trips" element={<MountainPage />} />
             </Routes>
         </Router>
