@@ -16,13 +16,16 @@ const firebaseConfig = {
 //This initializes Firebase
 const app = initializeApp(firebaseConfig);
 
+const blankProfile = require('./images/blankProfile.jpg');
+
 export const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
 let userID = "";
-let userName = "";
+let userName = "Guest";
 let userEmailAddress = "";
+let userProfilePic = blankProfile;
 let userVerifiedStatus = false;
 
 
@@ -35,49 +38,45 @@ auth.onAuthStateChanged(user => {
         userID = user.uid;
         userName = user.displayName;
         userEmailAddress = user.email;
+        userProfilePic = user.photoURL;
         userVerifiedStatus = user.emailVerified;
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("userProfilePic", userProfilePic);
         
     } else {
         userID = "";
-        userName = "";
+        userName = "Guest";
         userEmailAddress = "";
+        userProfilePic = blankProfile;
         userVerifiedStatus = false;
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("userProfilePic", userProfilePic);
     }
 });
 
 /**
  * This method uses a google pop up to sign the user into the website
  */
-export const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
+export const signInWithGoogle = (setUsername, setProfilePicture, setSignedIn) => {
+    if(userVerifiedStatus){
+        signOut(auth).then(() => {
+            setUsername("Guest")
+            setProfilePicture(blankProfile)
+            setSignedIn("Sign In")
+        }).catch((error) => {
+            console.log(error)
+    });
+    } else{
+        signInWithPopup(auth, provider)
         .then((result) => {
+            setUsername(result.user.displayName)
+            setProfilePicture(result.user.photoURL)
+            setSignedIn("Sign Out")
         console.log("User " + result.user.displayName + " sign in successful")
     })
     .catch(error => {
         console.log(error)
     });
-};
-
-/**
- * This method signs out the current user
- */
-export const accountSignOut = () => {
-    signOut(auth).then(() => {
-        console.log("Sign out successful")
-    }).catch((error) => {
-        console.log(error)
-    });
-};
-
-/**
- * This simple method demonstrates what information we have
- * for this user, which we can put into the database.
- */
-export const showAccountInformation = () => {
-    if(userVerifiedStatus){
-        alert(userName + " with the email address  " +  userEmailAddress + " has the unique ID: " + userID);
-    } else{
-        alert("You are not signed in.");
     }
     
 };
