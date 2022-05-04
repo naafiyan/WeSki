@@ -12,6 +12,7 @@ public class Area implements Model{
   private ObjectId weather;
   private double acreage;
   private double base;
+  private double price;
   private SnowType snow_type;
   private List<Integer> trails;
   private double recent_snowfall;
@@ -19,7 +20,8 @@ public class Area implements Model{
   public Area() {}
 
   public Area(String name, List<ObjectId> comments, ObjectId weather, double acreage,
-              double base, SnowType snow_type, List<Integer> trails, double recent_snowfall) {
+              double base, SnowType snow_type, List<Integer> trails, double recent_snowfall,
+              double price) {
     this.name=name;
     this.comments=comments;
     this.weather=weather;
@@ -28,6 +30,7 @@ public class Area implements Model{
     this.snow_type=snow_type;
     this.trails=trails;
     this.recent_snowfall=recent_snowfall;
+    this.price = price;
   }
 
   @Override
@@ -76,6 +79,10 @@ public class Area implements Model{
   public void setName(String name) {
     this.name = name;
   }
+
+  public void setPrice(double pr) {this.price=pr;}
+
+  public double getPrice() {return this.price;}
 
   public List<ObjectId> getComments() {
     return comments;
