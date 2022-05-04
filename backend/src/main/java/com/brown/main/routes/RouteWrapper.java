@@ -22,12 +22,13 @@ public class RouteWrapper {
   }
 
   private void initAreaRoutes() {
+    AreasHandler.addArea(db);
     Spark.get("/areas", (req, res) -> AreasHandler.getAllAreas(db));
      Spark.get("/areas/:id", (req, res) -> AreasHandler.getArea(db, req.params(":id")));
   }
 
   private void initUserRoute() {
-    // Spark.get("/users/:id", (req, res) -> UsersHandler.getUser(db, req.params(":id")));
+    Spark.get("/users/:id", (req, res) -> UsersHandler.getUserById(db, req));
     // Spark.put("/users/:id", (req, res) -> UsersHandler.updateUser(db, req.params(":id"), req.body()));
     // Spark.put("/users/:id/new", (req, res) -> UsersHandler.newUser(db, req.params(":id")));
     // Spark.get("/users/:id/prefs", (req, res) -> UsersHandler.getUserPrefs(db, req.params(":id")));
