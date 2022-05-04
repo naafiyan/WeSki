@@ -22,6 +22,7 @@ public class RouteWrapper {
   }
 
   private void initAreaRoutes() {
+    AreasHandler.addArea(db);
     Spark.get("/areas", (req, res) -> AreasHandler.getAllAreas(db));
     // Spark.get("/areas/:id", (req, res) -> AreasHandler.getArea(db, req.params(":id")));
   }

@@ -37,21 +37,21 @@ public class MongoHelper implements Database<MongoDatabase> {
         .codecRegistry(codecRegistry)
         .build();
 
-    this.client = MongoClients.create(clientSettings);
+    MongoHelper.client = MongoClients.create(clientSettings);
 
-    if (this.client == null) {
+    if (MongoHelper.client == null) {
       throw new NullPointerException("ERROR: Client is null");
     }
-    return this.client.getDatabase(db);
+    return MongoHelper.client.getDatabase(db);
   }
 
   @Override
   public MongoDatabase getDb(String db) {
-    return this.client.getDatabase(db);
+    return MongoHelper.client.getDatabase(db);
   }
 
   @Override
   public void close() {
-    this.client.close();
+    MongoHelper.client.close();
   }
 }
