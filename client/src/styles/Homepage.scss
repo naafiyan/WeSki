@@ -4,7 +4,7 @@ $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier Ne
 $font-family-base:       $font-family-sans-serif !default;
 
 $theme-colors: (
-        "primary": #04080F,
+        "primary": #000000,
         "secondary": #5A9B85,
         "success": #C4E0F9,
         "warning":    #FFFFFF,
@@ -33,6 +33,71 @@ $theme-colors: (
   display: flex;
   justify-content:center;
   font-family: "Times New Roman", sans-serif
+}
+
+.rectangle {
+  position: absolute;
+  display: inline-block;
+  width: 1100px;
+  height: 93px;
+  top:18%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 45px 45px 45px 45px;
+  background: black;
+}
+
+.date-bar {
+  position: absolute;
+  display: inline-block;
+  width: 400px;
+  height: 70px;
+  top:50%;
+  left:41%;
+  transform: translate(-50%,-50%);
+  border-radius: 45px 45px 45px 45px;
+  background: white;
+}
+
+.division-bar {
+  position: absolute;
+  width: 30px;
+  height: 0px;
+  left: 46.25%;
+  top: 50%;
+  border: 0.5px solid #5A9B85;
+  transform: rotate(90deg);
+}
+
+.trip-text {
+  position: absolute;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 38px;
+  top:30%;
+  left:3%;
+  color: white;
+}
+
+.search-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 60%;
+  top: 24%;
+  border-radius: 45px 45px 45px 45px;
+  background: #5A9B85;
+}
+
+.search-icon {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  height: 150%;
+  width: 150%;
+  color: white;
 }
 
 /* import bootstrap to set changes */
