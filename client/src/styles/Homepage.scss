@@ -71,9 +71,9 @@ $theme-colors: (
 
 .trip-text {
   position: absolute;
-  font-family: 'Roboto';
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
-  font-weight: 600;
+  font-weight: lighter;
   font-size: 32px;
   line-height: 38px;
   top:30%;
@@ -88,7 +88,10 @@ $theme-colors: (
   left: 60%;
   top: 24%;
   border-radius: 45px 45px 45px 45px;
-  background: #5A9B85;
+  background: #000000;
+  border: 2px solid #5A9B85;
+  box-sizing: border-box;
+  box-shadow: -1px 1px 9px rgba(255, 255, 255, 0.4);
 }
 
 .search-icon {
@@ -97,6 +100,36 @@ $theme-colors: (
   height: 100;
   left: 50%;
   top: 50%;
+}
+
+.compare-divider {
+  position: absolute;
+  width: 63px;
+  height: 0px;
+  right: 30%;
+  top: 50%;
+  border: 0.5px solid #5A9B85;
+  transform: rotate(90deg);
+}
+
+.compare-button {
+  position: absolute;
+  width: 300px;
+  height: 60px;
+  top: 40%;
+  left: 70%;
+  border: 2px solid #5A9B85;
+  box-sizing: border-box;
+}
+
+.compare-text {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: lighter;
+  top: 10%;
+  font-size: 26px;
+  line-height: 28px;
+  color: white;
 }
 
 /* import bootstrap to set changes */

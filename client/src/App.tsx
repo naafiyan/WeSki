@@ -6,6 +6,7 @@ import Homepage from "./pages/Homepage";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Header from "./components/Header";
 import MyAccountPage from "./pages/MyAccountPage"
+import CompareVenue from "./pages/CompareVenue";
 
 
 
@@ -15,9 +16,10 @@ function App() {
         <Router>
             <Header />
             <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/trips" element={<MountainPage />} />
-                <Route path="/MyAccountPage" element={<MyAccountPage/>} />
+                <Route path="/" element={<Homepage/>}/>
+                <Route path="/trips" element={<MountainPage/>}/>
+                <Route path="/MyAccountPage" element={<MyAccountPage/>}/>
+                <Route path="/venues" element={<CompareVenue/>}/>
             </Routes>
         </Router>
         // </ThemeProvider>

@@ -8,8 +8,9 @@ import LocationSearchingOutlinedIcon from '@mui/icons-material/LocationSearching
 import IconButton from '@mui/material/IconButton'
 import {Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
 
-function Homepage() {
+export default function Homepage() {
 
     const theme = createTheme({
         palette: {
@@ -65,18 +66,20 @@ function Homepage() {
             <Nav.Link as={Link} to="/trips">
                 <div className="search-button">
                     <ThemeProvider theme={theme}>
-                        <IconButton color="secondary" aria-label="search" sx={{width: 50, height: 50}}>
+                        <IconButton color="secondary" aria-label="search" sx={{width: 50, height: 50, right: 2, bottom: 2}}>
                             <LocationSearchingOutlinedIcon />
                         </IconButton>
                     </ThemeProvider>
                 </div>  
             </Nav.Link>
-            
+            <div className="compare-divider"></div>
+            <Nav.Link as={Link} to="/venues">
+                <ThemeProvider theme={theme}>
+                    <Button size="large" className="compare-button" variant="outlined">
+                        <p className="compare-text">Compare Venues</p>
+                    </Button>
+                </ThemeProvider>
+            </Nav.Link>
         </div>
-        
-
     );
-   
 }
-
-export default Homepage;
