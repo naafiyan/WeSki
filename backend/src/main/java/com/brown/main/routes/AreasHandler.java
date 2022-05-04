@@ -45,17 +45,22 @@ public class AreasHandler {
   }
 
   public static JsonObject addArea(MongoDatabase db) {
-    Area area = new Area();
-    area.setName("Test 1");
-    area.setBase(1.0);
-    area.setAcreage(2.0);
-    area.setComments(new ArrayList<ObjectId>());
-    area.setWeather(new ObjectId());
-    area.setTrails(new ArrayList<>());
-    area.setSnow_type(SnowType.groomed);
-    area.setRecent_snowfall(3.0);
-    // Area area = new Gson().fromJson(req.body(), Area.class);
-    db.getCollection("areas", Area.class).insertOne(area);
+    // Area area = new Area();
+    // area.setName("Test 1");
+    // area.setBase(1.0);
+    // area.setAcreage(2.0);
+    // // Comment comment = new Comment();
+    // List<ObjectId> comments = new ArrayList<>();
+    // comments.add(new ObjectId());
+    // area.setComments(comments);
+    // area.setWeather(new ObjectId());
+    // List<Integer> trails = new ArrayList<>();
+    // trails.add(1);
+    // area.setTrails(trails);
+    // area.setSnow_type(SnowType.groomed);
+    // area.setRecent_snowfall(3.0);
+    // // Area area = new Gson().fromJson(req.body(), Area.class);
+    // db.getCollection("areas", Area.class).insertOne(area);
     return getAllAreas(db);
   }
 }

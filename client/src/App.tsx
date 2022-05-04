@@ -17,7 +17,7 @@ const theme = createTheme({
 function App() {
 
     const fetchHandler = async () => {
-        const res = await fetch("http://localhost:4567/areas");
+        const res = await fetch("http://localhost:4567/users/6261da18466b956a5e436c27");
         const resJson = await res.json();
         console.log(resJson);
     }
