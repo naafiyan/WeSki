@@ -37,9 +37,9 @@ public class TripsHandler {
     return res;
   }
 
-  public static JsonObject getTrip(MongoDatabase db, String id) {
+  public static String getTrip(MongoDatabase db, String id) {
     ArrayList<Document> tripsDocs = db.getCollection("trips").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
-    return new Gson().fromJson(tripsDocs.get(0).toJson(), JsonObject.class);
+    return tripsDocs.get(0).toJson();
   }
 
   public static String getComments(MongoDatabase db, String id) {

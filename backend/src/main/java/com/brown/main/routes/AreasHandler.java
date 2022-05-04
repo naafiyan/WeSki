@@ -35,10 +35,8 @@ public class AreasHandler {
     return res;
   }
 
-  public static JsonObject getArea(MongoDatabase db, String id) {
+  public static String getArea(MongoDatabase db, String id) {
     ArrayList<Document> areasDocs = db.getCollection("areas").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
-    return new Gson().fromJson(areasDocs.get(0).toJson(), JsonObject.class);
+    return areasDocs.get(0).toJson();
   }
 }
-
-
