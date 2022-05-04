@@ -7,11 +7,12 @@ import com.google.gson.JsonObject;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-
 import spark.Request;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class AreasHandler {
 
@@ -65,4 +66,8 @@ public class AreasHandler {
   }
 }
 
-
+  public static String getArea(MongoDatabase db, String id) {
+    ArrayList<Document> areasDocs = db.getCollection("areas").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
+    return areasDocs.get(0).toJson();
+  }
+}
