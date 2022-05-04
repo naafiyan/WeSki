@@ -5,6 +5,9 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import LocationSearchingOutlinedIcon from '@mui/icons-material/LocationSearchingOutlined';
+import IconButton from '@mui/material/IconButton'
+import {Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Homepage() {
 
@@ -14,7 +17,7 @@ function Homepage() {
                 main: '#5A9B85'
             },
             secondary: {
-              main: '#5A9B85'
+              main: '#FFFFFF'
             }
           }
       });
@@ -59,9 +62,16 @@ function Homepage() {
                 </ThemeProvider>
                 <div className="division-bar"></div>
             </div>
-            <div className="search-button">
-                <LocationSearchingOutlinedIcon className="search-icon"/>
-            </div>
+            <Nav.Link as={Link} to="/trips">
+                <div className="search-button">
+                    <ThemeProvider theme={theme}>
+                        <IconButton color="secondary" aria-label="search" sx={{width: 50, height: 50}}>
+                            <LocationSearchingOutlinedIcon />
+                        </IconButton>
+                    </ThemeProvider>
+                </div>  
+            </Nav.Link>
+            
         </div>
         
 
