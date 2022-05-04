@@ -4,9 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class AreasHandler {
 
@@ -30,6 +33,11 @@ public class AreasHandler {
     JsonObject res = new JsonObject();
     res.add("areas", gson.toJsonTree(areas));
     return res;
+  }
+
+  public static JsonObject getArea(MongoDatabase db, String id) {
+    ArrayList<Document> areasDocs = db.getCollection("areas").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
+    return new Gson().fromJson(areasDocs.get(0).toJson(), JsonObject.class);
   }
 }
 

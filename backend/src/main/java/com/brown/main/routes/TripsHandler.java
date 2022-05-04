@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,13 +37,13 @@ public class TripsHandler {
     return res;
   }
 
-  public static String getTrip(MongoDatabase db, String id) {
-    ArrayList<Document> tripsDocs = db.getCollection("trips").find(eq("_id", id)).into(new ArrayList<Document>());
-    return tripsDocs.get(0).toJson();
+  public static JsonObject getTrip(MongoDatabase db, String id) {
+    ArrayList<Document> tripsDocs = db.getCollection("trips").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
+    return new Gson().fromJson(tripsDocs.get(0).toJson(), JsonObject.class);
   }
 
   public static String getComments(MongoDatabase db, String id) {
-    ArrayList<Document> commentsDocs = db.getCollection("comments").find(eq("_id", id)).into(new ArrayList<Document>());
+    ArrayList<Document> commentsDocs = db.getCollection("comments").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
     Gson gson = new Gson();
     ArrayList<String> comments = new ArrayList<>();
     for (Document doc: commentsDocs) {
