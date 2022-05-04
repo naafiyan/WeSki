@@ -39,5 +39,4 @@ public class RouteWrapper {
     // get comments for a trip
     // Spark.get("/trips/:id/comments", (req, res) -> TripsHandler.getComments(db, req.params(":id")));
   }
-
 }
