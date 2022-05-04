@@ -22,20 +22,20 @@ public class RouteWrapper {
   }
 
   private void initAreaRoutes() {
-    Spark.get("/areas/", (req, res) -> AreasHandler.getAllAreas(db));
-    Spark.get("/areas/:id", (req, res) -> AreasHandler.getArea(db, req.params(":id")));
+    Spark.get("/areas", (req, res) -> AreasHandler.getAllAreas(db));
+    // Spark.get("/areas/:id", (req, res) -> AreasHandler.getArea(db, req.params(":id")));
   }
 
   private void initUserRoute() {
-    Spark.get("/users/:id", (req, res) -> UsersHandler.getUser(db, req.params(":id")));
-    Spark.put("/users/:id", (req, res) -> UsersHandler.updateUser(db, req.params(":id"), req.body()));
+    // Spark.get("/users/:id", (req, res) -> UsersHandler.getUser(db, req.params(":id")));
+    // Spark.put("/users/:id", (req, res) -> UsersHandler.updateUser(db, req.params(":id"), req.body()));
   }
 
   private void initTripsRoutes() {
-    Spark.get("/trips/", (req, res) -> TripsHandler.getAllTrips(db));
-    Spark.get("/trips/:id", (req, res) -> TripsHandler.getTrip(db, req.params(":id")));
+    // Spark.get("/trips/", (req, res) -> TripsHandler.getAllTrips(db));
+    // Spark.get("/trips/:id", (req, res) -> TripsHandler.getTrip(db, req.params(":id")));
     // get comments for a trip
-    Spark.get("/trips/:id/comments", (req, res) -> TripsHandler.getComments(db, req.params(":id")));
+    // Spark.get("/trips/:id/comments", (req, res) -> TripsHandler.getComments(db, req.params(":id")));
   }
 
 }

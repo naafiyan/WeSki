@@ -2,6 +2,7 @@ package com.brown.main.models;
 
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -139,5 +140,16 @@ public class Area implements Model{
 
   public void setId(ObjectId id) {
     this.id = id;
+  }
+
+  public List<String> getAllFields() {
+    List<String> fields = new ArrayList<>();
+    String fieldsStrs = "_id,name,comments,weather,acreage,base,snow_type,trails,recent_snowfall";
+    String[] fieldsArr = fieldsStrs.split(",");
+    // convert to list
+    for (String field : fieldsArr) {
+      fields.add(field);
+    }
+    return fields;
   }
 }
