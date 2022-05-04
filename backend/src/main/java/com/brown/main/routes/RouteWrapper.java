@@ -19,6 +19,11 @@ public class RouteWrapper {
     this.initAreaRoutes();
     this.initUserRoute();
     this.initTripsRoutes();
+    this.initTableRoutes();
+  }
+
+  private void initTableRoutes() {
+    Spark.get("/table", (req, res) -> TableHandler.getTable(db));
   }
 
   private void initAreaRoutes() {
