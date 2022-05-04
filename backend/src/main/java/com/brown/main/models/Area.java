@@ -55,6 +55,7 @@ public class Area implements Model{
     sb.append(", snow_type=").append(this.snow_type);
     sb.append(", trails=").append(this.trails);
     sb.append(", recent_snowfall=").append(this.recent_snowfall);
+    sb.append(", price=").append(this.price);
     sb.append('}');
     return sb.toString();
   }

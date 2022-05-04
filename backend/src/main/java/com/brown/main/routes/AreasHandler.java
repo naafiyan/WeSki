@@ -14,5 +14,3 @@ public class AreasHandler {
     return areaFirstJson;
   }
 }
-
-
