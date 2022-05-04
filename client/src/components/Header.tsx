@@ -20,7 +20,7 @@ export default function Header() {
                     <Nav.Link as={Link} to="/trips">
                         Trips
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/account">
+                    <Nav.Link as={Link} to="/MyAccountPage">
                         My Account
                     </Nav.Link>
                 </Nav>
