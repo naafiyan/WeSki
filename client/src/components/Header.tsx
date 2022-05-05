@@ -1,5 +1,5 @@
 import React from "react";
-import {Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
+import {Nav, Navbar} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Header() {
@@ -22,6 +22,9 @@ export default function Header() {
                     </Nav.Link>
                     <Nav.Link as={Link} to="/account">
                         My Account
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/recommendation">
+                        Recommendation
                     </Nav.Link>
                 </Nav>
                 <Nav style={{ marginRight: "2%" }}>

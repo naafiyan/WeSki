@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { signInWithGoogle, accountSignOut, showAccountInformation } from "../Firebase"
 /**
  * This sets up some basic functionality around handling accounts. 

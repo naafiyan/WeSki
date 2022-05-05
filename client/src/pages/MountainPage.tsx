@@ -1,10 +1,5 @@
 import Button from "@mui/material/Button";
-import { Box, FormControlLabel, FormGroup, Slider, Stack, Switch, TextField } from "@mui/material";
-import Header from "../components/Header";
-import Form from "react-bootstrap/Form"
-import MySlider from "../components/Slider"
-import Input from "@mui/material/Input"
-import {Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { FormControlLabel, FormGroup, Switch, TextField, Typography } from "@mui/material";
 import StyledSlider from "../components/Slider";
 
 function MountainPage() {
@@ -81,124 +76,145 @@ function MountainPage() {
     const difficultyMarks = [
         {
             value: 0,
-            label: '0°C',
+            label: 'Green',
         },
         {
-            value: 20,
-            label: '20°C',
+            value: 33,
+            label: 'Blue',
         },
         {
-            value: 37,
-            label: '37°C',
+            value: 66,
+            label: 'Black',
         },
         {
             value: 100,
-            label: '100°C',
-        },
+            label: 'Double Black',
+        }
     ];
 
-    const terrainMarks = [
-        {
-            value: 0,
-            label: '0°C',
-        },
-        {
-            value: 20,
-            label: '20°C',
-        },
-        {
-            value: 37,
-            label: '37°C',
-        },
-        {
-            value: 100,
-            label: '100°C',
-        },
-    ];
     return (
         <>
-            {/* Center the content */}
-
             <div className = "flex-container">
-            <div className = "flex-child-left">
+                <div className = "flex-child-left">
 
+                    <br/>
+                    <FormGroup >
+                        <FormControlLabel control={<Switch defaultChecked color="primary" style={{
+                            color: "#5A9B85",
+                        }}/>} label="Use suggestions?" labelPlacement="start"
+                                          style={{
+                                              color: "#OOOOO",
+                                              padding: "18px 36px",
+                                              fontSize: "18px",
+                                              fontFamily: "Roboto"
+                                          }}/>
+                    </FormGroup>
+                    <br/>
+                    <TextField
+                        name="name"
+                        label="Name"
+                        InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
+                        type="text"
+                        placeholder="Enter name"
+                        InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
+                    />
+                    <br/>
+                    <TextField
+                        name="email"
+                        label="Email"
+                        InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
+                        type="name@example.com"
+                        InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
+                    />
+                    <br/>
+                    <TextField
+                        name="location"
+                        label="Location"
+                        InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
+                        type="Providence, RI"
+                        InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
+                    />
+                    <br/>
+
+
+                    <TextField
+                        name="startDate"
+                        label="Start Date"
+                        InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:"Roboto", fontSize:'18px'} }}
+                        type="date"
+                        InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
+                    />
+                    <br/>
+                    <TextField
+                        name="endDate"
+                        label="End Date"
+                        InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
+                        type="date"
+                        InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
+                    />
+                </div>
                 <br/>
-            <FormGroup >
-                <FormControlLabel control={<Switch defaultChecked />} label="Use suggestions?" labelPlacement="start"/>
-            </FormGroup>
-                <br/>
-                <TextField
-                    name="name"
-                    label="Name"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-                    type="text"
-                    placeholder="Enter name"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-                <br/>
-                <TextField
-                    name="email"
-                    label="Email"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-                    type="name@example.com"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-                <br/>
-                <TextField
-                    name="location"
-                    label="Location"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-                    type="Providence, RI"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-                <br/>
-                <TextField
-                    name="startDate"
-                    label="Start Date"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:"Roboto", fontSize:'18px'} }}
-                    type="date"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-                <br/>
-                <TextField
-                    name="endDate"
-                    label="End Date"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-                    type="date"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-            </div>
-            <br/>
-            <div className = "flex-child-right" >
-                <br/>
-                <br/>
-            Preferred Lift Ticket Price
-                <br/>
-            <StyledSlider marks={priceMarks}/>
-                <br/>
-            Distance from Your Location
-                <br/>
-            <StyledSlider marks={distanceMarks}/>
-                <br/>
-            Weather Conditions
-                <br/>
-            <StyledSlider marks={interestMarks}/>
-                <br/>
-            Terrain Difficuly Level
-                <br/>
-            <StyledSlider marks={difficultyMarks}/>
-                <br/>
-                Number of Trails Open
-                <br/>
-                <StyledSlider marks={interestMarks}/>
-                <br/>
-            </div>
+                <div className = "flex-child-right" >
+                    <br/>
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Preferred Lift Ticket Price
+                    </Typography>
+                    <StyledSlider marks={priceMarks}/>
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Distance from Your Location
+                    </Typography>
+                    <StyledSlider marks={distanceMarks}/>
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Weather Conditions
+                    </Typography>
+                    <StyledSlider marks={interestMarks}/>
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Terrain Difficuly Level
+                    </Typography>
+                    <StyledSlider marks={difficultyMarks}/>
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Number of Trails Open
+                    </Typography>
+                    <StyledSlider marks={interestMarks}/>
+                    <br/>
+                </div>
             </div>
             <br/>
             <div className = "button">
-            <Button variant = "contained" color="secondary" size={"large"}>
-                Find a mountain
-            </Button>
+                <Button variant = "contained" size={"large"} style={{
+                    borderRadius: 20,
+                    backgroundColor: "#5A9B85",
+                    padding: "18px 36px",
+                    fontSize: "18px",
+                    fontFamily: "Roboto"
+                }}>
+                    Find a mountain
+                </Button>
             </div>
         </>
     );
