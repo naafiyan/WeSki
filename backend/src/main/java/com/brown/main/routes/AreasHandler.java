@@ -64,7 +64,6 @@ public class AreasHandler {
     // db.getCollection("areas", Area.class).insertOne(area);
     return getAllAreas(db);
   }
-}
 
   public static String getArea(MongoDatabase db, String id) {
     ArrayList<Document> areasDocs = db.getCollection("areas").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
