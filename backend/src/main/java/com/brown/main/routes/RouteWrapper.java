@@ -33,6 +33,8 @@ public class RouteWrapper {
   }
 
   private void initUserRoute() {
+
+    // validate jwt!
     Spark.get("/users/:id", (req, res) -> UsersHandler.getUserById(db, req));
     // Spark.put("/users/:id", (req, res) -> UsersHandler.updateUser(db, req.params(":id"), req.body()));
     // Spark.put("/users/:id/new", (req, res) -> UsersHandler.newUser(db, req.params(":id")));
