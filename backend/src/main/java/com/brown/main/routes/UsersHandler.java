@@ -1,5 +1,10 @@
 package com.brown.main.routes;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.brown.main.models.Area;
 import com.brown.main.models.SnowType;
 import com.google.gson.Gson;
@@ -10,6 +15,8 @@ import org.bson.types.ObjectId;
 
 import spark.Request;
 
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +46,16 @@ public class UsersHandler {
         return res;
       }
       
-      public static String getUserById(MongoDatabase db, Request req) {
-        String id = req.params(":id");
-        System.out.println(id);
+      public static String getUserById(MongoDatabase db, String id) {
         Document userDoc = db.getCollection("users").find(eq("_id", new ObjectId(id))).first();
         return userDoc.toJson();
+      }
+
+      public static JsonObject newUser(MongoDatabase db, Request req) {
+      // use auth0 to verify jwt from req
+        return null;
+
+
       }
 
 }

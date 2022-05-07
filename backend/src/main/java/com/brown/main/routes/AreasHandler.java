@@ -4,6 +4,7 @@ import com.brown.main.models.Area;
 import com.brown.main.models.SnowType;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -46,22 +47,51 @@ public class AreasHandler {
   }
 
   public static JsonObject addArea(MongoDatabase db) {
-    // Area area = new Area();
-    // area.setName("Test 1");
-    // area.setBase(1.0);
-    // area.setAcreage(2.0);
-    // // Comment comment = new Comment();
-    // List<ObjectId> comments = new ArrayList<>();
-    // comments.add(new ObjectId());
-    // area.setComments(comments);
-    // area.setWeather(new ObjectId());
-    // List<Integer> trails = new ArrayList<>();
-    // trails.add(1);
-    // area.setTrails(trails);
-    // area.setSnow_type(SnowType.groomed);
-    // area.setRecent_snowfall(3.0);
-    // // Area area = new Gson().fromJson(req.body(), Area.class);
+    // Document areaDoc = new Document();
+    // areaDoc.append("name", "Test 1");
+    // areaDoc.append("name", "Test 1");
+    // areaDoc.append("name", "Test 1");
+    // areaDoc.append("name", "Test 1");
+    // areaDoc.append("name", "Test 1");
+    // areaDoc.append("name", "Test 1");
+    // areaDoc.
+    // 
+    Area area = new Area();
+    area.setName("Test 2");
+    area.setBase(1.0);
+    area.setAcreage(2.0);
+    // Comment comment = new Comment();
+    List<ObjectId> comments = new ArrayList<>();
+    comments.add(new ObjectId());
+    area.setComments(comments);
+    area.setWeather(new ObjectId());
+    List<Integer> trails = new ArrayList<>();
+    trails.add(1);
+    trails.add(2);
+    trails.add(3);
+    trails.add(4);
+    area.setTrails(trails);
+    area.setSnow_type(SnowType.groomed);
+    area.setRecent_snowfall(3.0);
+    
     // db.getCollection("areas", Area.class).insertOne(area);
+    // // Area area = new Gson().fromJson(req.body(), Area.class);
+    // MongoCollection<Area> coll = db.getCollection("areas", Area.class);
+    // convert area to document
+    Document areaDoc = new Document();
+    areaDoc.append("name", area.getName());
+    areaDoc.append("base", area.getBase());
+    areaDoc.append("acreage", area.getAcreage());
+    areaDoc.append("comments", area.getComments());
+    areaDoc.append("weather", area.getWeather());
+    areaDoc.append("trails", area.getTrails());
+    // areaDoc.append("snow_type", area.getSnow_type());
+    areaDoc.append("snow_type", area.getSnow_type().toString());
+    areaDoc.append("recent_snowfall", area.getRecent_snowfall());
+    db.getCollection("areas").insertOne(areaDoc);
+    // // coll.insertOne(area);
+    // TODO: error check for validation fails i.e. MongoWriteExceptions
+    db.getCollection("areas").insertOne(areaDoc);
     return getAllAreas(db);
   }
 
