@@ -59,9 +59,6 @@ public class UsersHandler {
       }
 
       public static boolean validateUserToken(MongoDatabase db, Request req) {
-        // iterate through req.headers
-        System.out.println(req.headers("Authorization"));
-          // System.out.println(req.headers());
         // Bearer token
         String bearerToken = req.headers("Authorization");
         String[] bearerTokenSplit = bearerToken.split(" ");
