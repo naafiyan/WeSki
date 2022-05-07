@@ -32,6 +32,10 @@ public class RouteWrapper {
      Spark.get("/areas/:id", (req, res) -> AreasHandler.getArea(db, req.params(":id")));
   }
 
+  private void initRecRoutes() {
+    Spark.post("/recommend", (req, res) -> RecHandler.recommend(db, req.body()));
+  }
+
   private void initUserRoute() {
 
     // validate jwt!
