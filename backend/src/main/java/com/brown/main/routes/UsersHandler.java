@@ -5,8 +5,10 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.brown.main.database.FirebaseHelper;
 import com.brown.main.models.Area;
 import com.brown.main.models.SnowType;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mongodb.client.MongoDatabase;
@@ -54,8 +56,24 @@ public class UsersHandler {
       public static JsonObject newUser(MongoDatabase db, Request req) {
       // use auth0 to verify jwt from req
         return null;
+      }
 
-
+      public static boolean validateUserToken(MongoDatabase db, Request req) {
+        // iterate through req.headers
+        System.out.println(req.headers("Authorization"));
+          // System.out.println(req.headers());
+        // Bearer token
+        String bearerToken = req.headers("Authorization");
+        String[] bearerTokenSplit = bearerToken.split(" ");
+        String token = bearerTokenSplit[1];
+        // verify token
+        try {
+          FirebaseHelper.validateToken(token);
+          return true;
+        } catch (FirebaseAuthException e) {
+          System.out.println(e.toString());
+          return false;
+        }
       }
 
 }

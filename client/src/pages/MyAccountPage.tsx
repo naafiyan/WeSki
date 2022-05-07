@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {signInWithGoogle} from "../Firebase"
 import Button from "@mui/material/Button";
-import {Autocomplete, TextField } from "@mui/material";
-import Header from "../components/Header";
-import Form from "react-bootstrap/Form"
-import MySlider from "../components/Slider"
-import Input from "@mui/material/Input"
-import {Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { TextField } from "@mui/material";
 import StyledSlider from "../components/Slider";
 import ProfilePicture from '../components/ProfilePicture';
 import FavoriteMountain from '../components/FavoriteMountain';
@@ -126,64 +119,64 @@ export function MyAccountPage() {
             label: '100°C',
         },
     ];
-  return (
-    <>
-        {/* Center the content */}
-        <div className = "flex-container">
-        <div className = "left-side" style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: '80vh'}}>
-        <ProfilePicture></ProfilePicture>
-        <div className = "CurrentLocationTextBox">  
-        <br/>
-        <TextField
-            name="location"
-            label="Current Location"
-            InputLabelProps={{ shrink: true, required: false, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-            type="Providence, RI"
-            InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-            />
-        </div>
-        <div className = "FavoriteMountainTextBox">  
-        <br/> 
-        <FavoriteMountain></FavoriteMountain>
-        </div>
-        </div>
-        <br/>
-        <br/>
-        <div className = "flex-child-right" >
-            <br/>
-            <h1>What Is Important To You?</h1>
-            <br/>
-        Preferred Lift Ticket Price
-            <br/>
-        <StyledSlider marks={priceMarks}/>
-            <br/>
-        Distance from Your Location
-            <br/>
-        <StyledSlider marks={distanceMarks}/>
-            <br/>
-        Weather Conditions
-            <br/>
-        <StyledSlider marks={interestMarks}/>
-            <br/>
-        Terrain Difficuly Level
-            <br/>
-        <StyledSlider marks={difficultyMarks}/>
-            <br/>
-        Number of Trails Open
-            <br/>
-        <StyledSlider marks={interestMarks}/>
-            <br/>
-            <br/>
-        <Button variant = "contained" color="primary" size={"large"}>
-            Save Preferences
-        </Button>
-        </div>
-        </div>
-        
-    </>
+    return (
+        <>
+            {/* Center the content */}
+            <div className="flex-container">
+                <div className="left-side" style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', height: '80vh' }}>
+                    <ProfilePicture></ProfilePicture>
+                    <div className="CurrentLocationTextBox">
+                        <br />
+                        <TextField
+                            name="location"
+                            label="Current Location"
+                            InputLabelProps={{ shrink: true, required: false, style: { fontWeight: 700, color: '#1E1E1E', fontFamily: 'Roboto', fontSize: '18px' } }}
+                            type="Providence, RI"
+                            InputProps={{ style: { border: "1px solid #C2C2C2", padding: 6, width: 480, height: 51 } }}
+                        />
+                    </div>
+                    <div className="FavoriteMountainTextBox">
+                        <br />
+                        <FavoriteMountain></FavoriteMountain>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div className="flex-child-right" >
+                    <br />
+                    <h1>What Is Important To You?</h1>
+                    <br />
+                    Preferred Lift Ticket Price
+                    <br />
+                    <StyledSlider marks={priceMarks} />
+                    <br />
+                    Distance from Your Location
+                    <br />
+                    <StyledSlider marks={distanceMarks} />
+                    <br />
+                    Weather Conditions
+                    <br />
+                    <StyledSlider marks={interestMarks} />
+                    <br />
+                    Terrain Difficuly Level
+                    <br />
+                    <StyledSlider marks={difficultyMarks} />
+                    <br />
+                    Number of Trails Open
+                    <br />
+                    <StyledSlider marks={interestMarks} />
+                    <br />
+                    <br />
+                    <Button variant="contained" color="primary" size={"large"}>
+                        Save Preferences
+                    </Button>
+                </div>
+            </div>
 
-    
-);
+        </>
+
+
+    );
 };
 
 export default MyAccountPage;
