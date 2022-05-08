@@ -42,6 +42,7 @@ public class RouteWrapper {
     // route to fetch basic user info by id
     Spark.get("/users/:id", (req, res) -> UsersHandler.getUserById(db, req.params(":id")));
     Spark.get("/user/authcheck", (req, res) -> UsersHandler.validateUserToken(db, req));
+    Spark.post("/users", (req, res) -> UsersHandler.userLogin(db, req));
     // route to fetch user prefs (need to validate user auth first)
     // Spark.get("user/:id/prefs", (req, res) -> UsersHandler.getUserPrefs(db, req));
     // Spark.put("/users/:id", (req, res) -> UsersHandler.updateUser(db, req.params(":id"), req.body()));

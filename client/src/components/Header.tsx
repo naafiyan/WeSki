@@ -10,7 +10,7 @@ export default function Header() {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        if (user) setLoading(false);
+        setLoading(false);
     }, [user])
 
 

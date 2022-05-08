@@ -11,7 +11,31 @@ function UserProvider(props: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
 
     const handleMount = () => {
-        auth.onAuthStateChanged(user => {
+        auth.onAuthStateChanged(async (user) => {
+            // make req to backend to get user prefs if user exists
+            if (user) {
+                const token = await user.getIdToken();
+                console.log(token);
+                // make backend call to first check if user exists -> if it does -> get user prefs else add user to db and assign default prefs
+                const res = await fetch("http://localhost:4567/users/" + user.uid);
+                const resJson = await res.json();
+                if (resJson.success) setUser(user);
+                else {
+                    const res = await fetch("http://localhost:4567/users", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token,
+                        },
+                        body: JSON.stringify({
+                            uid: user.uid,
+                            username: user.displayName,
+                            email: user.email,
+                        })
+                    });
+                }
+                console.log(resJson);
+            }
             setUser(user);
         });
     }
