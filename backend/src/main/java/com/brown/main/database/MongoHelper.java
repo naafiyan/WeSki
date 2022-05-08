@@ -18,6 +18,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 public class MongoHelper implements Database<MongoDatabase> {
 
   public static MongoClient client;
+  public MongoClientSettings clientSettings;
 
   /**
    * Constructor for the wrapper class.
@@ -29,20 +30,25 @@ public class MongoHelper implements Database<MongoDatabase> {
 
   @Override
   public MongoDatabase initDb(String db) {
+    System.out.println(System.getProperty("mongodb.uri"));
     ConnectionString connectionString = new ConnectionString(System.getProperty("mongodb.uri"));
     CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
     CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
-    MongoClientSettings clientSettings = MongoClientSettings.builder()
+    this.clientSettings = MongoClientSettings.builder()
         .applyConnectionString(connectionString)
         .codecRegistry(codecRegistry)
         .build();
 
-    MongoHelper.client = MongoClients.create(clientSettings);
+    MongoHelper.client = MongoClients.create(this.clientSettings);
 
     if (MongoHelper.client == null) {
       throw new NullPointerException("ERROR: Client is null");
     }
     return MongoHelper.client.getDatabase(db);
+  }
+
+  public MongoClientSettings getClientSettings() {
+    return this.clientSettings;
   }
 
   @Override
