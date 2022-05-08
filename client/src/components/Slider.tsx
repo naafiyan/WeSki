@@ -1,6 +1,6 @@
 import { Slider } from "@mui/material";
 import React from "react";
-type SliderProps = {marks?: { value: number; label: string; }[]};
+type SliderProps = { marks?: { value: number; label: string; }[] };
 export default function StyledSlider(props: SliderProps) {
     return (
         <Slider

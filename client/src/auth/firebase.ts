@@ -1,6 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signOut, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User, IdTokenResult } from 'firebase/auth'
 
+export type UserDoc = {
+    displayName: string;
+    photoUrl: string;
+    uid: string;
+}
+
 /**
  * This sets up the firebase connection to allow authorization of users.
  */
@@ -103,3 +109,14 @@ export const isAuth = async () => {
 export const getUser = (): User | null => {
     return user;
 }
+
+export const userToUserDoc = (): UserDoc | null => {
+    if (user && user.displayName && user.photoURL) {
+        return {
+            displayName: user.displayName,
+            photoUrl: user.photoURL,
+            uid: user.uid
+        }
+    } else return null;
+}
+
