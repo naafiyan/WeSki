@@ -1,27 +1,17 @@
-import { User } from "firebase/auth";
-import React, { useEffect, useState } from "react";
-import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { auth, getUser, signInWithGoogle } from "../auth/firebase";
+import { signInWithGoogle } from "../auth/firebase";
+import { UserContext } from "../providers/UserProvider";
 
 export default function Header() {
+    const user = useContext(UserContext);
 
-    const [user, setUser] = useState<User | null>();
-    const [isAuth, setIsAuth] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
-    auth.onAuthStateChanged(user => {
-        setUser(user);
-        setLoading(false);
-    })
-
     useEffect(() => {
-        setUser(auth.currentUser);
-    }, [])
-
-    useEffect(() => {
-        if (auth.currentUser) setIsAuth(true);
-    }, [user]);
+        if (user) setLoading(false);
+    }, [user])
 
 
     const loginComp = (
@@ -54,14 +44,7 @@ export default function Header() {
                 </Nav.Link>
             </Nav>
             <Nav style={{ marginRight: "2%" }}>
-                {loading ? (<Navbar.Text>Loading...</Navbar.Text>) : isAuth ? userPageComp : loginComp}
-                {/* {isAuth ? userPageComp : loginComp} */}
-                {/* {loading ? (
-                    
-                        <Navbar.Text>Loading...</Navbar.Text>
-                    ) : (
-                        // <UserNavDropdown user={user} />
-                    )} */}
+                {loading ? (<Navbar.Text>Loading...</Navbar.Text>) : user ? userPageComp : loginComp}
             </Nav>
 
         </Navbar>
