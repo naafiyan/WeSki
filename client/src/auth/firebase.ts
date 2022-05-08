@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signOut, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User } from 'firebase/auth'
-import { SetStateAction } from 'react';
+import { getAuth, signOut, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User, IdTokenResult } from 'firebase/auth'
 
 /**
  * This sets up the firebase connection to allow authorization of users.
@@ -32,6 +31,8 @@ let userVerifiedStatus = false;
 let user: User | null = null;
 
 
+// check if user is auth or not
+if (auth.currentUser) user = auth.currentUser;
 
 /**
  * This method creates variables and sets them
@@ -41,26 +42,6 @@ auth.onAuthStateChanged(user => {
     console.log("User is logged in: " + user);
     if (user) {
         user = user;
-        user.getIdToken().then(idToken => {
-            console.log("Token", idToken);
-            // let's just ping server and see if user is authenticated
-            fetch("http://localhost:4567/user/authcheck", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + idToken
-                }
-            }).then(response => {
-                if (response.status === 200) {
-                    console.log("User is authenticated");
-                }
-            }
-            ).catch(error => {
-                console.log("User is not authenticated");
-            });
-
-            // add more fields to idToken
-        });
         userID = user.uid;
         if (user.displayName) userName = user.displayName;
         if (user.email) userEmailAddress = user.email;
@@ -68,7 +49,6 @@ auth.onAuthStateChanged(user => {
         userVerifiedStatus = user.emailVerified;
         localStorage.setItem("userName", userName);
         localStorage.setItem("userProfilePic", userProfilePic);
-
     } else {
         userID = "";
         userName = "Guest";
@@ -96,10 +76,30 @@ export const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 console.log("User " + auth.currentUser?.toJSON());
+                user = result.user;
             })
             .catch(error => {
                 console.log(error)
             });
     }
-
 };
+
+export const isAuth = async () => {
+    if (user) {
+        const idToken = user.getIdToken();
+        const res = await fetch("http://localhost:4567/user/authcheck", {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + idToken,
+            }
+        })
+        const resJson = await res.json();
+        return resJson.status == 200;
+    } else {
+        return false;
+    }
+}
+
+export const getUser = (): User | null => {
+    return user;
+}

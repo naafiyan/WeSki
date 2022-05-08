@@ -1,54 +1,56 @@
 import { useState, useEffect } from 'react';
-import { signInWithGoogle } from "../firebaseUtils/Firebase"
+import { auth, getUser, signInWithGoogle } from '../auth/firebase';
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
-
-
+import { User } from 'firebase/auth';
 
 function ProfilePicture() {
-
-
-
-    const [userName, setUserName] = useState<string>("Guest");
-    const [profileURL, setProfileURL] = useState<string>('../images/blankProfile.png');
-    const [signedIn, setSignedIn] = useState<string>("Sign In");
+    const [user, setUser] = useState<User | null>();
+    const [profileUrl, setProfileUrl] = useState<string | undefined>();
 
     useEffect(() => {
-
-    }, [profileURL]);
-
-    useEffect(() => {
-
-    }, [userName]);
+        setUser(getUser());
+    }, [])
 
     useEffect(() => {
+        if (user?.photoURL) {
+            setProfileUrl(user.photoURL);
+        } else {
+            setProfileUrl(undefined);
+        }
+    }, [user]);
 
-    }, [signedIn]);
-
-    return (
+    const page = (
         <div className="leftSide">
             <div className="profilePhoto">
                 <div className="profile" style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '30vh' }}>
                     <br />
                     <br />
                     <br />
-                    <img src={profileURL}
+                    <img src={profileUrl}
                         color="#321124"
                         width="150"
                         height="150" />
                     <div className="profile-Name">
-                        <h1>{userName}</h1>
+                        <h1>{user?.displayName}</h1>
                     </div>
                 </div>
-                <div className="sign-in-button">
+                {/* <div className="sign-in-button">
                     <br />
                     <Button sx={{ width: 475 }}
                         variant="contained" color="info" size={"large"} onClick={signInWithGoogle}>
                         {signedIn}
                     </Button>
-                </div>
+                </div> */}
             </div>
         </div>
+    )
+
+
+    return (
+        <>
+            {user && page}
+        </>
     );
 }
 export default ProfilePicture;

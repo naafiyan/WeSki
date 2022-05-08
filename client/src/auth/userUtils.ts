@@ -1,5 +1,5 @@
 import { getAuth } from "firebase/auth";
-import { app } from "./Firebase";
+import { app } from "./firebase";
 
 const checkIfUserIsLoggedIn = () => {
     return new Promise((resolve, reject) => {
