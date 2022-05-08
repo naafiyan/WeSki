@@ -55,13 +55,14 @@ public class UsersHandler {
         return user;
       }
 
-      public static JsonObject userLogin(MongoDatabase db, Request req) {
+      public static synchronized JsonObject userLogin(MongoDatabase db, Request req) {
         // Post request body should be in the form of:
         // {
         //   "email": "
         // "username": "
         // "uid": "
         // }
+
         JsonObject body = new Gson().fromJson(req.body(), JsonObject.class);
         String email = body.get("email").getAsString();
         String username = body.get("username").getAsString();
@@ -81,6 +82,7 @@ public class UsersHandler {
           newUserDoc.append("location", "");
           // TODO: probably assign default values to pref area
           newUserDoc.append("pref_area", new ObjectId());
+          System.out.println("Getting here!!!");
           db.getCollection("users").insertOne(newUserDoc);
           userDoc = newUserDoc;
           return new Gson().fromJson(newUserDoc.toJson(), JsonObject.class);

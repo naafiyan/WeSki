@@ -11,16 +11,17 @@ function UserProvider(props: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
 
     const handleMount = () => {
-        auth.onAuthStateChanged(async (user) => {
+        console.log("getting here!");
+        auth.onAuthStateChanged(async (userFb) => {
             // make req to backend to get user prefs if user exists
-            if (user) {
-                const token = await user.getIdToken();
+            if (userFb) {
+                const token = await userFb.getIdToken();
                 console.log(token);
                 // make backend call to first check if user exists -> if it does -> get user prefs else add user to db and assign default prefs
-                const res = await fetch("http://localhost:4567/users/" + user.uid);
+                const res = await fetch("http://localhost:4567/users/" + userFb.uid);
                 const resJson = await res.json();
-                if (resJson.success) setUser(user);
-                else {
+                if (!resJson.success) {
+                    console.log("getting here!!");
                     const res = await fetch("http://localhost:4567/users", {
                         method: "POST",
                         headers: {
@@ -28,15 +29,16 @@ function UserProvider(props: { children: React.ReactNode }) {
                             "Authorization": "Bearer " + token,
                         },
                         body: JSON.stringify({
-                            uid: user.uid,
-                            username: user.displayName,
-                            email: user.email,
+                            uid: userFb.uid,
+                            username: userFb.displayName,
+                            email: userFb.email,
                         })
                     });
                 }
                 console.log(resJson);
             }
-            setUser(user);
+            setUser(userFb);
+
         });
     }
 
