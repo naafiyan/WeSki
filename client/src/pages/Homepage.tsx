@@ -1,11 +1,4 @@
-import Button from "@mui/material/Button";
-import { Box, FormControlLabel, FormGroup, Slider, Stack, Switch, TextField } from "@mui/material";
-import Header from "../components/Header";
-import Form from "react-bootstrap/Form"
-import MySlider from "../components/Slider"
-import Input from "@mui/material/Input"
-import {Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import StyledSlider from "../components/Slider";
+import { TextField } from "@mui/material";
 
 function Homepage() {
     return(<TextField

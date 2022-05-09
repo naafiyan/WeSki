@@ -42,7 +42,14 @@ export default function Header() {
                 <Nav.Link as={Link} to="/trips">
                     Trips
                 </Nav.Link>
+                <Nav.Link as={Link} to="/account">
+                    My Account
+                </Nav.Link>
+                <Nav.Link as={Link} to="/recommendation">
+                    Recommendation
+                </Nav.Link>
             </Nav>
+
             <Nav style={{ marginRight: "2%" }}>
                 {loading ? (<Navbar.Text>Loading...</Navbar.Text>) : user ? userPageComp : loginComp}
             </Nav>
