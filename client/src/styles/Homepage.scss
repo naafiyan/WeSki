@@ -48,8 +48,27 @@ $theme-colors: (
   background: black;
 }
 
+.date-bar {
+  position: absolute;
+  display: inline-block;
+  width: 400px;
+  height: 70px;
+  top:50%;
+  left:41%;
+  transform: translate(-50%,-50%);
+  border-radius: 45px 45px 45px 45px;
+  background: white;
+}
 
-
+.division-bar {
+  position: absolute;
+  width: 30px;
+  height: 0px;
+  left: 46.25%;
+  top: 50%;
+  border: 0.5px solid #5A9B85;
+  transform: rotate(90deg);
+}
 
 .trip-text {
   position: absolute;

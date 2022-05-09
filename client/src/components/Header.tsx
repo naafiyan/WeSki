@@ -53,7 +53,6 @@ export default function Header() {
             <Nav style={{ marginRight: "2%" }}>
                 {loading ? (<Navbar.Text>Loading...</Navbar.Text>) : user ? userPageComp : loginComp}
             </Nav>
-
         </Navbar>
     );
 }
