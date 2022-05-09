@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import { Carousel } from "react-bootstrap";
 
 
 function Recommendation() {
@@ -6,15 +7,71 @@ function Recommendation() {
         <>
             <br/>
             <div className = "button">
-                <Button variant = "contained" size={"large"} style={{
-                    borderRadius: 20,
-                    backgroundColor: "#5A9B85",
-                    padding: "18px 36px",
-                    fontSize: "18px",
-                    fontFamily: "Roboto"
-                }}>
-                    Find a mountain
-                </Button>
+
+                <Carousel>
+                    <Carousel.Item>
+                        <img
+                            alt="First slide"
+                            src={require('../images/download.jpg')}
+                            width="300"
+                            height="300"
+                        />
+                        <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            alt="Second slide"
+                            src={require('../images/download.jpg')}
+                            width="300"
+                            height="300"
+                        />
+
+                        <Carousel.Caption>
+                            <h3>Second slide label</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            alt="Third slide"
+                            src={require('../images/download.jpg')}
+                            width="300"
+                            height="300"
+                        />
+
+                        <Carousel.Caption>
+                            <h3>Third slide label</h3>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            alt="First slide"
+                            src={require('../images/download.jpg')}
+                            width="300"
+                            height="300"
+                        />
+                        <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            alt="First slide"
+                            src={require('../images/download.jpg')}
+                            width="300"
+                            height="300"
+                        />
+                        <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
             </div>
         </>
     );
