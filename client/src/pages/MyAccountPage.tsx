@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import StyledSlider from "../components/Slider";
 import ProfilePicture from '../components/ProfilePicture';
 import FavoriteMountain from '../components/FavoriteMountain';
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../auth/firebase";
 
@@ -18,6 +18,8 @@ export function MyAccountPage() {
 
     const user = useContext(UserContext);
 
+    const [prefs, setPrefs] = useState<Map<string, number>>(new Map());
+
     const handleFetchPrefs = async () => {
         auth.onAuthStateChanged(async (userFb) => {
             if (userFb) {
@@ -28,7 +30,13 @@ export function MyAccountPage() {
                     }
                 });
                 const resJson = await res.json();
-                console.log(resJson);
+                // go through prefs and set name and value pairs
+                const prefsMap = new Map();
+                for (const pref of resJson.prefs) {
+                    prefsMap.set(pref.name, pref.value);
+                }
+                console.log(prefsMap);
+                setPrefs(prefsMap);
             }
         });
         // if (!user) return;
