@@ -1,0 +1,130 @@
+$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:       $font-family-sans-serif !default;
+
+$theme-colors: (
+        "primary": #000000,
+        "secondary": #5A9B85,
+        "success": #C4E0F9,
+        "warning":    #FFFFFF,
+        "light": #FFFFFF,
+        "info": tomato,
+        "danger": teal,
+        "dark": #5A9B85
+);
+
+
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-child-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.flex-child-right {
+  display: flex;
+  flex-direction: column;
+}
+.button {
+  display: flex;
+  justify-content:center;
+  font-family: "Times New Roman", sans-serif
+}
+
+.rectangle {
+  position: absolute;
+  display: inline-block;
+  width: 1100px;
+  height: 93px;
+  top:18%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 45px 45px 45px 45px;
+  background: black;
+}
+
+.date-bar {
+  position: absolute;
+  display: inline-block;
+  width: 400px;
+  height: 70px;
+  top:50%;
+  left:41%;
+  transform: translate(-50%,-50%);
+  border-radius: 45px 45px 45px 45px;
+  background: white;
+}
+
+.division-bar {
+  position: absolute;
+  width: 30px;
+  height: 0px;
+  left: 46.25%;
+  top: 50%;
+  border: 0.5px solid #5A9B85;
+  transform: rotate(90deg);
+}
+
+.trip-text {
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: lighter;
+  font-size: 32px;
+  line-height: 38px;
+  top:30%;
+  left:3%;
+  color: white;
+}
+
+.search-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 60%;
+  top: 24%;
+  border-radius: 45px 45px 45px 45px;
+  background: #000000;
+  border: 2px solid #5A9B85;
+  box-sizing: border-box;
+  box-shadow: -1px 1px 9px rgba(255, 255, 255, 0.4);
+}
+
+
+.compare-divider {
+  position: absolute;
+  width: 63px;
+  height: 0px;
+  right: 30%;
+  top: 50%;
+  border: 0.5px solid #5A9B85;
+  transform: rotate(90deg);
+}
+
+.compare-button {
+  position: absolute;
+  width: 300px;
+  height: 60px;
+  top: 40%;
+  left: 70%;
+  border: 2px solid #5A9B85;
+  box-sizing: border-box;
+}
+
+.compare-text {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: lighter;
+  top: 10%;
+  font-size: 26px;
+  line-height: 28px;
+  color: white;
+}
+
+/* import bootstrap to set changes */
+@import "node_modules/bootstrap/scss/bootstrap";
