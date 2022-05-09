@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import StyledSlider from "../components/Slider";
 import ProfilePicture from '../components/ProfilePicture';
 import FavoriteMountain from '../components/FavoriteMountain';
@@ -15,7 +15,20 @@ import { auth } from "../auth/firebase";
  * @returns The React element for profile handling.
  */
 export function MyAccountPage() {
-
+    const interestMarks = [
+        {
+            value: 0,
+            label: 'Irrelevant to me',
+        },
+        {
+            value: 50,
+            label: 'Meh',
+        },
+        {
+            value: 100,
+            label: 'Super important',
+        },
+    ];
     const user = useContext(UserContext);
 
     const [prefs, setPrefs] = useState<Map<string, number>>(new Map());
@@ -48,113 +61,7 @@ export function MyAccountPage() {
     }, []);
 
 
-    const priceMarks = [
-        {
-            value: 0,
-            label: '$0',
-        },
-        {
-            value: 25,
-            label: '$75',
-        },
-        {
-            value: 50,
-            label: '$150',
-        },
-        {
-            value: 75,
-            label: '$225',
-        },
-        {
-            value: 100,
-            label: '$300',
-        },
-    ];
-    const distanceMarks = [
-        {
-            value: 0,
-            label: '0 miles',
-        },
-        {
-            value: 20,
-            label: '100 miles',
-        },
-        {
-            value: 40,
-            label: '200 miles',
-        },
-        {
-            value: 60,
-            label: '300 miles',
-        },
-        {
-            value: 80,
-            label: '400 miles',
-        },
-        {
-            value: 100,
-            label: '500 miles',
-        },
-    ];
-    const interestMarks = [
-        {
-            value: 0,
-            label: 'Irrelevant',
-        },
-        {
-            value: 25,
-            label: 'Meh',
-        },
-        {
-            value: 50,
-            label: 'Neutral',
-        },
-        {
-            value: 75,
-            label: 'Kinda',
-        },
-        {
-            value: 100,
-            label: 'Super',
-        },
-    ];
-    const difficultyMarks = [
-        {
-            value: 0,
-            label: '0°C',
-        },
-        {
-            value: 20,
-            label: '20°C',
-        },
-        {
-            value: 37,
-            label: '37°C',
-        },
-        {
-            value: 100,
-            label: '100°C',
-        },
-    ];
 
-    const terrainMarks = [
-        {
-            value: 0,
-            label: '0°C',
-        },
-        {
-            value: 20,
-            label: '20°C',
-        },
-        {
-            value: 37,
-            label: '37°C',
-        },
-        {
-            value: 100,
-            label: '100°C',
-        },
-    ];
     return (
         <>
             {/* Center the content */}
@@ -178,32 +85,63 @@ export function MyAccountPage() {
                 </div>
                 <br />
                 <br />
-                <div className="flex-child-right" >
+                <div className = "flex-child-right" >
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "32px",
+                        fontWeight: "medium",
+                        fontStyle: "italic",
+                        fontFamily: "Roboto"
+                    }}>
+                        Your Preferences
+                    </Typography>
+
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Cheap Lift Tickets
+                    </Typography>
+                    <StyledSlider marks={interestMarks}/>
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Distance from your Location
+                    </Typography>
+                    <StyledSlider marks={interestMarks}/>
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Weather Conditions
+                    </Typography>
+                    <StyledSlider marks={interestMarks}/>
+                    <br/>
+                    <Typography style={{
+                        color:'#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Number of Trails Open
+                    </Typography>
+                    <StyledSlider marks={interestMarks}/>
+                    <br/>
                     <br />
-                    <h1>What Is Important To You?</h1>
-                    <br />
-                    Preferred Lift Ticket Price
-                    <br />
-                    <StyledSlider marks={priceMarks} />
-                    <br />
-                    Distance from Your Location
-                    <br />
-                    <StyledSlider marks={distanceMarks} />
-                    <br />
-                    Weather Conditions
-                    <br />
-                    <StyledSlider marks={interestMarks} />
-                    <br />
-                    Terrain Difficuly Level
-                    <br />
-                    <StyledSlider marks={difficultyMarks} />
-                    <br />
-                    Number of Trails Open
-                    <br />
-                    <StyledSlider marks={interestMarks} />
-                    <br />
-                    <br />
-                    <Button variant="contained" color="primary" size={"large"}>
+                    <Button variant = "contained" size={"medium"} style={{
+                        borderRadius: 20,
+                        backgroundColor: "#5A9B85",
+                        padding: "14px 30px",
+                        fontSize: "18px",
+                        fontFamily: "Roboto"
+                    }} >
                         Save Preferences
                     </Button>
                 </div>

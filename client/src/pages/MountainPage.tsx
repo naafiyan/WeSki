@@ -12,6 +12,30 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 
 function MountainPage() {
+    const navigate = useNavigate();
+    async function useFetchRecommend() {
+        const res = await fetch("http://localhost:4567/recommend", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                zipcode : 'string',
+                experience : 'number',
+                priceImportance :  'number',
+                locationImportance : 'number',
+                weatherImportance : 'number',
+                openTrailsImportance : 'number',
+            })
+        })
+        const resJson = await res.json();
+        console.log(resJson);
+        if (resJson.success) {
+            // navigate('../recommend', { replace: true });
+        }
+
+
+    }
 
     const theme = createTheme({
         palette: {
@@ -208,29 +232,5 @@ function MountainPage() {
     );
 }
 
-async function useFetchRecommend() {
-    const navigate = useNavigate();
-    const res = await fetch('"http://localhost:4567/recommend"', {
-        method: 'POST',
-        headers: {
-            'Accept': 'recommend/json',
-            'Content-Type': 'recommend/json',
-        },
-        body: JSON.stringify({
-            zipcode : 'string',
-            experience : 'number',
-            priceImportance :  'number',
-            locationImportance : 'number',
-            weatherImportance : 'number',
-            openTrailsImportance : 'number',
-        })
-    })
-    const resJson = await res.json();
-    if (resJson.success) {
-        navigate('../recommend', { replace: true });
-    }
-
-
-}
 
 export default MountainPage;
