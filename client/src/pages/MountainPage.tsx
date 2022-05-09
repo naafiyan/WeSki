@@ -185,7 +185,8 @@ function MountainPage() {
                     fontSize: "18px",
                     fontFamily: "Roboto"
                 }} onClick={() => {
-                    fetch('"http://localhost:4567/recommend"', {
+                    console.log('fetching');
+                    fetch('http://localhost:4567/recommend', {
                         method: 'POST',
                         headers: {
                             'Accept': 'recommend/json',
