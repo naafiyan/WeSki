@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2662c4fa-4510-4c7b-a598-52f1c597fd9d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/Account.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/GoogleAuthentication.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/MountainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/MountainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Recommendation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Recommendation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/styles/Homepage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/styles/Homepage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-compat.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-firestore-compat.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-firestore.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Homepage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Homepage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +25,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/client/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
