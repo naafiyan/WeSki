@@ -31,7 +31,12 @@ export function MyAccountPage() {
     ];
     const user = useContext(UserContext);
 
-    const [prefs, setPrefs] = useState<Map<string, number>>(new Map());
+    const [ticketPref, setTicketPref] = useState<number>(0);
+    const [locPref, setLocPref] = useState<number>(0);
+    const [weatherPref, setWeatherPref] = useState<number>(0);
+    const [trailsPref, setTrailsPref] = useState<number>(0);
+    const [difficultyPref, setDifficultyPref] = useState<number>(0);
+    const [zipcode, setZipcode] = useState<string>("");
 
     const handleFetchPrefs = async () => {
         auth.onAuthStateChanged(async (userFb) => {
@@ -43,13 +48,20 @@ export function MyAccountPage() {
                     }
                 });
                 const resJson = await res.json();
+                setTicketPref(parseFloat(resJson.ticketPref));
+                setLocPref(parseFloat(resJson.locPref));
+                setWeatherPref(parseFloat(resJson.weatherPref));
+                setTrailsPref(parseFloat(resJson.trailsPref));
+                setDifficultyPref(parseFloat(resJson.difficultyPref));
+                setZipcode(resJson.zipcode);
+                console.log(resJson);
                 // go through prefs and set name and value pairs
-                const prefsMap = new Map();
-                for (const pref of resJson.prefs) {
-                    prefsMap.set(pref.name, pref.value);
-                }
-                console.log(prefsMap);
-                setPrefs(prefsMap);
+                // const prefsMap = new Map();
+                // for (const pref of resJson.prefs) {
+                //     prefsMap.set(pref.name, pref.value);
+                // }
+                // console.log(prefsMap);
+                // setPrefs(prefsMap);
             }
         });
     }
@@ -85,10 +97,10 @@ export function MyAccountPage() {
                 </div>
                 <br />
                 <br />
-                <div className = "flex-child-right" >
-                    <br/>
+                <div className="flex-child-right" >
+                    <br />
                     <Typography style={{
-                        color:'#1E1E1E',
+                        color: '#1E1E1E',
                         fontSize: "32px",
                         fontWeight: "medium",
                         fontStyle: "italic",
@@ -97,45 +109,45 @@ export function MyAccountPage() {
                         Your Preferences
                     </Typography>
 
-                    <br/>
+                    <br />
                     <Typography style={{
-                        color:'#1E1E1E',
+                        color: '#1E1E1E',
                         fontSize: "16px",
                         fontFamily: "Roboto"
                     }}>
                         Cheap Lift Tickets
                     </Typography>
-                    <StyledSlider marks={interestMarks}/>
-                    <br/>
+                    <StyledSlider marks={interestMarks} val={ticketPref} setVal={setTicketPref} />
+                    <br />
                     <Typography style={{
-                        color:'#1E1E1E',
+                        color: '#1E1E1E',
                         fontSize: "16px",
                         fontFamily: "Roboto"
                     }}>
                         Distance from your Location
                     </Typography>
-                    <StyledSlider marks={interestMarks}/>
-                    <br/>
+                    <StyledSlider marks={interestMarks} val={locPref} setVal={setLocPref} />
+                    <br />
                     <Typography style={{
-                        color:'#1E1E1E',
+                        color: '#1E1E1E',
                         fontSize: "16px",
                         fontFamily: "Roboto"
                     }}>
                         Weather Conditions
                     </Typography>
-                    <StyledSlider marks={interestMarks}/>
-                    <br/>
+                    <StyledSlider marks={interestMarks} val={weatherPref} setVal={setWeatherPref} />
+                    <br />
                     <Typography style={{
-                        color:'#1E1E1E',
+                        color: '#1E1E1E',
                         fontSize: "16px",
                         fontFamily: "Roboto"
                     }}>
                         Number of Trails Open
                     </Typography>
-                    <StyledSlider marks={interestMarks}/>
-                    <br/>
+                    <StyledSlider marks={interestMarks} val={trailsPref} setVal={setTrailsPref} />
                     <br />
-                    <Button variant = "contained" size={"medium"} style={{
+                    <br />
+                    <Button variant="contained" size={"medium"} style={{
                         borderRadius: 20,
                         backgroundColor: "#5A9B85",
                         padding: "14px 30px",

@@ -139,23 +139,22 @@ public class UsersHandler {
         }
         // get user doc from database
         Document userDoc = db.getCollection("users").find(eq("uid", userId)).first();
-        // get prefs from user doc
-        ArrayList<ObjectId> prefs = (ArrayList<ObjectId>) userDoc.get("prefs");
-        // loop through prefs and get prefs docs from prefs collection
-        MongoCollection<Document> prefsCol = db.getCollection("prefs");
-        ArrayList<Document> prefsDocs = new ArrayList<>();
-        for (ObjectId pref : prefs) {
-          prefsDocs.add(prefsCol.find(eq("_id", pref)).first());
+        // if user doc is null, return json object where success is false
+        if (userDoc == null) {
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
         }
-        // convert prefsDocs to json
-        List<JsonObject> prefsJsons = new ArrayList<>();
-        for (Document prefDoc : prefsDocs) {
-          prefsJsons.add(new Gson().fromJson(prefDoc.toJson(), JsonObject.class));
-        }
-        // return prefs as json
         JsonObject res = new JsonObject();
-        res.add("prefs", new Gson().toJsonTree(prefsJsons));
-        return new Gson().fromJson(res.toString(), JsonObject.class);
+        res.addProperty("success", true);
+        res.addProperty("zipcode", userDoc.get("zipcode").toString());
+        res.addProperty("ticketPref", userDoc.get("ticket_pref").toString());
+        res.addProperty("locPref", userDoc.get("loc_pref").toString());
+        res.addProperty("weatherPref", userDoc.get("weather_pref").toString());
+        res.addProperty("trailsPref", userDoc.get("trails_pref").toString());
+        res.addProperty("difficultyPref", userDoc.get("difficulty_pref").toString());
+        res.addProperty("type", userDoc.get("type").toString());
+        return res;
       }
 
 }
