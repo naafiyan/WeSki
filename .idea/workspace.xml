@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2662c4fa-4510-4c7b-a598-52f1c597fd9d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/Account.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/GoogleAuthentication.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/MountainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/MountainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Recommendation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Recommendation.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/styles/Homepage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/styles/Homepage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-compat.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-firestore-compat.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-firestore.js.map" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
