@@ -19,28 +19,28 @@ export default function Homepage() {
                 main: '#5A9B85'
             },
             secondary: {
-              main: '#FFFFFF'
+                main: '#FFFFFF'
             }
-          }
-      });
+        }
+    });
 
     const [startValue, setStartValue] = React.useState<Date | null>(
         new Date('2022-05-04T21:11:54'),
-      );
+    );
 
-      const [endValue, setEndValue] = React.useState<Date | null>(
+    const [endValue, setEndValue] = React.useState<Date | null>(
         new Date('2022-05-04T21:11:54'),
-      );
-    
-      const handleStartChange = (newValue: Date | null) => {
+    );
+
+    const handleStartChange = (newValue: Date | null) => {
         setStartValue(newValue);
-      };
+    };
 
-      const handleEndChange = (newValue: Date | null) => {
+    const handleEndChange = (newValue: Date | null) => {
         setEndValue(newValue);
-      };
+    };
 
-    return(
+    return (
         <div>
             <div className="rectangle">
                 <p className="trip-text">Plan Your Trip</p>
@@ -48,33 +48,33 @@ export default function Homepage() {
                     <ThemeProvider theme={theme}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DesktopDatePicker
-                            label="Start Date" 
-                            inputFormat="MM/dd/yyyy" 
-                            value={startValue} 
-                            onChange={handleStartChange} 
-                            renderInput={(params) => <TextField {...params} sx={{width: 175, position: "absolute", top: 10, left: 20}}/>}
+                                label="Start Date"
+                                inputFormat="MM/dd/yyyy"
+                                value={startValue}
+                                onChange={handleStartChange}
+                                renderInput={(params) => <TextField {...params} sx={{ width: 175, position: "absolute", top: 10, left: 20 }} />}
                             />
                             <DesktopDatePicker
-                            label="End Date" 
-                            inputFormat="MM/dd/yyyy" 
-                            value={endValue} 
-                            onChange={handleEndChange} 
-                            renderInput={(params) => <TextField {...params} sx={{width: 175, position: "absolute", top: 10, right: 20}}/>}
+                                label="End Date"
+                                inputFormat="MM/dd/yyyy"
+                                value={endValue}
+                                onChange={handleEndChange}
+                                renderInput={(params) => <TextField {...params} sx={{ width: 175, position: "absolute", top: 10, right: 20 }} />}
                             />
                         </LocalizationProvider>
                     </ThemeProvider>
-                    <div className="division-bar"/>
+                    <div className="division-bar" />
                 </div>
                 <Nav.Link as={Link} to="/trips">
                     <div className="search-button">
                         <ThemeProvider theme={theme}>
-                            <IconButton color="secondary" aria-label="search" sx={{width: 50, height: 50, right: 2, bottom: 2}}>
-                                <LocationSearchingOutlinedIcon/>
+                            <IconButton color="secondary" aria-label="search" sx={{ width: 50, height: 50, right: 2, bottom: 2 }}>
+                                <LocationSearchingOutlinedIcon />
                             </IconButton>
                         </ThemeProvider>
-                    </div>  
+                    </div>
                 </Nav.Link>
-                <div className="compare-divider"/>
+                <div className="compare-divider" />
                 <Nav.Link as={Link} to="/venues">
                     <ThemeProvider theme={theme}>
                         <Button size="large" className="compare-button" variant="outlined">
@@ -83,7 +83,7 @@ export default function Homepage() {
                     </ThemeProvider>
                 </Nav.Link>
             </div>
-            <div className = "button">
+            <div className="button">
                 <Carousel>
                     <Carousel.Item>
                         {/* <img
@@ -147,6 +147,6 @@ export default function Homepage() {
                     </Carousel.Item>
                 </Carousel>
             </div>
-        </div> 
+        </div>
     );
 }
