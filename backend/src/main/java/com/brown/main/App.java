@@ -1,6 +1,7 @@
 package com.brown.main;
 
 import com.brown.main.database.Database;
+import com.brown.main.database.FirebaseHelper;
 import com.brown.main.database.MongoHelper;
 import com.brown.main.routes.RouteWrapper;
 import com.mongodb.client.MongoDatabase;
@@ -44,6 +45,8 @@ public final class App {
 
     Spark.before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
+    // set up firebase service
+    FirebaseHelper.initFirebase();
     // create new db
     Database<MongoDatabase> db = new MongoHelper("notSkiQL");
     RouteWrapper rw = new RouteWrapper(db.getDb("notSkiQL"));

@@ -2,6 +2,7 @@ package com.brown.main.models;
 
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +13,7 @@ public class Area implements Model{
   private ObjectId weather;
   private double acreage;
   private double base;
+  private double price;
   private SnowType snow_type;
   private List<Integer> trails;
   private double recent_snowfall;
@@ -19,7 +21,8 @@ public class Area implements Model{
   public Area() {}
 
   public Area(String name, List<ObjectId> comments, ObjectId weather, double acreage,
-              double base, SnowType snow_type, List<Integer> trails, double recent_snowfall) {
+              double base, SnowType snow_type, List<Integer> trails, double recent_snowfall,
+              double price) {
     this.name=name;
     this.comments=comments;
     this.weather=weather;
@@ -28,6 +31,7 @@ public class Area implements Model{
     this.snow_type=snow_type;
     this.trails=trails;
     this.recent_snowfall=recent_snowfall;
+    this.price = price;
   }
 
   @Override
@@ -52,6 +56,7 @@ public class Area implements Model{
     sb.append(", snow_type=").append(this.snow_type);
     sb.append(", trails=").append(this.trails);
     sb.append(", recent_snowfall=").append(this.recent_snowfall);
+    sb.append(", price=").append(this.price);
     sb.append('}');
     return sb.toString();
   }
@@ -76,6 +81,10 @@ public class Area implements Model{
   public void setName(String name) {
     this.name = name;
   }
+
+  public void setPrice(double pr) {this.price=pr;}
+
+  public double getPrice() {return this.price;}
 
   public List<ObjectId> getComments() {
     return comments;
@@ -139,5 +148,16 @@ public class Area implements Model{
 
   public void setId(ObjectId id) {
     this.id = id;
+  }
+
+  public List<String> getAllFields() {
+    List<String> fields = new ArrayList<>();
+    String fieldsStrs = "_id,name,comments,weather,acreage,base,snow_type,trails,recent_snowfall";
+    String[] fieldsArr = fieldsStrs.split(",");
+    // convert to list
+    for (String field : fieldsArr) {
+      fields.add(field);
+    }
+    return fields;
   }
 }
