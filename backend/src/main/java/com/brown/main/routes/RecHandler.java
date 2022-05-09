@@ -16,6 +16,7 @@ import java.util.Map;
 public class RecHandler {
 
   public static String recommend(MongoDatabase db, Request req) {
+    System.out.println(req.body().toString());
     String reqJson = req.body();
     Gson gson = new Gson();
     Map<String, String> reqMap = gson.fromJson(reqJson, Map.class);
