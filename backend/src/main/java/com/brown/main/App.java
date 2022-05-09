@@ -3,9 +3,16 @@ package com.brown.main;
 import com.brown.main.database.Database;
 import com.brown.main.database.FirebaseHelper;
 import com.brown.main.database.MongoHelper;
+import com.brown.main.models.Area;
 import com.brown.main.routes.RouteWrapper;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import spark.Spark;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class App {
   private static final int DEFAULT_PORT = 4567;
