@@ -9,9 +9,9 @@ export function Account() {
 
   return (
     <div className="Account">
-        <button onClick={signInWithGoogle}>Sign In With Google Account</button>
-        <button onClick={showAccountInformation}>What is the Specific Account ID</button>
-        <button onClick={accountSignOut}>LogOut</button>
+      <button onClick={signInWithGoogle}>Sign In With Google Account</button>
+      <button onClick={showAccountInformation}>What is the Specific Account ID</button>
+      <button onClick={accountSignOut}>LogOut</button>
     </div>
   );
 }
