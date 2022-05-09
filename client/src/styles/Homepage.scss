@@ -11,7 +11,7 @@ $theme-colors: (
         "light": #FFFFFF,
         "info": tomato,
         "danger": teal,
-        "dark": #5A9B85 
+        "dark": #5A9B85
 );
 
 
@@ -24,7 +24,8 @@ $theme-colors: (
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  }
+  justify-content: flex-start;
+}
 .flex-child-right {
   display: flex;
   flex-direction: column;

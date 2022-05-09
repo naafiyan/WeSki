@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signOut, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 
 /**
  * This sets up the firebase connection to allow authorization of users.
