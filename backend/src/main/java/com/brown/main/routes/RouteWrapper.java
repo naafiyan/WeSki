@@ -2,6 +2,7 @@ package com.brown.main.routes;
 
 import com.mongodb.client.MongoDatabase;
 import spark.Spark;
+import spark.Request;
 
 public class RouteWrapper {
 
@@ -51,6 +52,7 @@ public class RouteWrapper {
   }
 
   private void initTripsRoutes() {
+    Spark.post("/recommend", (req, res) -> RecHandler.recommend(db, req));
      Spark.get("/trips", (req, res) -> TripsHandler.getAllTrips(db));
      Spark.get("/trips/:id", (req, res) -> TripsHandler.getTrip(db, req.params(":id")));
     // get comments for a trip
