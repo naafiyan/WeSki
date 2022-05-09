@@ -39,10 +39,6 @@ export function MyAccountPage() {
                 setPrefs(prefsMap);
             }
         });
-        // if (!user) return;
-        // const res = await fetch("http://localhost:4567/users/" + user.uid);
-        // const resJson = await res.json();
-        // console.log(resJson);
     }
 
 
