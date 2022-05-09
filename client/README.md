@@ -11,6 +11,11 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+### `Environment Variables`
+Create a file named ".env" in this folder with the following 2 fields
+- ```REACT_APP_FIREBASE_API_KEY=AIzaSyAxVwDN-GYeD0lU6eYIGPOj49X3WKKVFtM```
+- ```REACT_APP_FIREBASE_AUTH_DOMAIN=ski-trip-planner-84981.firebaseapp.com```
+
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
