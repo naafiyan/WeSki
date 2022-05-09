@@ -1,10 +1,10 @@
 package com.brown.main.routes;
 
 import com.brown.main.database.FirebaseHelper;
-import com.brown.main.models.SkierType;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -100,7 +100,15 @@ public class UsersHandler {
       public static boolean validateUserToken(MongoDatabase db, Request req) {
         // Bearer token
         String bearerToken = req.headers("Authorization");
+        // if bearerToken is null, return false
+        if (bearerToken == null) {
+          return false;
+        } 
         String[] bearerTokenSplit = bearerToken.split(" ");
+        // if bearerTokenSplit is not of length 2, return false
+        if (bearerTokenSplit.length != 2) {
+          return false;
+        }
         String token = bearerTokenSplit[1];
         // verify token
         try {
@@ -110,6 +118,38 @@ public class UsersHandler {
           System.out.println(e.toString());
           return false;
         }
+      }
+
+      public static JsonObject getUserPrefs(MongoDatabase db, Request req) {
+        // get user id from req params
+        String userId = req.params("id");
+
+        // get header bearer token
+        if (!validateUserToken(db, req)) {
+          // return json object where success is false
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
+        }
+        // get user doc from database
+        Document userDoc = db.getCollection("users").find(eq("uid", userId)).first();
+        // get prefs from user doc
+        ArrayList<ObjectId> prefs = (ArrayList<ObjectId>) userDoc.get("prefs");
+        // loop through prefs and get prefs docs from prefs collection
+        MongoCollection<Document> prefsCol = db.getCollection("prefs");
+        ArrayList<Document> prefsDocs = new ArrayList<>();
+        for (ObjectId pref : prefs) {
+          prefsDocs.add(prefsCol.find(eq("_id", pref)).first());
+        }
+        // convert prefsDocs to json
+        List<JsonObject> prefsJsons = new ArrayList<>();
+        for (Document prefDoc : prefsDocs) {
+          prefsJsons.add(new Gson().fromJson(prefDoc.toJson(), JsonObject.class));
+        }
+        // return prefs as json
+        JsonObject res = new JsonObject();
+        res.add("prefs", new Gson().toJsonTree(prefsJsons));
+        return new Gson().fromJson(res.toString(), JsonObject.class);
       }
 
 }

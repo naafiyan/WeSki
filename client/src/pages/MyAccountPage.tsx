@@ -3,6 +3,9 @@ import { TextField } from "@mui/material";
 import StyledSlider from "../components/Slider";
 import ProfilePicture from '../components/ProfilePicture';
 import FavoriteMountain from '../components/FavoriteMountain';
+import { useContext, useEffect } from "react";
+import { UserContext } from "../providers/UserProvider";
+import { auth } from "../auth/firebase";
 
 
 
@@ -12,6 +15,35 @@ import FavoriteMountain from '../components/FavoriteMountain';
  * @returns The React element for profile handling.
  */
 export function MyAccountPage() {
+
+    const user = useContext(UserContext);
+
+    const handleFetchPrefs = async () => {
+        auth.onAuthStateChanged(async (userFb) => {
+            if (userFb) {
+                const token = await userFb.getIdToken();
+                const res = await fetch("http://localhost:4567/user/" + userFb.uid + "/prefs", {
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                    }
+                });
+                const resJson = await res.json();
+                console.log(resJson);
+            }
+        });
+        // if (!user) return;
+        // const res = await fetch("http://localhost:4567/users/" + user.uid);
+        // const resJson = await res.json();
+        // console.log(resJson);
+    }
+
+
+    useEffect(() => {
+        console.log("hello");
+        handleFetchPrefs();
+    }, []);
+
+
     const priceMarks = [
         {
             value: 0,

@@ -11,14 +11,13 @@ function UserProvider(props: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
 
     const handleMount = () => {
-        console.log("getting here!");
         auth.onAuthStateChanged(async (userFb) => {
             // make req to backend to get user prefs if user exists
             if (userFb) {
                 const token = await userFb.getIdToken();
                 console.log(token);
                 // make backend call to first check if user exists -> if it does -> get user prefs else add user to db and assign default prefs
-                const res = await fetch("http://localhost:4567/users/" + userFb.uid);
+                const res = await fetch("http://localhost:4567/user/" + userFb.uid);
                 const resJson = await res.json();
                 if (!resJson.success) {
                     console.log("getting here!!");
