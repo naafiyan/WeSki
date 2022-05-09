@@ -1,10 +1,10 @@
 package com.brown.main.routes;
 
 import com.brown.main.database.FirebaseHelper;
-import com.brown.main.models.SkierType;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -55,13 +55,14 @@ public class UsersHandler {
         return user;
       }
 
-      public static JsonObject userLogin(MongoDatabase db, Request req) {
+      public static synchronized JsonObject userLogin(MongoDatabase db, Request req) {
         // Post request body should be in the form of:
         // {
         //   "email": "
         // "username": "
         // "uid": "
         // }
+
         JsonObject body = new Gson().fromJson(req.body(), JsonObject.class);
         String email = body.get("email").getAsString();
         String username = body.get("username").getAsString();
@@ -77,10 +78,17 @@ public class UsersHandler {
           // user doc has comments field so we need to initialize it
           newUserDoc.append("comments", new ArrayList<ObjectId>());
           newUserDoc.append("prefs", new ArrayList<ObjectId>());
+          newUserDoc.append("zipcode", "02912");
+          newUserDoc.append("ticket_pref", 0.5);
+          newUserDoc.append("loc_pref", 0.5);
+          newUserDoc.append("weather_pref", 0.5);
+          newUserDoc.append("trails_pref", 0.5);
+          newUserDoc.append("difficulty_pref", 0.5);
           newUserDoc.append("type", "Ski");
           newUserDoc.append("location", "");
           // TODO: probably assign default values to pref area
           newUserDoc.append("pref_area", new ObjectId());
+          System.out.println("Getting here!!!");
           db.getCollection("users").insertOne(newUserDoc);
           userDoc = newUserDoc;
           return new Gson().fromJson(newUserDoc.toJson(), JsonObject.class);
@@ -98,7 +106,15 @@ public class UsersHandler {
       public static boolean validateUserToken(MongoDatabase db, Request req) {
         // Bearer token
         String bearerToken = req.headers("Authorization");
+        // if bearerToken is null, return false
+        if (bearerToken == null) {
+          return false;
+        } 
         String[] bearerTokenSplit = bearerToken.split(" ");
+        // if bearerTokenSplit is not of length 2, return false
+        if (bearerTokenSplit.length != 2) {
+          return false;
+        }
         String token = bearerTokenSplit[1];
         // verify token
         try {
@@ -108,6 +124,73 @@ public class UsersHandler {
           System.out.println(e.toString());
           return false;
         }
+      }
+
+      public static JsonObject getUserPrefs(MongoDatabase db, Request req) {
+        // get user id from req params
+        String userId = req.params("id");
+
+        // get header bearer token
+        if (!validateUserToken(db, req)) {
+          // return json object where success is false
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
+        }
+        // get user doc from database
+        Document userDoc = db.getCollection("users").find(eq("uid", userId)).first();
+        // if user doc is null, return json object where success is false
+        if (userDoc == null) {
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
+        }
+        JsonObject res = new JsonObject();
+        res.addProperty("success", true);
+        res.addProperty("zipcode", userDoc.get("zipcode").toString());
+        res.addProperty("ticketPref", userDoc.get("ticket_pref").toString());
+        res.addProperty("locPref", userDoc.get("loc_pref").toString());
+        res.addProperty("weatherPref", userDoc.get("weather_pref").toString());
+        res.addProperty("trailsPref", userDoc.get("trails_pref").toString());
+        res.addProperty("difficultyPref", userDoc.get("difficulty_pref").toString());
+        res.addProperty("type", userDoc.get("type").toString());
+        return res;
+      }
+
+      public static JsonObject updateUserPrefs(MongoDatabase db, Request req) {
+        // get user id from req params
+        String userId = req.params("id");
+        // get header bearer token
+        if (!validateUserToken(db, req)) {
+          // return json object where success is false
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
+        }
+        // get user doc from database
+        Document userDoc = db.getCollection("users").find(eq("uid", userId)).first();
+        // if user doc is null, return json object where success is false
+        if (userDoc == null) {
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
+        }
+        // get request body
+        JsonObject body = new Gson().fromJson(req.body(), JsonObject.class);
+        // update user doc with new prefs
+        userDoc.replace("zipcode", body.get("zipcode").getAsString());
+        userDoc.replace("ticket_pref", body.get("ticketPref").getAsDouble());
+        userDoc.replace("loc_pref", body.get("locPref").getAsDouble());
+        userDoc.replace("weather_pref", body.get("weatherPref").getAsDouble());
+        userDoc.replace("trails_pref", body.get("trailsPref").getAsDouble());
+        userDoc.replace("difficulty_pref", body.get("difficultyPref").getAsDouble());
+
+        // update user doc in database
+        db.getCollection("users").replaceOne(eq("uid", userId), userDoc);
+        // return json object where success is true
+        JsonObject res = new JsonObject();
+        res.addProperty("success", true);
+        return res;
       }
 
 }

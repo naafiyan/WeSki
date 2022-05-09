@@ -1,15 +1,12 @@
 package com.brown.main.routes;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.brown.main.models.Area;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class TableHandler {
   public static String getTable(MongoDatabase db) {

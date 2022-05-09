@@ -4,30 +4,25 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.brown.main.recsys.TreeInfo;
+import com.google.gson.Gson;
 import com.mongodb.client.MongoDatabase;
+import spark.Request;
+
+import java.util.Map;
 
 import java.util.Map;
 
 public class RecHandler {
-  public static String recommend(MongoDatabase db, String json) {
-    if(db==null){
-      System.out.println("ERROR: Please use the load_data command to load in a database");
-      return null;
-    }
+
+  public static String recommend(MongoDatabase db, Request req) {
+    String reqJson = req.body();
     Gson gson = new Gson();
-    JsonObject reqJson = new JsonParser().parse(json).getAsJsonObject();
-    String table = reqJson.get("table").getAsString();
-    String columns = reqJson.get("columns").getAsString();
-    String values = reqJson.get("values").getAsString();
-    //int end = this.db.insert(table, columns, values);
-    //System.out.println("Number of Rows Inserted: " + end);
-//    if(end>=0){
-//      Map<String, String> matchMap = ImmutableMap.of("result", "Great Success!");
-//      return gson.toJson(matchMap);
-//    }else{
-//      Map<String, String> matchMap = ImmutableMap.of("result", "Not Great Success:(");
-//      return gson.toJson(matchMap);
-//    }
+    Map<String, String> reqMap = gson.fromJson(reqJson, Map.class);
+    System.out.println(reqMap.toString());
+
+    TreeInfo inf = new TreeInfo("usr", Double.parseDouble(reqMap.get("experience")), Double.parseDouble(reqMap.get("weatherImportance")),
+        Double.parseDouble(reqMap.get("priceImportance")), Double.parseDouble(reqMap.get("openTrilsImportance")), Double.parseDouble(reqMap.get("")));
 
     return null;
   }

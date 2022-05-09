@@ -1,207 +1,278 @@
 import Button from "@mui/material/Button";
-import { Box, FormControlLabel, FormGroup, Slider, Stack, Switch, TextField } from "@mui/material";
-import Header from "../components/Header";
-import Form from "react-bootstrap/Form"
-import MySlider from "../components/Slider"
-import Input from "@mui/material/Input"
-import {Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Box, FormControlLabel, FormGroup, Switch, TextField, ThemeProvider, Typography } from "@mui/material";
 import StyledSlider from "../components/Slider";
+import { createTheme } from '@mui/material/styles';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import LocationSearchingOutlinedIcon from '@mui/icons-material/LocationSearchingOutlined';
+import IconButton from '@mui/material/IconButton'
+import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../providers/UserProvider";
+import { auth } from "../auth/firebase";
 
 function MountainPage() {
-    const priceMarks = [
-        {
-            value: 0,
-            label: '$0',
-        },
-        {
-            value: 25,
-            label: '$75',
-        },
-        {
-            value: 50,
-            label: '$150',
-        },
-        {
-            value: 75,
-            label: '$225',
-        },
-        {
-            value: 100,
-            label: '$300',
-        },
-    ];
-    const distanceMarks = [
-        {
-            value: 0,
-            label: '0 miles',
-        },
-        {
-            value: 20,
-            label: '100 miles',
-        },
-        {
-            value: 40,
-            label: '200 miles',
-        },
-        {
-            value: 60,
-            label: '300 miles',
-        },
-        {
-            value: 80,
-            label: '400 miles',
-        },
-        {
-            value: 100,
-            label: '500 miles',
-        },
-    ];
+    const navigate = useNavigate();
+
+    const user = useContext(UserContext);
+
+    // state variables
+    const [ticketPref, setTicketPref] = useState<number>(0);
+    const [locPref, setLocPref] = useState<number>(0);
+    const [weatherPref, setWeatherPref] = useState<number>(0);
+    const [trailsPref, setTrailsPref] = useState<number>(0);
+    const [difficultyPref, setDifficultyPref] = useState<number>(0);
+    const [zipcode, setZipcode] = useState<string>("");
+
+    const handleFetchPrefs = async () => {
+        auth.onAuthStateChanged(async (userFb) => {
+            if (userFb) {
+                const token = await userFb.getIdToken();
+                const res = await fetch("http://localhost:4567/user/" + userFb.uid + "/prefs", {
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                    }
+                });
+                const resJson = await res.json();
+                setTicketPref(parseFloat(resJson.ticketPref));
+                setLocPref(parseFloat(resJson.locPref));
+                setWeatherPref(parseFloat(resJson.weatherPref));
+                setTrailsPref(parseFloat(resJson.trailsPref));
+                setDifficultyPref(parseFloat(resJson.difficultyPref));
+                setZipcode(resJson.zipcode);
+                console.log(resJson);
+            }
+        });
+    }
+
+    useEffect(() => {
+        handleFetchPrefs();
+    }, []);
+
+
+    async function useFetchRecommend() {
+        const res = await fetch("http://localhost:4567/recommend", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ticketPref: ticketPref,
+                locPref: locPref,
+                weatherPref: weatherPref,
+                trailsPref: trailsPref,
+                difficultyPref: difficultyPref,
+                zipcode: zipcode,
+            })
+        })
+        const resJson = await res.json();
+        console.log(resJson);
+        if (resJson.success) {
+            // navigate('../recommend', { replace: true });
+        }
+    }
+
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#5A9B85'
+            },
+            secondary: {
+                main: '#FFFFFF'
+            }
+        }
+    });
+
+    const [startValue, setStartValue] = React.useState<Date | null>(
+        new Date('2022-05-04T21:11:54'),
+    );
+
+    const [endValue, setEndValue] = React.useState<Date | null>(
+        new Date('2022-05-04T21:11:54'),
+    );
+
+    const handleStartChange = (newValue: Date | null) => {
+        setStartValue(newValue);
+    };
+
+    const handleEndChange = (newValue: Date | null) => {
+        setEndValue(newValue);
+    };
+
     const interestMarks = [
         {
             value: 0,
-            label: 'Irrelevant',
-        },
-        {
-            value: 25,
-            label: 'Meh',
+            label: 'Irrelevant to me',
         },
         {
             value: 50,
-            label: 'Neutral',
-        },
-        {
-            value: 75,
-            label: 'Kinda',
+            label: 'Meh',
         },
         {
             value: 100,
-            label: 'Super',
+            label: 'Super important',
         },
     ];
     const difficultyMarks = [
         {
             value: 0,
-            label: '0°C',
+            label: 'Green',
         },
         {
-            value: 20,
-            label: '20°C',
+            value: 33,
+            label: 'Blue',
         },
         {
-            value: 37,
-            label: '37°C',
+            value: 66,
+            label: 'Black',
         },
         {
             value: 100,
-            label: '100°C',
-        },
+            label: 'Double Black',
+        }
     ];
 
-    const terrainMarks = [
-        {
-            value: 0,
-            label: '0°C',
-        },
-        {
-            value: 20,
-            label: '20°C',
-        },
-        {
-            value: 37,
-            label: '37°C',
-        },
-        {
-            value: 100,
-            label: '100°C',
-        },
-    ];
     return (
         <>
-            {/* Center the content */}
+            <div className="flex-container">
+                <FormGroup >
+                    <br />
+                    <Typography style={{
+                        color: '#1E1E1E',
+                        fontSize: "32px",
+                        fontWeight: "medium",
+                        fontStyle: "italic",
+                        fontFamily: "Roboto"
+                    }}>
+                        Personal Information
+                    </Typography>
+                    <ThemeProvider theme={theme}>
+                        <TextField
+                            label="Name"
+                            placeholder="Enter Name"
+                            style={{ width: 480 }}
+                            value={user?.displayName}
+                        />
+                        <br />
+                        <TextField
+                            label="Email"
+                            placeholder="name@example.com"
+                            style={{ width: 480 }}
+                            value={user?.email}
+                        />
+                        <br />
+                        <TextField
+                            label="Location"
+                            placeholder="02912"
+                            style={{ width: 480 }}
+                            value={zipcode}
 
-            <div className = "flex-container">
-            <div className = "flex-child-left">
+                        />
+                        <Box >
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <br />
+                                <DesktopDatePicker
+                                    label="Start Date"
+                                    inputFormat="MM/dd/yyyy"
+                                    value={startValue}
+                                    onChange={handleStartChange}
+                                    renderInput={(params) => <TextField {...params} sx={{ width: 230 }} />}
+                                />
+                                <DesktopDatePicker
+                                    label="End Date"
+                                    inputFormat="MM/dd/yyyy"
+                                    value={endValue}
+                                    onChange={handleEndChange}
+                                    renderInput={(params) => <TextField {...params} sx={{ width: 230 }} />}
+                                />
+                            </LocalizationProvider>
+                        </Box>
+                        <br />
+                        <Typography style={{
+                            color: '#1E1E1E',
+                            fontSize: "16px",
+                            fontFamily: "Roboto"
+                        }}>
+                            What type of trails are you looking for?
+                        </Typography>
+                        <StyledSlider marks={difficultyMarks} val={difficultyPref} setVal={setDifficultyPref} />
+                        <br />
+                    </ThemeProvider>
 
-                <br/>
-            <FormGroup >
-                <FormControlLabel control={<Switch defaultChecked />} label="Use suggestions?" labelPlacement="start"/>
-            </FormGroup>
-                <br/>
-                <TextField
-                    name="name"
-                    label="Name"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-                    type="text"
-                    placeholder="Enter name"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-                <br/>
-                <TextField
-                    name="email"
-                    label="Email"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-                    type="name@example.com"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-                <br/>
-                <TextField
-                    name="location"
-                    label="Location"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-                    type="Providence, RI"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-                <br/>
-                <TextField
-                    name="startDate"
-                    label="Start Date"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:"Roboto", fontSize:'18px'} }}
-                    type="date"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
-                <br/>
-                <TextField
-                    name="endDate"
-                    label="End Date"
-                    InputLabelProps={{ shrink: true, required: true, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-                    type="date"
-                    InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-                />
+                </FormGroup>
+                <br />
+                <div className="flex-child-right" >
+                    <br />
+                    <Typography style={{
+                        color: '#1E1E1E',
+                        fontSize: "32px",
+                        fontWeight: "medium",
+                        fontStyle: "italic",
+                        fontFamily: "Roboto"
+                    }}>
+                        What is most important to you?
+                    </Typography>
+
+                    <br />
+                    <Typography style={{
+                        color: '#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Cheap Lift Tickets
+                    </Typography>
+                    <StyledSlider marks={interestMarks} val={ticketPref} setVal={setTicketPref} />
+                    <br />
+                    <Typography style={{
+                        color: '#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Distance from your Location
+                    </Typography>
+                    <StyledSlider marks={interestMarks} val={locPref} setVal={setLocPref} />
+                    <br />
+                    <Typography style={{
+                        color: '#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Weather Conditions
+                    </Typography>
+                    <StyledSlider marks={interestMarks} val={weatherPref} setVal={setWeatherPref} />
+                    <br />
+                    <Typography style={{
+                        color: '#1E1E1E',
+                        fontSize: "16px",
+                        fontFamily: "Roboto"
+                    }}>
+                        Number of Trails Open
+                    </Typography>
+                    <StyledSlider marks={interestMarks} val={trailsPref} setVal={setTrailsPref} />
+                    <br />
+                    <br />
+                </div>
             </div>
-            <br/>
-            <div className = "flex-child-right" >
-                <br/>
-                <br/>
-            Preferred Lift Ticket Price
-                <br/>
-            <StyledSlider marks={priceMarks}/>
-                <br/>
-            Distance from Your Location
-                <br/>
-            <StyledSlider marks={distanceMarks}/>
-                <br/>
-            Weather Conditions
-                <br/>
-            <StyledSlider marks={interestMarks}/>
-                <br/>
-            Terrain Difficuly Level
-                <br/>
-            <StyledSlider marks={difficultyMarks}/>
-                <br/>
-                Number of Trails Open
-                <br/>
-                <StyledSlider marks={interestMarks}/>
-                <br/>
-            </div>
-            </div>
-            <br/>
-            <div className = "button">
-            <Button variant = "contained" color="secondary" size={"large"}>
-                Find a mountain
-            </Button>
+            <br />
+
+            <div className="button">
+                <Button variant="contained" size={"large"} style={{
+                    borderRadius: 20,
+                    backgroundColor: "#5A9B85",
+                    padding: "18px 36px",
+                    fontSize: "18px",
+                    fontFamily: "Roboto"
+                }} onClick={
+                    useFetchRecommend
+                }>
+                    Find a mountain
+                </Button>
             </div>
         </>
     );
 }
+
 
 export default MountainPage;
