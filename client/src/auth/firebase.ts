@@ -90,6 +90,14 @@ export const signInWithGoogle = () => {
     }
 };
 
+export const signOutWithGoogle = () => {
+    signOut(auth).then(() => {
+        console.log("User signed out");
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
 export const isAuth = async () => {
     if (user) {
         const idToken = user.getIdToken();

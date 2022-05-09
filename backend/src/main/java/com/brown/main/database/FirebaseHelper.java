@@ -39,7 +39,6 @@ public class FirebaseHelper {
     public static void validateToken(String idToken) throws FirebaseAuthException{
         FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
         String uid = decodedToken.getUid();
-        System.out.println(uid);
     }
 
 }
