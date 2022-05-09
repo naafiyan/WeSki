@@ -1,7 +1,7 @@
 validator: {
     $jsonSchema: {
         bsonType: "object",
-        required: [ "name", "comments", "weather", "acreage", "base", "snow_type", "trails", "recent_snowfall" ],
+        required: [ "name", "comments", "num_trails", "acreage", "temperature", "snow_quality", "difficulty", "vert_drop", "num_lifts", "location", "price"],
         properties: {
             name: {
                 bsonType: "string",
@@ -14,34 +14,41 @@ validator: {
                 },
                 description: "must be an array of objectIds and is required"
             },
-            weather: {
-                bsonType: "objectId",
-                description: "must be an objectId and is required"
+            num_trails: {
+                bsonType: "int",
+                description: "must be a positive integer and is required"
             },
             acreage: {
+                bsonType: "int",
+                description: "must be a positive integer and is required"
+            },
+            temperature: {
                 bsonType: "double",
                 description: "must be a double and is required"
             },
-            base: {
+            snow_quality: {
                 bsonType: "double",
-                description: "must be a double and is required"
+                description: "must be a double between 0 and 1 and is required"
             },
-            snow_type: {
-                enum: [ "powder", "variable", "groomed", "packed", "spring", "other" ],
-                description: "can only be one of the enum values and is required"
-            },
-            trails: {
-                bsonType: "array",
-                items: {
-                    bsonType: "int"
-                },
-                minItems: 4,
-                maxItems: 4,
-                description: "must be an array of ints of length 4 and is required"
-            },
-            recent_snowfall: {
+            difficulty: {
                 bsonType: "double",
-                description: "must be a double and is required"
+                description: "must be a double between 0 and 1 and is required"
+            },
+            vert_drop: {
+                   bsonType: "int",
+                   description: "must be a positive integer and is required"
+            },
+            num_lifts: {
+                bsonType: "int",
+                description: "must be a positive integer and is required"
+            },
+            location: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            price: {
+                bsonType: "int",
+                description: "must be a positive integer and ix required"
             }
         }
     }
