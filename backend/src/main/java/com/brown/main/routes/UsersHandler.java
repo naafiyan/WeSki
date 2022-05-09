@@ -78,6 +78,12 @@ public class UsersHandler {
           // user doc has comments field so we need to initialize it
           newUserDoc.append("comments", new ArrayList<ObjectId>());
           newUserDoc.append("prefs", new ArrayList<ObjectId>());
+          newUserDoc.append("zipcode", "02912");
+          newUserDoc.append("ticket_pref", 0.5);
+          newUserDoc.append("loc_pref", 0.5);
+          newUserDoc.append("weather_pref", 0.5);
+          newUserDoc.append("trails_pref", 0.5);
+          newUserDoc.append("difficulty_pref", 0.5);
           newUserDoc.append("type", "Ski");
           newUserDoc.append("location", "");
           // TODO: probably assign default values to pref area
