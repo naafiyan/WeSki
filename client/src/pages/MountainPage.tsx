@@ -9,8 +9,9 @@ import LocationSearchingOutlinedIcon from '@mui/icons-material/LocationSearching
 import IconButton from '@mui/material/IconButton'
 import { Col, Container, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../providers/UserProvider";
+import { auth } from "../auth/firebase";
 
 function MountainPage() {
     const navigate = useNavigate();
@@ -23,24 +24,32 @@ function MountainPage() {
     const [weatherPref, setWeatherPref] = useState<number>(0);
     const [trailsPref, setTrailsPref] = useState<number>(0);
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
+    const [zipcode, setZipcode] = useState<string>("");
 
     const handleFetchPrefs = async () => {
-        const token = await user?.getIdToken();
-        const res = await fetch("http://localhost:4567/user/" + user?.uid + "/prefs", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token,
+        auth.onAuthStateChanged(async (userFb) => {
+            if (userFb) {
+                const token = await userFb.getIdToken();
+                const res = await fetch("http://localhost:4567/user/" + userFb.uid + "/prefs", {
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                    }
+                });
+                const resJson = await res.json();
+                setTicketPref(parseFloat(resJson.ticketPref));
+                setLocPref(parseFloat(resJson.locPref));
+                setWeatherPref(parseFloat(resJson.weatherPref));
+                setTrailsPref(parseFloat(resJson.trailsPref));
+                setDifficultyPref(parseFloat(resJson.difficultyPref));
+                setZipcode(resJson.zipcode);
+                console.log(resJson);
             }
         });
-        const resJson = await res.json();
-        console.log(resJson);
-        setTicketPref(resJson.ticketPref);
-        setLocPref(resJson.locPref);
-        setWeatherPref(resJson.weatherPref);
-        setTrailsPref(resJson.trailsPref);
-        setDifficultyPref(resJson.difficultyPref);
     }
+
+    useEffect(() => {
+        handleFetchPrefs();
+    }, []);
 
 
     async function useFetchRecommend() {
@@ -50,12 +59,12 @@ function MountainPage() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                zipcode: 'string',
-                experience: 'number',
-                priceImportance: 'number',
-                locationImportance: 'number',
-                weatherImportance: 'number',
-                openTrailsImportance: 'number',
+                ticketPref: ticketPref,
+                locPref: locPref,
+                weatherPref: weatherPref,
+                trailsPref: trailsPref,
+                difficultyPref: difficultyPref,
+                zipcode: zipcode,
             })
         })
         const resJson = await res.json();
@@ -144,18 +153,22 @@ function MountainPage() {
                             label="Name"
                             placeholder="Enter Name"
                             style={{ width: 480 }}
+                            value={user?.displayName}
                         />
                         <br />
                         <TextField
                             label="Email"
                             placeholder="name@example.com"
                             style={{ width: 480 }}
+                            value={user?.email}
                         />
                         <br />
                         <TextField
                             label="Location"
                             placeholder="02912"
                             style={{ width: 480 }}
+                            value={zipcode}
+
                         />
                         <Box >
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -203,13 +216,6 @@ function MountainPage() {
                     </Typography>
 
                     <br />
-                    <Typography style={{
-                        color: '#1E1E1E',
-                        fontSize: "16px",
-                        fontFamily: "Roboto"
-                    }}>
-                        Cheap Lift Tickets
-                    </Typography>
                     <Typography style={{
                         color: '#1E1E1E',
                         fontSize: "16px",

@@ -38,6 +38,27 @@ export function MyAccountPage() {
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
     const [zipcode, setZipcode] = useState<string>("");
 
+    const handleUpdatePrefs = async () => {
+        const token = await user?.getIdToken();
+        const res = await fetch("http://localhost:4567/user/" + user?.uid + "/prefs", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token,
+            },
+            body: JSON.stringify({
+                ticketPref: ticketPref,
+                locPref: locPref,
+                weatherPref: weatherPref,
+                trailsPref: trailsPref,
+                difficultyPref: difficultyPref,
+                zipcode: zipcode,
+            }),
+        });
+        const resJson = await res.json();
+        console.log(resJson);
+    }
+
     const handleFetchPrefs = async () => {
         auth.onAuthStateChanged(async (userFb) => {
             if (userFb) {
@@ -153,7 +174,7 @@ export function MyAccountPage() {
                         padding: "14px 30px",
                         fontSize: "18px",
                         fontFamily: "Roboto"
-                    }} >
+                    }} onClick={handleUpdatePrefs}>
                         Save Preferences
                     </Button>
                 </div>
