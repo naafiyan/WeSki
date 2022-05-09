@@ -41,7 +41,14 @@ function ProfilePicture() {
                         <br />
                         <Link to={"/"}>
                             <Button sx={{ width: 475 }}
-                                variant="contained" color="info" size={"large"} onClick={signOutWithGoogle}>
+                                variant="contained" size={"medium"} onClick={signOutWithGoogle}
+                                    style={{
+                                        borderRadius: 20,
+                                        backgroundColor: "#5A9B85",
+                                        padding: "14px 30px",
+                                        fontSize: "18px",
+                                        fontFamily: "Roboto"
+                                    }}>
                                 Sign Out
                             </Button>
                         </Link>
