@@ -71,11 +71,9 @@ export function MyAccountPage() {
                     <div className="CurrentLocationTextBox">
                         <br />
                         <TextField
-                            name="location"
                             label="Current Location"
-                            InputLabelProps={{ shrink: true, required: false, style: { fontWeight: 700, color: '#1E1E1E', fontFamily: 'Roboto', fontSize: '18px' } }}
-                            type="Providence, RI"
-                            InputProps={{ style: { border: "1px solid #C2C2C2", padding: 6, width: 480, height: 51 } }}
+                            placeholder="Providence, RI"
+                            style = {{width: 480}}
                         />
                     </div>
                     <div className="FavoriteMountainTextBox">

@@ -82,68 +82,78 @@ export default function Homepage() {
                         </Button>
                     </ThemeProvider>
                 </Nav.Link>
-                <Carousel style={{
-                    width:"700",
-                    height:"700",
-                }}>
+                <br/>
+
+                <Carousel>
                     <Carousel.Item>
-                        {<img
+                        <img
+                            className="d-block w-100"
+                            src={require('../images/killington.jpeg')}
                             alt="First slide"
-                            src={require('../images/download.jpg')}
-                            width="300"
-                            height="300"
-                        /> }
+                        />
                         <Carousel.Caption>
-                            <h3>First slide label</h3>
+                            <h3>Killington</h3>
                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        {<img
-                            alt="Second slide"
+                        <img
+                            className="d-block w-100"
                             src={require('../images/download.jpg')}
-                            width="300"
-                            height="300"
-                        /> }
+                            alt="Second slide"
+                        />
+
                         <Carousel.Caption>
-                            <h3>Second slide label</h3>
+                            <h3>Stratton</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        {<img
-                            alt="Third slide"
+                        <img
+                            className="d-block w-100"
                             src={require('../images/download.jpg')}
-                            width="300"
-                            height="300"
-                        /> }
+                            alt="Third slide"
+                        />
+
                         <Carousel.Caption>
-                            <h3>Third slide label</h3>
+                            <h3>Attitash</h3>
                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        {<img
-                            alt="First slide"
+                        <img
+                            className="d-block w-100"
                             src={require('../images/download.jpg')}
-                            width="300"
-                            height="300"
-                        /> }
+                            alt="Third slide"
+                        />
+
                         <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            <h3>Sunday River</h3>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        {<img
-                            alt="First slide"
+                        <img
+                            className="d-block w-100"
                             src={require('../images/download.jpg')}
-                            width="300"
-                            height="300"
-                        /> }
+                            alt="Third slide"
+                        />
+
                         <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            <h3>Ski Butternut</h3>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100 "
+                            src={require('../images/download.jpg')}
+                            alt="Third slide"
+                        />
+
+                        <Carousel.Caption>
+                            <h3>Ski Sundown</h3>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>

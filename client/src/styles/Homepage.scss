@@ -94,7 +94,16 @@ $theme-colors: (
   box-sizing: border-box;
   box-shadow: -1px 1px 9px rgba(255, 255, 255, 0.4);
 }
+.carousel {
+  width:900px;
+  height:450px;
+  margin: auto;
+}
 
+.carousel-item {
+  width:900px;
+  height:450px;
+}
 
 .compare-divider {
   position: absolute;
