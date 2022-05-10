@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
-import { auth, getUser, signInWithGoogle } from '../auth/firebase';
+import { auth, getUser, signInWithGoogle, signOutWithGoogle } from '../auth/firebase';
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import { User } from 'firebase/auth';
 import { UserContext } from '../providers/UserProvider';
+import { Link } from 'react-router-dom';
 
 function ProfilePicture() {
-    const user = useContext(UserContext);
+    let user = useContext(UserContext);
 
     const [loading, setLoading] = useState<boolean>(true);
     const [photoUrl, setPhotoUrl] = useState<string>("../images/blankProfile.jpg");
@@ -18,11 +19,11 @@ function ProfilePicture() {
             if (user.photoURL) setPhotoUrl(user.photoURL);
             if (user.displayName) setUsername(user.displayName);
         }
-    }, [user])
+    }, [user]);
 
     const page = (
         <>
-            {!loading && <div className="leftSide">
+            {!loading && user ? (<div className="leftSide">
                 <div className="profilePhoto">
                     <div className="profile" style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '30vh' }}>
                         <br />
@@ -36,8 +37,24 @@ function ProfilePicture() {
                             <h1>{username}</h1>
                         </div>
                     </div>
+                    <div className="sign-in-button">
+                        <br />
+                        <Link to={"/"}>
+                            <Button sx={{ width: 475 }}
+                                variant="contained" size={"medium"} onClick={signOutWithGoogle}
+                                    style={{
+                                        borderRadius: 20,
+                                        backgroundColor: "#5A9B85",
+                                        padding: "14px 30px",
+                                        fontSize: "18px",
+                                        fontFamily: "Roboto"
+                                    }}>
+                                Sign Out
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
-            </div>}
+            </div>) : <div>Please Sign in!</div>}
         </>
     )
 

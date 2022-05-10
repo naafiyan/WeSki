@@ -16,8 +16,7 @@ public class FirebaseHelper {
     public static void initFirebase() {
         FileInputStream serviceAccount;
         try {
-            serviceAccount = new FileInputStream("secrets/ski-trip-planner-84981-firebase-adminsdk-gyigm-702f49d20c.json");
-       
+            serviceAccount = new FileInputStream("secrets/ski-trip-planner-84981-firebase-adminsdk-gyigm-87d9d0c22a.json");       
         } catch (FileNotFoundException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -39,7 +38,6 @@ public class FirebaseHelper {
     public static void validateToken(String idToken) throws FirebaseAuthException{
         FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
         String uid = decodedToken.getUid();
-        System.out.println(uid);
     }
 
 }
