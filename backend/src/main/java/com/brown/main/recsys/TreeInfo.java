@@ -8,12 +8,12 @@ public class TreeInfo {
     private double price;
     private double size;
     private double distance;
-    private double location;
+    private double[] location;
 
     public  TreeInfo(){
-
     }
-    public TreeInfo(String name, double skillLevel, double weather, double price, double size, double location){
+
+    public TreeInfo(String name, double skillLevel, double weather, double price, double size, double[] location){
         this.name=name;
         this.skillLevel=skillLevel;
         this.weather=weather;
@@ -34,6 +34,10 @@ public class TreeInfo {
             dist = dist * 60 * 1.1515;
             return dist;
         }
+    }
+
+    public void setLocation(double[] coords){
+        this.location=coords;
     }
 
     public void setName(String name){
