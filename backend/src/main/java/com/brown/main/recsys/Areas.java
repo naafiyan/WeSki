@@ -26,6 +26,7 @@ public class Areas {
         TreeInfo info;
         for (Document doc: areaDocs){
             info = new TreeInfo();
+            info.setName(doc.get("name", String.class));
             info.setLocation(this.getCoords(doc));
             info.setWeather(this.scaleWeather(doc));
             info.setPrice(this.scalePrice(doc));
