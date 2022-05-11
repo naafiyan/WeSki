@@ -54,6 +54,10 @@ function MountainPage() {
 
 
     async function useFetchRecommend() {
+        if (!user) {
+            console.log("ERROR: User is not logged in!");
+            return;
+        }
         const jsonBody = JSON.stringify({
             ticketPref: String(ticketPref),
             locPref: String(locPref),
@@ -64,11 +68,13 @@ function MountainPage() {
         });
 
         console.log(jsonBody);
+        const token = await user?.getIdToken();
 
         const res = await fetch("http://localhost:4567/recommend", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
             body: jsonBody
         })

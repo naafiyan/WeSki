@@ -22,6 +22,12 @@ import java.util.Map;
 public class RecHandler {
 
   public static List<String> recommend(MongoDatabase db, Request req) {
+    // validate user
+    if (!UsersHandler.validateUserToken(db, req)) {
+      return null;
+    }
+
+
     String reqJson = req.body();
     Gson gson = new Gson();
     Map<String, String> reqMap = gson.fromJson(reqJson, Map.class);
