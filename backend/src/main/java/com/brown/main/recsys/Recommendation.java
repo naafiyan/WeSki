@@ -16,7 +16,7 @@ public class Recommendation {
         List<TreeInfo> list = new Areas().getInfo();
         for (TreeInfo info: list){
             Double dist = TreeInfo.calDistance(user.getLocation()[0], user.getLocation()[1], info.getLocation()[0], info.getLocation()[1]);
-            info.setDistance(dist);
+            info.setDistance(1-(dist/250.));
             //Get locations in [lat.,  long.] form
         }
         list.add(user);
