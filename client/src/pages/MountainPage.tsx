@@ -54,19 +54,23 @@ function MountainPage() {
 
 
     async function useFetchRecommend() {
+        const jsonBody = JSON.stringify({
+            ticketPref: String(ticketPref),
+            locPref: String(locPref),
+            weatherPref: String(weatherPref),
+            trailsPref: String(trailsPref),
+            difficultyPref: String(difficultyPref),
+            zipcode: String(zipcode),
+        });
+
+        console.log(jsonBody);
+
         const res = await fetch("http://localhost:4567/recommend", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                ticketPref: ticketPref,
-                locPref: locPref,
-                weatherPref: weatherPref,
-                trailsPref: trailsPref,
-                difficultyPref: difficultyPref,
-                zipcode: zipcode,
-            })
+            body: jsonBody
         })
         const resJson = await res.json();
         console.log(resJson);
