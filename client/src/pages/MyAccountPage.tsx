@@ -3,9 +3,13 @@ import { TextField, Typography } from "@mui/material";
 import StyledSlider from "../components/Slider";
 import ProfilePicture from '../components/ProfilePicture';
 import FavoriteMountain from '../components/FavoriteMountain';
+<<<<<<< HEAD
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../auth/firebase";
+=======
+import LocationSelector from '../components/LocationSelector';
+>>>>>>> Zsickles-Week3
 
 
 
@@ -31,6 +35,7 @@ export function MyAccountPage() {
     ];
     const user = useContext(UserContext);
 
+<<<<<<< HEAD
     const [ticketPref, setTicketPref] = useState<number>(0);
     const [locPref, setLocPref] = useState<number>(0);
     const [weatherPref, setWeatherPref] = useState<number>(0);
@@ -104,11 +109,9 @@ export function MyAccountPage() {
                     <div className="CurrentLocationTextBox">
                         <br />
                         <TextField
-                            name="location"
                             label="Current Location"
-                            InputLabelProps={{ shrink: true, required: false, style: { fontWeight: 700, color: '#1E1E1E', fontFamily: 'Roboto', fontSize: '18px' } }}
-                            type="Providence, RI"
-                            InputProps={{ style: { border: "1px solid #C2C2C2", padding: 6, width: 480, height: 51 } }}
+                            placeholder="Providence, RI"
+                            style = {{width: 480}}
                         />
                     </div>
                     <div className="FavoriteMountainTextBox">
@@ -184,6 +187,80 @@ export function MyAccountPage() {
 
 
     );
+=======
+    const terrainMarks = [
+        {
+            value: 0,
+            label: '0°C',
+        },
+        {
+            value: 20,
+            label: '20°C',
+        },
+        {
+            value: 37,
+            label: '37°C',
+        },
+        {
+            value: 100,
+            label: '100°C',
+        },
+    ];
+  return (
+    <>
+        {/* Center the content */}
+        <div className = "flex-container">
+        <div className = "left-side" style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: '80vh'}}>
+        <ProfilePicture></ProfilePicture>
+        <div className = "User">  
+        <br/>
+        <h2>Current User Information:</h2>
+        </div>
+        <div className = "LeftSideTextBoxes">  
+        <br/>
+        <LocationSelector></LocationSelector>
+        <br/> 
+        <FavoriteMountain></FavoriteMountain>
+        </div>
+        </div>
+        <br/>
+        <br/>
+        <div className = "flex-child-right" >
+            <br/>
+            <h1>What Is Important To You?</h1>
+            <br/>
+        Preferred Lift Ticket Price
+            <br/>
+        <StyledSlider marks={priceMarks}/>
+            <br/>
+        Distance from Your Location
+            <br/>
+        <StyledSlider marks={distanceMarks}/>
+            <br/>
+        Weather Conditions
+            <br/>
+        <StyledSlider marks={interestMarks}/>
+            <br/>
+        Terrain Difficuly Level
+            <br/>
+        <StyledSlider marks={difficultyMarks}/>
+            <br/>
+        Number of Trails Open
+            <br/>
+        <StyledSlider marks={interestMarks}/>
+            <br/>
+            <br/>
+        <Button variant = "contained" color="primary" size={"large"}>
+            Save Preferences
+        </Button>
+        </div>
+        </div>
+        
+    </>
+
+    
+);
+>>>>>>> Zsickles-Week3
 };
 
 export default MyAccountPage;
