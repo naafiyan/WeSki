@@ -22,7 +22,15 @@ function MountainPage() {
 
 
     type recommendation = {
-        name: string
+        name?: string
+        dificulty?: number
+        location?: string
+        num_lifts?: number
+        num_trails?: number
+        price?: number
+        snow_quality?: number
+        temperature?: number
+        vert_drop?: number
     }
 
     // state variables
@@ -31,9 +39,9 @@ function MountainPage() {
     const [weatherPref, setWeatherPref] = useState<number>(0);
     const [trailsPref, setTrailsPref] = useState<number>(0);
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
-    const [zipcode, setZipcode] = useState<string>("");
+    const [zipcode, setZipcode] = useState<string>("02912");
     const [recommendationShowing, setRecommendationShowing] = useState<boolean>(false);
-    const [currentRecommendation, setCurrentRecommendation] = useState<recommendation>({ name: "" });
+    const [currentRecommendation, setCurrentRecommendation] = useState<recommendation>({});
 
     const handleFetchPrefs = async () => {
         auth.onAuthStateChanged(async (userFb) => {
@@ -91,7 +99,18 @@ function MountainPage() {
         const resJson = await res.json();
         console.log(resJson);
         // if (resJson.success) {
-        setCurrentRecommendation({ name: resJson[0].name });
+        setCurrentRecommendation({ 
+            
+            name: resJson[0].name,
+            dificulty: resJson[0].dificulty,
+            location: resJson[0].location,
+            num_lifts: resJson[0].num_lifts,
+            num_trails: resJson[0].num_trails,
+            price: resJson[0].price,
+            snow_quality: resJson[0].snow_quality,
+            temperature: resJson[0].temperature,
+            vert_drop: resJson[0].vert_drop });
+    
         setRecommendationShowing(true);
         // }
     }
