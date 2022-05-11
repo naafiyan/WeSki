@@ -10,6 +10,7 @@ import {Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import StyledSlider from "../components/Slider";
 import ProfilePicture from '../components/ProfilePicture';
 import FavoriteMountain from '../components/FavoriteMountain';
+import LocationSelector from '../components/LocationSelector';
 
 
 
@@ -132,17 +133,13 @@ export function MyAccountPage() {
         <div className = "flex-container">
         <div className = "left-side" style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: '80vh'}}>
         <ProfilePicture></ProfilePicture>
-        <div className = "CurrentLocationTextBox">  
+        <div className = "User">  
         <br/>
-        <TextField
-            name="location"
-            label="Current Location"
-            InputLabelProps={{ shrink: true, required: false, style: { fontWeight: 700, color:'#1E1E1E', fontFamily:'Roboto', fontSize:'18px'} }}
-            type="Providence, RI"
-            InputProps={{ style: {border: "1px solid #C2C2C2", padding: 6, width:480, height:51} }}
-            />
+        <h2>Current User Information:</h2>
         </div>
-        <div className = "FavoriteMountainTextBox">  
+        <div className = "LeftSideTextBoxes">  
+        <br/>
+        <LocationSelector></LocationSelector>
         <br/> 
         <FavoriteMountain></FavoriteMountain>
         </div>

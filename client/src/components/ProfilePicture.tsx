@@ -29,7 +29,6 @@ function ProfilePicture() {
         <div className="leftSide">
         <div className="profilePhoto">
         <div className="profile" style={{display: 'flex',  justifyContent:'space-around', alignItems:'center', height: '30vh'}}>
-        <br/>
         <br/> 
         <br/> 
         <img src={profileURL}
