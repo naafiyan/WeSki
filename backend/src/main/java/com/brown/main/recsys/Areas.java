@@ -61,6 +61,22 @@ public class Areas {
         return null;
     }
 
+    public static double[] getCoordsFromAddress(String s){
+        try{
+            GeoApiContext context = new GeoApiContext.Builder().apiKey(getApiKey()).build();
+            GeocodingResult[] results = GeocodingApi.newRequest(context).address(s).await();
+            LatLng location = results[0].geometry.location;
+            return new double[]{location.lat, location.lng};
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }catch(ApiException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public double scaleSize(Document doc){
         Double num_trails = ((double)doc.get("num_trails", Integer.class))/162.;
         Double vert_drop = ((double)doc.get("vert_drop", Integer.class))/3050.;
