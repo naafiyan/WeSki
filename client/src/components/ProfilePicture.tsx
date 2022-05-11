@@ -60,34 +60,9 @@ function ProfilePicture() {
 
 
     return (
-<<<<<<< HEAD
         <>
             {user && page}
         </>
-=======
-        <div className="leftSide">
-        <div className="profilePhoto">
-        <div className="profile" style={{display: 'flex',  justifyContent:'space-around', alignItems:'center', height: '30vh'}}>
-        <br/> 
-        <br/> 
-        <img src={profileURL}
-            color="#321124"
-            width="150"
-            height="150"/>    
-        <div className = "profile-Name">
-        <h1>{userName}</h1>
-        </div>
-        </div>
-        <div className = "sign-in-button">
-        <br/>
-        <Button sx={{width: 475}}
-            variant = "contained" color="info" size={"large"} onClick={() => signInWithGoogle(setUserName, setProfileURL, setSignedIn)}>
-            {signedIn}
-        </Button>
-        </div>
-        </div>
-        </div>
->>>>>>> Zsickles-Week3
     );
 }
 export default ProfilePicture;
