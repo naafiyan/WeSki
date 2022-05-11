@@ -20,7 +20,7 @@ function MountainPage() {
 
     const user = useContext(UserContext);
 
-    
+
     type recommendation = {
         name: string
     }
@@ -33,7 +33,7 @@ function MountainPage() {
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
     const [zipcode, setZipcode] = useState<string>("");
     const [recommendationShowing, setRecommendationShowing] = useState<boolean>(false);
-    const [currentRecommendation, setCurrentRecommendation] = useState<recommendation>({name: ""});
+    const [currentRecommendation, setCurrentRecommendation] = useState<recommendation>({ name: "" });
 
     const handleFetchPrefs = async () => {
         auth.onAuthStateChanged(async (userFb) => {
@@ -50,8 +50,11 @@ function MountainPage() {
                 setWeatherPref(parseFloat(resJson.weatherPref));
                 setTrailsPref(parseFloat(resJson.trailsPref));
                 setDifficultyPref(parseFloat(resJson.difficultyPref));
-                setZipcode(resJson.zipcode);
-                console.log(resJson);
+                if (!resJson.zipcode) {
+                    setZipcode("02912");
+                } else {
+                    setZipcode(resJson.zipcode);
+                }
             }
         });
     }
@@ -87,10 +90,10 @@ function MountainPage() {
         })
         const resJson = await res.json();
         console.log(resJson);
-        if (resJson.success) {
-            setCurrentRecommendation({name: resJson[0].name});
-            setRecommendationShowing(true);
-        }
+        // if (resJson.success) {
+        setCurrentRecommendation({ name: resJson[0].name });
+        setRecommendationShowing(true);
+        // }
     }
 
     const theme = createTheme({
@@ -182,7 +185,7 @@ function MountainPage() {
                             value={user?.email}
                         />
                         <br />
-                        <LocationSelector setLocation = { setZipcode }></LocationSelector>
+                        <LocationSelector setLocation={setZipcode}></LocationSelector>
                         <Box >
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <br />
@@ -282,7 +285,7 @@ function MountainPage() {
                 }>
                     Find a mountain
                 </Button>
-                <Reccomendation setShowing = { setRecommendationShowing } currentlyShowing= { recommendationShowing } rec={ currentRecommendation }></Reccomendation>
+                <Reccomendation setShowing={setRecommendationShowing} currentlyShowing={recommendationShowing} rec={currentRecommendation}></Reccomendation>
             </div>
         </>
     );

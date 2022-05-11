@@ -87,6 +87,7 @@ public class UsersHandler {
           newUserDoc.append("type", "Ski");
           newUserDoc.append("location", "");
           // TODO: probably assign default values to pref area
+          newUserDoc.append("pref_area", new Object());
           newUserDoc.append("pref_area", new ObjectId());
           System.out.println("Getting here!!!");
           db.getCollection("users").insertOne(newUserDoc);
