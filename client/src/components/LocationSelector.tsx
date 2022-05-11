@@ -37,8 +37,11 @@ interface PlaceType {
   description: string;
   structured_formatting: StructuredFormatting;
 }
+type LocationProps = {
+    setLocation: (value: string) => void;
+};
+export default function LocationSelector(props: LocationProps) {
 
-export default function LocationSelector() {
   const [value, setValue] = React.useState<PlaceType | null>(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState<readonly PlaceType[]>([]);
@@ -130,6 +133,7 @@ export default function LocationSelector() {
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
+        props.setLocation(newInputValue);
       }}
       renderInput={(params) => (
         <TextField {...params} label="Current Location" fullWidth />

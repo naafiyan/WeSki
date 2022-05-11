@@ -42,6 +42,7 @@ export function MyAccountPage() {
 
     const handleUpdatePrefs = async () => {
         const token = await user?.getIdToken();
+        console.log(zipcode)
         const res = await fetch("http://localhost:4567/user/" + user?.uid + "/prefs", {
             method: "PUT",
             headers: {
@@ -114,7 +115,7 @@ export function MyAccountPage() {
                         User Settings
                     </Typography>
                         <br />
-                        <LocationSelector></LocationSelector>
+                        <LocationSelector setLocation = { setZipcode } ></LocationSelector>
                     </div>
                     <div className="FavoriteMountainTextBox">
                         <br />

@@ -164,7 +164,7 @@ function MountainPage() {
                             value={user?.email}
                         />
                         <br />
-                        <LocationSelector></LocationSelector>
+                        <LocationSelector setLocation = { setZipcode }></LocationSelector>
                         <Box >
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <br />
