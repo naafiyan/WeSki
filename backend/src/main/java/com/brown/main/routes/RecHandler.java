@@ -30,7 +30,7 @@ public class RecHandler {
     info.setName("User");
     info.setLocation(Areas.getCoordsFromAddress(reqMap.get("zipcode")));
     info.setWeather(Double.parseDouble(reqMap.get("weatherPref")));
-    info.setPrice(1-Double.parseDouble(reqMap.get("ticketPref")));
+    info.setPrice(Double.parseDouble(reqMap.get("ticketPref")));
     info.setsize(Double.parseDouble(reqMap.get("trailsPref")));
     info.setSkillLevel(Double.parseDouble(reqMap.get("difficultyPref")));
     info.setDistance(1-Double.parseDouble(reqMap.get("locPref")));
