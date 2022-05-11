@@ -1,9 +1,6 @@
 package com.brown.main.recsys;
 
 import com.brown.main.database.MongoHelper;
-import com.brown.main.models.Area;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
