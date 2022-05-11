@@ -16,16 +16,24 @@ const Transition = React.forwardRef(function Transition(
 ) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
-
-export default function Reccomendation() {
+type InformationProps = {
+    setShowing: React.Dispatch<React.SetStateAction<boolean>>
+    rec: recommendation
+};
+type recommendation = {
+    name: string
+}
+export default function Reccomendation(props: InformationProps) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
+    props.setShowing(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    props.setShowing(false);
   };
 
   return (
@@ -41,7 +49,7 @@ export default function Reccomendation() {
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
+            location data to Google, even when no apps are running. Name is { props.rec.name }
           </DialogContentText>
         </DialogContent>
         <DialogActions>
