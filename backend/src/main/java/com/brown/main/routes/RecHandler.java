@@ -15,6 +15,7 @@ import org.bson.Document;
 import spark.Request;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -29,12 +30,12 @@ public class RecHandler {
     info.setName("User");
     info.setLocation(Areas.getCoordsFromAddress(reqMap.get("zipcode")));
     info.setWeather(Double.parseDouble(reqMap.get("weatherPref")));
-    System.out.println(reqMap.get("ticketPref") instanceof String);
     info.setPrice(1-Double.parseDouble(reqMap.get("ticketPref")));
     info.setsize(Double.parseDouble(reqMap.get("trailsPref")));
     info.setSkillLevel(Double.parseDouble(reqMap.get("difficultyPref")));
     info.setDistance(1-Double.parseDouble(reqMap.get("locPref")));
     List<String> nearest = new Recommendation(info).getNearest();
+    System.out.println(Arrays.deepToString(nearest.toArray()));
     List<String> best = new ArrayList<>();
     for (String s: nearest){
       best.add(new MongoHelper("notSkiQL").getDb("notSkiQL").getCollection("areas").find(Filters.eq("name", s)).first().toJson());
