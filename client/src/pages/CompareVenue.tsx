@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 
 export default function CompareVenue() {
@@ -20,11 +22,6 @@ export default function CompareVenue() {
         console.log(data);
         setHeaders(data.headers);
         setRows(data.rows);
-        // setRows(data.rows);
-        // const rows: Area[] = [{name: 'name', weather: 'weather', trails: 1, acreage: 2, base: 3, snowfall: 4, price: 5}];
-        
-        // setTables(data);
-        // setCurrTable(data[0]);
     }
 
     // useEffect with tables dependency to map and set the table names
@@ -37,21 +34,77 @@ export default function CompareVenue() {
         fetchTables();
     }
 
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+          backgroundColor: theme.palette.common.black,
+          color: '#5A9B85',
+        },
+        [`&.${tableCellClasses.body}`]: {
+          fontSize: 14,
+        },
+    }));
+    
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+    }));
+
+    // function isNumeric(value: string) {
+    //     return /^-?\d+$/.test(value);
+    // }
+
+    // const sortTable = () => {
+    //     for(var i=0; i<rows.length; i+=1) {
+    //         for(var j=i; j<rows.length; j+=1) {
+    //             if(isNumeric(rows[j][props.sortCol])){
+    //                 if (parseFloat(rows[j][props.sortCol]) < parseFloat(rows[i][props.sortCol])) {
+    //                     var temp = rows[j];
+    //                     rows[j] = rows[i];
+    //                     rows[i] = temp;
+    //                 };
+    //             } else {
+    //                 if (rows[j][props.sortCol] < rows[i][props.sortCol]) {
+    //                     var temp = rows[j];
+    //                     rows[j] = rows[i];
+    //                     rows[i] = temp;
+    //                 };
+    //             }
+    //         };
+    //     };
+    //     const tab: table = {
+    //         headerList: props.tableInfo.headerList,
+    //         rowMap: rows,
+    //     }
+    //     props.setRowMap(tab);
+    // };
+
+    // useEffect(sortTable, [props.sortCol]);
+
     return (
         <div>
             <h1>Compare Venues</h1>
             <div id="body">
-                <TableContainer>
-                    <Table>
+                <TableContainer component={Paper}>
+                    <Table aria-label="table with ski venue data">
                         <TableHead>
-                            <TableRow>
-                                {headers.map(item => <TableCell>{item}</TableCell>)}
-                            </TableRow>
+                            <StyledTableRow>
+                                <StyledTableCell>Ski Area</StyledTableCell>
+                                <StyledTableCell># Trails Open</StyledTableCell>
+                                <StyledTableCell>Acreage Open</StyledTableCell>
+                                <StyledTableCell>Price</StyledTableCell>
+                                <StyledTableCell>Temperature</StyledTableCell>
+                                <StyledTableCell>Difficulty</StyledTableCell>
+                            </StyledTableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map(item => <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                {item.map(data => <TableCell>{data}</TableCell>)}
-                            </TableRow>)}
+                            {rows.map(item => <StyledTableRow>
+                                {item.map(data => <StyledTableCell>{data}</StyledTableCell>)}
+                            </StyledTableRow>)}
                         </TableBody>
                     </Table>
                 </TableContainer>
