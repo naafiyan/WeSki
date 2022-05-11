@@ -1,10 +1,18 @@
 package com.brown.main;
 
 import com.brown.main.database.Database;
+import com.brown.main.database.FirebaseHelper;
 import com.brown.main.database.MongoHelper;
+import com.brown.main.models.Area;
 import com.brown.main.routes.RouteWrapper;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import spark.Spark;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class App {
   private static final int DEFAULT_PORT = 4567;
@@ -44,6 +52,8 @@ public final class App {
 
     Spark.before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
+    // set up firebase service
+    FirebaseHelper.initFirebase();
     // create new db
     Database<MongoDatabase> db = new MongoHelper("notSkiQL");
     RouteWrapper rw = new RouteWrapper(db.getDb("notSkiQL"));
