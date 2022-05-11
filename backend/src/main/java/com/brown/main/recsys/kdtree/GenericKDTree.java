@@ -33,9 +33,11 @@ public class GenericKDTree{
 
   public void load(List<TreeInfo> collection) {
     Map<String, double[]> toLoad = new HashMap<>();
+    System.out.println("Number of tree nodes: " + collection.size());
     for (TreeInfo info : collection) {
       toLoad.put(info.getName(), new double[] {info.getDistance(), info.getNum(), info.getPrice(), info.getSkill(), info.getWeather()});
     }
+    System.out.println("Number of tree nodes: " + toLoad.size());
     this.loadUp(toLoad);
   }
 
