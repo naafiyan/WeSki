@@ -17,18 +17,21 @@ import java.util.List;
 
 public class Areas {
 
-    private ArrayList<TreeInfo> areaList;
+    private List<TreeInfo> areaList;
 
     public Areas(){
         MongoDatabase db = MongoHelper.client.getDatabase("notSkiQL");
         ArrayList<Document> areaDocs = db.getCollection("areas").find().into(new ArrayList<Document>());
+        this.areaList = new ArrayList<>();
+        TreeInfo info;
         for (Document doc: areaDocs){
-            TreeInfo info = new TreeInfo();
+            info = new TreeInfo();
             info.setLocation(this.getCoords(doc));
             info.setWeather(this.scaleWeather(doc));
             info.setPrice(this.scalePrice(doc));
             info.setsize(this.scaleSize(doc));
             info.setSkillLevel(this.scaleSkill(doc));
+            this.areaList.add(info);
         }
     }
 
@@ -39,14 +42,14 @@ public class Areas {
     }
 
     public double[] getCoords(Document doc){
+        return this.getCoordsFromZipcode(doc.get("location", String.class));
+    }
+
+    public static double[] getCoordsFromZipcode(String s){
         try{
-            System.out.println(doc.get("name", String.class));
-            System.out.println(getApiKey());
             GeoApiContext context = new GeoApiContext.Builder().apiKey(getApiKey()).build();
-            GeocodingResult[] results = GeocodingApi.newRequest(context).components(ComponentFilter.postalCode(doc.get("location", String.class))).await();
+            GeocodingResult[] results = GeocodingApi.newRequest(context).components(ComponentFilter.postalCode(s)).await();
             LatLng location = results[0].geometry.location;
-            System.out.println(location.lat);
-            System.out.println(location.lng);
             return new double[]{location.lat, location.lng};
         }catch(InterruptedException e){
             e.printStackTrace();

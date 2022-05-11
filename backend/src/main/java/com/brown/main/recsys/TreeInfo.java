@@ -22,7 +22,7 @@ public class TreeInfo {
         this.location=location;
     }
 
-    public double calDistance(double lat1, double lon1, double lat2, double lon2) {
+    public static double calDistance(double lat1, double lon1, double lat2, double lon2) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
         }
@@ -87,5 +87,9 @@ public class TreeInfo {
 
     public double getDistance(){
         return distance;
+    }
+
+    public double[] getLocation() {
+        return location;
     }
 }
