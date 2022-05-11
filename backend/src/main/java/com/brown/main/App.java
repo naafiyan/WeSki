@@ -4,6 +4,8 @@ import com.brown.main.database.Database;
 import com.brown.main.database.FirebaseHelper;
 import com.brown.main.database.MongoHelper;
 import com.brown.main.models.Area;
+import com.brown.main.recsys.Areas;
+import com.brown.main.recsys.TreeInfo;
 import com.brown.main.routes.RouteWrapper;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;

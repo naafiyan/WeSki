@@ -3,6 +3,7 @@ package com.brown.main.recsys;
 import com.brown.main.recsys.kdtree.BasicComparator;
 import com.brown.main.recsys.kdtree.EuclideanDistance;
 import com.brown.main.recsys.kdtree.GenericKDTree;
+import com.google.firebase.database.core.utilities.Tree;
 
 import java.util.List;
 
@@ -14,11 +15,13 @@ public class Recommendation {
         GenericKDTree tree = new GenericKDTree(new EuclideanDistance(), new BasicComparator());
         List<TreeInfo> list = new Areas().getInfo();
         for (TreeInfo info: list){
+            Double dist = TreeInfo.calDistance(user.getLocation()[0], user.getLocation()[1], info.getLocation()[0], info.getLocation()[1]);
+            info.setDistance(1-(dist/250.));
             //Get locations in [lat.,  long.] form
         }
         list.add(user);
         tree.load(list);
-        tree.similar(5, user.getName());
+        this.k_nearest = tree.similar(5, user.getName());
     }
 
     public List<String> getNearest(){

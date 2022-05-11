@@ -1,5 +1,7 @@
 package com.brown.main.routes;
 
+import com.brown.main.recsys.Areas;
+import com.brown.main.recsys.Recommendation;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -9,22 +11,25 @@ import com.google.gson.Gson;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 
-import java.util.Map;
-
+import java.util.List;
 import java.util.Map;
 
 public class RecHandler {
 
-  public static String recommend(MongoDatabase db, Request req) {
-    System.out.println(req.body().toString());
+  public static List<String> recommend(MongoDatabase db, Request req) {
     String reqJson = req.body();
     Gson gson = new Gson();
     Map<String, String> reqMap = gson.fromJson(reqJson, Map.class);
     System.out.println(reqMap.toString());
-
-    TreeInfo inf = new TreeInfo("usr", Double.parseDouble(reqMap.get("experience")), Double.parseDouble(reqMap.get("weatherImportance")),
-        Double.parseDouble(reqMap.get("priceImportance")), Double.parseDouble(reqMap.get("openTrilsImportance")), Double.parseDouble(reqMap.get("")));
-
-    return null;
+    TreeInfo info = new TreeInfo();
+    info.setName("User");
+    info.setLocation(Areas.getCoordsFromZipcode(reqMap.get("zipcode")));
+    info.setWeather(Double.parseDouble(reqMap.get("weatherPref")));
+    info.setPrice(1-Double.parseDouble(reqMap.get("ticketPref")));
+    info.setsize(Double.parseDouble(reqMap.get("trailsPref")));
+    info.setSkillLevel(Double.parseDouble(reqMap.get("difficultyPref")));
+    info.setDistance(1-Double.parseDouble(reqMap.get("locPref")));
+    List<String> nearest = new Recommendation(info).getNearest();
+    return nearest;
   }
 }
