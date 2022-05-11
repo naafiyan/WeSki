@@ -20,6 +20,7 @@ public final class App {
   private static final int DEFAULT_PORT = 4567;
 
   public static void main(String[] args) {
+
     new App(args).run();
   }
 

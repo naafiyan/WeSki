@@ -28,7 +28,7 @@ public class RecHandler {
     System.out.println(reqMap.toString());
     TreeInfo info = new TreeInfo();
     info.setName("User");
-    info.setLocation(Areas.getCoordsFromZipcode(reqMap.get("zipcode")));
+    info.setLocation(Areas.getCoordsFromAddress(reqMap.get("zipcode")));
     info.setWeather(Double.parseDouble(reqMap.get("weatherPref")));
     info.setPrice(1-Double.parseDouble(reqMap.get("ticketPref")));
     info.setsize(Double.parseDouble(reqMap.get("trailsPref")));
