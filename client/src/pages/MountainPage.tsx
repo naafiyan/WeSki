@@ -13,6 +13,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../auth/firebase";
 import LocationSelector from "../components/LocationSelector";
+import Reccomendation from "../components/Reccomendation";
 
 function MountainPage() {
     const navigate = useNavigate();
@@ -81,7 +82,7 @@ function MountainPage() {
         const resJson = await res.json();
         console.log(resJson);
         if (resJson.success) {
-            // navigate('../recommend', { replace: true });
+            
         }
     }
 
@@ -174,7 +175,7 @@ function MountainPage() {
                             value={user?.email}
                         />
                         <br />
-                        <LocationSelector></LocationSelector>
+                        <LocationSelector setLocation = { setZipcode }></LocationSelector>
                         <Box >
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <br />
@@ -274,6 +275,7 @@ function MountainPage() {
                 }>
                     Find a mountain
                 </Button>
+                <Reccomendation></Reccomendation>
             </div>
         </>
     );
