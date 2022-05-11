@@ -4,6 +4,8 @@ import com.brown.main.database.Database;
 import com.brown.main.database.FirebaseHelper;
 import com.brown.main.database.MongoHelper;
 import com.brown.main.models.Area;
+import com.brown.main.recsys.Areas;
+import com.brown.main.recsys.TreeInfo;
 import com.brown.main.routes.RouteWrapper;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -18,6 +20,15 @@ public final class App {
   private static final int DEFAULT_PORT = 4567;
 
   public static void main(String[] args) {
+
+    MongoDatabase db = MongoHelper.client.getDatabase("notSkiQL");
+    ArrayList<Document> areaDocs = db.getCollection("areas").find().into(new ArrayList<Document>());
+    Areas areas = new Areas();
+    for (Document doc: areaDocs){
+      System.out.println("Getting coordinates for another mountain");
+      TreeInfo info = new TreeInfo();
+      info.setLocation(areas.getCoords(doc));
+    }
     new App(args).run();
   }
 

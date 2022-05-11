@@ -1,9 +1,17 @@
 package com.brown.main.recsys;
 
 import com.brown.main.database.MongoHelper;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.ComponentFilter;
+import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.LatLng;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import com.google.maps.GeocodingApiRequest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +39,21 @@ public class Areas {
     }
 
     public double[] getCoords(Document doc){
-
-        return new double[]{0.};
+        try{
+            GeoApiContext context = new GeoApiContext.Builder().apiKey(getApiKey()).build();
+            GeocodingResult[] results = GeocodingApi.newRequest(context).components(ComponentFilter.postalCode(doc.get("location", String.class))).await();
+            LatLng location = results[0].geometry.location;
+            System.out.println(location.lat);
+            System.out.println(location.lng);
+            return new double[]{location.lat, location.lng};
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }catch(ApiException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public double scaleSize(Document doc){
@@ -53,5 +74,10 @@ public class Areas {
 
     public List<TreeInfo> getInfo(){
         return areaList;
+    }
+
+    public static String getApiKey() {
+        KeyParser parser = new KeyParser("secrets/api.txt");
+        return parser.readLine();
     }
 }
