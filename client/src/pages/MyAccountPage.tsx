@@ -39,10 +39,10 @@ export function MyAccountPage() {
     const [trailsPref, setTrailsPref] = useState<number>(0);
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
     const [zipcode, setZipcode] = useState<string>("");
+    const [favoriteMountian, setFavoriteMountian] = useState<string>("");
 
     const handleUpdatePrefs = async () => {
         const token = await user?.getIdToken();
-        console.log(zipcode)
         const res = await fetch("http://localhost:4567/user/" + user?.uid + "/prefs", {
             method: "PUT",
             headers: {
@@ -56,6 +56,7 @@ export function MyAccountPage() {
                 trailsPref: trailsPref,
                 difficultyPref: difficultyPref,
                 zipcode: zipcode,
+                favoriteMountian: setFavoriteMountian,
             }),
         });
         const resJson = await res.json();
@@ -78,6 +79,7 @@ export function MyAccountPage() {
                 setTrailsPref(parseFloat(resJson.trailsPref));
                 setDifficultyPref(parseFloat(resJson.difficultyPref));
                 setZipcode(resJson.zipcode);
+                setFavoriteMountian(resJson.favoriteMountian);
                 console.log(resJson);
                 // go through prefs and set name and value pairs
                 // const prefsMap = new Map();
@@ -119,7 +121,7 @@ export function MyAccountPage() {
                     </div>
                     <div className="FavoriteMountainTextBox">
                         <br />
-                        <FavoriteMountain></FavoriteMountain>
+                        <FavoriteMountain setFavMountain = { setFavoriteMountian }></FavoriteMountain>
                     </div>
                 </div>
                 <br />

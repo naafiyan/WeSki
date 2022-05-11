@@ -3,7 +3,10 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState } from 'react';
 
-export default function FavoriteMountain() {
+type FavMountainProps = {
+  setFavMountain: (value: string) => void;
+}
+export default function FavoriteMountain(props: FavMountainProps) {
 
   const [areas, setAreas] = useState<resort[]>([]);
 
@@ -42,6 +45,9 @@ export default function FavoriteMountain() {
       id="combo-box-demo"
       options={areas}
       sx={{ width: 475 }}
+      onInputChange={(event, newInputValue) => {
+        props.setFavMountain(newInputValue);
+      }}
       renderInput={(params) => <TextField {...params} label="Favorite Ski Mountain" />}
     />
   );
