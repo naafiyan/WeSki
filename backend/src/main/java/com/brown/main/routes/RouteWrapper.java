@@ -2,6 +2,7 @@ package com.brown.main.routes;
 
 import com.mongodb.client.MongoDatabase;
 import spark.Spark;
+import spark.Request;
 
 public class RouteWrapper {
 
@@ -43,13 +44,15 @@ public class RouteWrapper {
     Spark.get("/user/authcheck", (req, res) -> UsersHandler.validateUserToken(db, req));
     Spark.post("/users", (req, res) -> UsersHandler.userLogin(db, req));
     // route to fetch user prefs (need to validate user auth first)
-    Spark.get("user/:id/prefs", (req, res) -> UsersHandler.getUserPrefs(db, req));
+    Spark.get("/user/:id/prefs", (req, res) -> UsersHandler.getUserPrefs(db, req));
+    Spark.put("/user/:id/prefs", (req, res) -> UsersHandler.updateUserPrefs(db, req));
     // Spark.put("/users/:id", (req, res) -> UsersHandler.updateUser(db, req.params(":id"), req.body()));
     // Spark.post("/users/:id/new", (req, res) -> UsersHandler.newUser(db, req.params(":id")));
     // Spark.get("/users/:id/prefs", (req, res) -> UsersHandler.getUserPrefs(db, req.params(":id")));
   }
 
   private void initTripsRoutes() {
+    Spark.post("/recommend", (req, res) -> RecHandler.recommend(db, req));
      Spark.get("/trips", (req, res) -> TripsHandler.getAllTrips(db));
      Spark.get("/trips/:id", (req, res) -> TripsHandler.getTrip(db, req.params(":id")));
     // get comments for a trip

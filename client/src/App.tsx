@@ -5,7 +5,6 @@ import MountainPage from "./pages/MountainPage";
 import Homepage from "./pages/Homepage";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Header from "./components/Header";
-import Account from "./pages/Account";
 import Recommendation from "./pages/Recommendation";
 import MyAccountPage from "./pages/MyAccountPage"
 import CompareVenue from "./pages/CompareVenue";
@@ -22,7 +21,7 @@ function App() {
                     <Route path="/trips" element={<MountainPage />} />
                     <Route path="/recommendation" element={<Recommendation />} />
                     <Route path="/MyAccountPage" element={<MyAccountPage />} />
-                    <Route path="/venues" element={<CompareVenue/>}/>
+                    <Route path="/venues" element={<CompareVenue />} />
                 </Routes>
             </Router>
         </UserProvider>
