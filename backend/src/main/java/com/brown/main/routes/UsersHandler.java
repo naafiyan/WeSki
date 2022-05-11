@@ -78,6 +78,12 @@ public class UsersHandler {
           // user doc has comments field so we need to initialize it
           newUserDoc.append("comments", new ArrayList<ObjectId>());
           newUserDoc.append("prefs", new ArrayList<ObjectId>());
+          newUserDoc.append("zipcode", "02912");
+          newUserDoc.append("ticket_pref", 0.5);
+          newUserDoc.append("loc_pref", 0.5);
+          newUserDoc.append("weather_pref", 0.5);
+          newUserDoc.append("trails_pref", 0.5);
+          newUserDoc.append("difficulty_pref", 0.5);
           newUserDoc.append("type", "Ski");
           newUserDoc.append("location", "");
           // TODO: probably assign default values to pref area
@@ -133,23 +139,58 @@ public class UsersHandler {
         }
         // get user doc from database
         Document userDoc = db.getCollection("users").find(eq("uid", userId)).first();
-        // get prefs from user doc
-        ArrayList<ObjectId> prefs = (ArrayList<ObjectId>) userDoc.get("prefs");
-        // loop through prefs and get prefs docs from prefs collection
-        MongoCollection<Document> prefsCol = db.getCollection("prefs");
-        ArrayList<Document> prefsDocs = new ArrayList<>();
-        for (ObjectId pref : prefs) {
-          prefsDocs.add(prefsCol.find(eq("_id", pref)).first());
+        // if user doc is null, return json object where success is false
+        if (userDoc == null) {
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
         }
-        // convert prefsDocs to json
-        List<JsonObject> prefsJsons = new ArrayList<>();
-        for (Document prefDoc : prefsDocs) {
-          prefsJsons.add(new Gson().fromJson(prefDoc.toJson(), JsonObject.class));
-        }
-        // return prefs as json
         JsonObject res = new JsonObject();
-        res.add("prefs", new Gson().toJsonTree(prefsJsons));
-        return new Gson().fromJson(res.toString(), JsonObject.class);
+        res.addProperty("success", true);
+        res.addProperty("zipcode", userDoc.get("zipcode").toString());
+        res.addProperty("ticketPref", userDoc.get("ticket_pref").toString());
+        res.addProperty("locPref", userDoc.get("loc_pref").toString());
+        res.addProperty("weatherPref", userDoc.get("weather_pref").toString());
+        res.addProperty("trailsPref", userDoc.get("trails_pref").toString());
+        res.addProperty("difficultyPref", userDoc.get("difficulty_pref").toString());
+        res.addProperty("type", userDoc.get("type").toString());
+        return res;
+      }
+
+      public static JsonObject updateUserPrefs(MongoDatabase db, Request req) {
+        // get user id from req params
+        String userId = req.params("id");
+        // get header bearer token
+        if (!validateUserToken(db, req)) {
+          // return json object where success is false
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
+        }
+        // get user doc from database
+        Document userDoc = db.getCollection("users").find(eq("uid", userId)).first();
+        // if user doc is null, return json object where success is false
+        if (userDoc == null) {
+          JsonObject res = new JsonObject();
+          res.addProperty("success", false);
+          return res;
+        }
+        // get request body
+        JsonObject body = new Gson().fromJson(req.body(), JsonObject.class);
+        // update user doc with new prefs
+        userDoc.replace("zipcode", body.get("zipcode").getAsString());
+        userDoc.replace("ticket_pref", body.get("ticketPref").getAsDouble());
+        userDoc.replace("loc_pref", body.get("locPref").getAsDouble());
+        userDoc.replace("weather_pref", body.get("weatherPref").getAsDouble());
+        userDoc.replace("trails_pref", body.get("trailsPref").getAsDouble());
+        userDoc.replace("difficulty_pref", body.get("difficultyPref").getAsDouble());
+
+        // update user doc in database
+        db.getCollection("users").replaceOne(eq("uid", userId), userDoc);
+        // return json object where success is true
+        JsonObject res = new JsonObject();
+        res.addProperty("success", true);
+        return res;
       }
 
 }
