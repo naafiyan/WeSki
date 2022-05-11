@@ -20,6 +20,11 @@ function MountainPage() {
 
     const user = useContext(UserContext);
 
+    
+    type recommendation = {
+        name: string
+    }
+
     // state variables
     const [ticketPref, setTicketPref] = useState<number>(0);
     const [locPref, setLocPref] = useState<number>(0);
@@ -27,6 +32,8 @@ function MountainPage() {
     const [trailsPref, setTrailsPref] = useState<number>(0);
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
     const [zipcode, setZipcode] = useState<string>("");
+    const [recommendationShowing, setRecommendationShowing] = useState<boolean>(false);
+    const [currentRecommendation, setCurrentRecommendation] = useState<recommendation>({name: ""});
 
     const handleFetchPrefs = async () => {
         auth.onAuthStateChanged(async (userFb) => {
@@ -70,7 +77,6 @@ function MountainPage() {
 
         console.log(jsonBody);
         const token = await user?.getIdToken();
-
         const res = await fetch("http://localhost:4567/recommend", {
             method: 'POST',
             headers: {
@@ -82,7 +88,8 @@ function MountainPage() {
         const resJson = await res.json();
         console.log(resJson);
         if (resJson.success) {
-            
+            setCurrentRecommendation({name: resJson[0].name});
+            setRecommendationShowing(true);
         }
     }
 
@@ -275,7 +282,7 @@ function MountainPage() {
                 }>
                     Find a mountain
                 </Button>
-                <Reccomendation></Reccomendation>
+                <Reccomendation setShowing = { setRecommendationShowing } currentlyShowing= { recommendationShowing } rec={ currentRecommendation }></Reccomendation>
             </div>
         </>
     );
