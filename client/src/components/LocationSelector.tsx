@@ -114,7 +114,7 @@ export default function LocationSelector() {
   return (
     <Autocomplete
       id="google-map-demo"
-      sx={{ width: 475 }}
+      sx={{ width: 480 }}
       getOptionLabel={(option) =>
         typeof option === 'string' ? option : option.description
       }

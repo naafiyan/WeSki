@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../auth/firebase";
+import LocationSelector from "../components/LocationSelector";
 
 function MountainPage() {
     const navigate = useNavigate();
@@ -163,13 +164,7 @@ function MountainPage() {
                             value={user?.email}
                         />
                         <br />
-                        <TextField
-                            label="Location"
-                            placeholder="02912"
-                            style={{ width: 480 }}
-                            value={zipcode}
-
-                        />
+                        <LocationSelector></LocationSelector>
                         <Box >
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <br />
