@@ -53,9 +53,9 @@ public class RouteWrapper {
 
   private void initTripsRoutes() {
     Spark.post("/recommend", (req, res) -> RecHandler.recommend(db, req));
-     Spark.get("/trips", (req, res) -> TripsHandler.getAllTrips(db));
-     Spark.get("/trips/:id", (req, res) -> TripsHandler.getTrip(db, req.params(":id")));
+    Spark.get("/trips", (req, res) -> TripsHandler.getAllTrips(db));
+    Spark.get("/trips/:id", (req, res) -> TripsHandler.getTrip(db, req.params(":id")));
     // get comments for a trip
-     Spark.get("/trips/:id/comments", (req, res) -> TripsHandler.getComments(db, req.params(":id")));
+    Spark.get("/trips/:id/comments", (req, res) -> TripsHandler.getComments(db, req.params(":id")));
   }
 }
