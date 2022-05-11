@@ -35,6 +35,7 @@ public class RecHandler {
     info.setSkillLevel(Double.parseDouble(reqMap.get("difficultyPref")));
     info.setDistance(1-Double.parseDouble(reqMap.get("locPref")));
     List<String> nearest = new Recommendation(info).getNearest();
+    System.out.println("Info: " + info.getName());
     System.out.println(Arrays.deepToString(nearest.toArray()));
     List<String> best = new ArrayList<>();
     for (String s: nearest){
