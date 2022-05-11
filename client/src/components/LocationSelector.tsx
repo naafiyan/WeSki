@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyDL9JfTKHNORq_4VKblbWjALh2Ir51gicU';
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_MAPS_API_KEY;
 
 function loadScript(src: string, position: HTMLElement | null, id: string) {
   if (!position) {
@@ -37,8 +37,11 @@ interface PlaceType {
   description: string;
   structured_formatting: StructuredFormatting;
 }
+type LocationProps = {
+    setLocation: (value: string) => void;
+};
+export default function LocationSelector(props: LocationProps) {
 
-export default function LocationSelector() {
   const [value, setValue] = React.useState<PlaceType | null>(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState<readonly PlaceType[]>([]);
@@ -130,6 +133,7 @@ export default function LocationSelector() {
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
+        props.setLocation(newInputValue);
       }}
       renderInput={(params) => (
         <TextField {...params} label="Current Location" fullWidth />
