@@ -40,6 +40,8 @@ public class Areas {
 
     public double[] getCoords(Document doc){
         try{
+            System.out.println(doc.get("name", String.class));
+            System.out.println(getApiKey());
             GeoApiContext context = new GeoApiContext.Builder().apiKey(getApiKey()).build();
             GeocodingResult[] results = GeocodingApi.newRequest(context).components(ComponentFilter.postalCode(doc.get("location", String.class))).await();
             LatLng location = results[0].geometry.location;
@@ -60,7 +62,7 @@ public class Areas {
         Double num_trails = ((double)doc.get("num_trails", Integer.class))/162.;
         Double vert_drop = ((double)doc.get("vert_drop", Integer.class))/3050.;
         Double num_lifts = ((double)doc.get("num_lifts", Integer.class))/21.;
-        Double acres = ((double)doc.get("skiable_acres", Integer.class))/1509.;
+        Double acres = ((double)doc.get("acreage", Integer.class))/1509.;
         return (num_trails+vert_drop+num_lifts+acres)/4.;
     }
 
@@ -77,7 +79,7 @@ public class Areas {
     }
 
     public static String getApiKey() {
-        KeyParser parser = new KeyParser("secrets/api.txt");
+        KeyParser parser = new KeyParser("secret/api.txt");
         return parser.readLine();
     }
 }

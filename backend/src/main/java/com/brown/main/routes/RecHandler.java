@@ -16,13 +16,13 @@ import java.util.Map;
 public class RecHandler {
 
   public static String recommend(MongoDatabase db, Request req) {
-    String reqJson = req.body();
-    Gson gson = new Gson();
-    Map<String, String> reqMap = gson.fromJson(reqJson, Map.class);
-    System.out.println(reqMap.toString());
-
-    TreeInfo inf = new TreeInfo("usr", Double.parseDouble(reqMap.get("experience")), Double.parseDouble(reqMap.get("weatherImportance")),
-        Double.parseDouble(reqMap.get("priceImportance")), Double.parseDouble(reqMap.get("openTrilsImportance")), Double.parseDouble(reqMap.get("")));
+//    String reqJson = req.body();
+//    Gson gson = new Gson();
+//    Map<String, String> reqMap = gson.fromJson(reqJson, Map.class);
+//    System.out.println(reqMap.toString());
+//
+//    TreeInfo inf = new TreeInfo("usr", Double.parseDouble(reqMap.get("experience")), Double.parseDouble(reqMap.get("weatherImportance")),
+//        Double.parseDouble(reqMap.get("priceImportance")), Double.parseDouble(reqMap.get("openTrilsImportance")), Double.parseDouble(reqMap.get("")));
 
     return null;
   }

@@ -20,9 +20,9 @@ public final class App {
   private static final int DEFAULT_PORT = 4567;
 
   public static void main(String[] args) {
-
-    MongoDatabase db = MongoHelper.client.getDatabase("notSkiQL");
-    ArrayList<Document> areaDocs = db.getCollection("areas").find().into(new ArrayList<Document>());
+    Database<MongoDatabase> db = new MongoHelper("notSkiQL");
+    MongoDatabase data = db.getDb("notSkiQL");
+    ArrayList<Document> areaDocs = data.getCollection("areas").find().into(new ArrayList<Document>());
     Areas areas = new Areas();
     for (Document doc: areaDocs){
       System.out.println("Getting coordinates for another mountain");
