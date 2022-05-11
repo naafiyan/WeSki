@@ -21,6 +21,7 @@ public class Recommendation {
         }
         list.add(user);
         tree.load(list);
+        System.out.println("Similar: " + tree.similar(5, user.getName()));
         this.k_nearest = tree.similar(5, user.getName());
     }
 
