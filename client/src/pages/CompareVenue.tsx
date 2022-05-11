@@ -1,51 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from '../types';
-import { TableView } from '../components/TableView';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 
 export default function CompareVenue() {
 
-    const [tables, setTables] = useState<Table[]>([]);
-    const [tableNames, setTableNames] = useState<string[]>([]);
-    const [currTable, setCurrTable] = useState<Table>();
+    const [rows, setRows] = useState<string[][]>([[]]);
+    const [headers, setHeaders] = useState<string[]>([]);
 
     // fetch the data from api endpoint
     const fetchTables = async () => {
+        console.log("getting here");
         const response = await fetch('http://localhost:4567/table');
         const data = await response.json();
         console.log(data);
-        setTables(data);
-        setCurrTable(data[0]);
+        setHeaders(data.headers);
+        setRows(data.rows);
+        // setRows(data.rows);
+        // const rows: Area[] = [{name: 'name', weather: 'weather', trails: 1, acreage: 2, base: 3, snowfall: 4, price: 5}];
+        
+        // setTables(data);
+        // setCurrTable(data[0]);
     }
 
     // useEffect with tables dependency to map and set the table names
     useEffect(() => {
-        const tableNames = tables.map(table => table.name);
-        setTableNames(tableNames);
         handleLoadData();
     }, []);
-
-    // handle changing table from dropdown menu
-    const handleTableChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const tableName = event.target.value;
-        const table = tables.find(table => table.name === tableName);
-        if (table) {
-            setCurrTable(table);
-        }
-    }
-  
-    // handle updating the table state and current table
-    const handleTableUpdate = (updatedTable: Table) => {
-        // loop through tables and find the one that matches the table name
-        const table = tables.find(table => table.name === updatedTable.name);
-        // if table is found, replace it with the updated table
-        if (table) {
-            const newTables = [...tables];
-            newTables[tables.indexOf(table)] = updatedTable;
-            setTables(newTables);
-            setCurrTable(updatedTable);
-        }
-    }
 
     // handle loading the data when button is pressed
     const handleLoadData = () => {
@@ -56,12 +41,21 @@ export default function CompareVenue() {
         <div>
             <h1>Compare Venues</h1>
             <div id="body">
-                <div>
-                    {currTable && (
-                        <TableView table={currTable} handleTableUpdate={handleTableUpdate}/>
-                    )}
-                </div>
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                {headers.map(item => <TableCell>{item}</TableCell>)}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map(item => <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                {item.map(data => <TableCell>{data}</TableCell>)}
+                            </TableRow>)}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
         </div>
-    )
+    );
 }

@@ -28,6 +28,22 @@ export type Row = {
     data: TableData[];
 }
 
+export type Header = {
+    colIdx: number;
+    colHeader: string;
+    data: TableData[];
+}
+
+export type Area = {
+    name: string;
+    weather: string;
+    trails: number;
+    acreage: number;
+    base: number;
+    snowfall: number;
+    price: number;
+}
+
 /**
  * This is the type for a table in a database. Each table should keep track of its unique ID, its
  * name, its list of columns, its list of rows, and its list of data values.

@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { RowView } from './RowView';
-import { Column, Row, Table } from '../types';
+import { Column, Row, Header } from '../types';
 // import { BsSortAlphaDown, BsSortAlphaUpAlt } from 'react-icons/bs'
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import '../App.css';
 
 type TableProps = {
-    table: Table;
-    handleTableUpdate: (updatedTable: Table) => void;
+    rows: [];
+    headers: [];
 }
 
 export function TableView(props: TableProps) {
-    const table = props.table;
-    const cols = table.cols;
-    // keep list of changes made to the table so we can batch and send one update to the server
-    const [rowsAdded, setRowsAdded] = useState<Row[]>([]);
-    const [rowsRemoved, setRowsRemoved] = useState<Row[]>([]);
-    const [rowsChanged, setRowsChanged] = useState<Row[]>([]);
+    console.log("Table view")
 
-    const [rows, setRows] = useState<Row[]>(table.rows);
+    const [headers, setHeaders] = useState<string[]>(props.headers);
+    const [rows, setRows] = useState<Row[]>(props.rows);
 
     useEffect(() => {
-        setRows(table.rows);
-    }, [table.rows]);
+        setRows(props.rows);
+        setHeaders(props.headers);
+    }, [props.rows]);
 
     // sort the table by the given column
-    const sortTableByColumn = (col: Column, isAscending: boolean) => {
+    const sortTableByColumn = (col: Header, isAscending: boolean) => {
         rows.sort((a, b) => {
             const aVal = a.data[col.colIdx].value;
             const bVal = b.data[col.colIdx].value;
@@ -45,22 +42,22 @@ export function TableView(props: TableProps) {
 
     return (
        <div>
-           {table && (
+           {props.rows && props.headers && (
                <div>
-                   <h1>{table.name}</h1>
+                   <h1>Venues</h1>
                    <div>
                           <table id="table">
                                 <thead>
                                     <tr>
-                                        {cols.map(col => (
-                                            <th key={col.colHeader}>{col.colHeader} <button onClick={() => sortTableByColumn(col, true)}><SortByAlphaIcon/></button><button onClick={() => sortTableByColumn(col, false)}><SortByAlphaIcon/></button></th>
+                                        {headers.map(hdr => (
+                                            <th key={hdr}>{hdr}</th>
                                         ))}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {rows.map(row => (
-                                            <RowView row={row} key={row.rowIdx}/>
-                                    ))}
+                                    {/* {rows.map(row => (
+                                            // <RowView row={}/>
+                                    ))} */}
                                 </tbody>
                             </table> 
                     </div>

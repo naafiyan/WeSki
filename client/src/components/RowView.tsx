@@ -1,45 +1,50 @@
+import { PropaneSharp } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
-import { Row } from "../types";
+import { Area } from "../types";
 import { Cell } from './Cell';
 
 type RowViewProps = {
-    row: Row;
+    row: Area;
 }
 
 export function RowView(props: RowViewProps) {
     // ordering data by colIdx
-    const [orderedData, setOrderedData] = useState<string[]>([]);
+    // const [orderedData, setOrderedData] = useState<string[]>([]);
 
-    useEffect(() => {
-        const orderedData = [];
-        for (let i = 0; i < props.row.data.length; i++) {
-            orderedData.push('');
-        }
-        // loop through rows and order data according to colIdx
-        for (let i = 0; i < props.row.data.length; i++) {
-            const data = props.row.data[i];
-            const colIdx = data.col.colIdx;
-            orderedData[colIdx] = data.value;
-        }
-        setOrderedData(orderedData);
-    }, [props.row]);
+    // useEffect(() => {
+    //     // const orderedData = [];
+    //     // for (let i = 0; i < 7; i++) {
+    //     //     orderedData.push('');
+    //     // }
+    //     // // loop through rows and order data according to colIdx
+    //     // for (let i = 0; i < 7; i++) {
+    //     //     const data = props.row.data[i];
+    //     //     const colIdx = data.col.colIdx;
+    //     //     orderedData[colIdx] = data.value;
+    //     // }
+    //     // setOrderedData(orderedData);
+    // }, [props.row]);
 
 
 
-    const handleCellChange = (rowIdx: number, colIdx: number, dataStr: string) => {        
-        // goto colIdx and update the value
-        const data = props.row?.data[colIdx];
-        if (data) data.value = dataStr;
-    }
+    // const handleCellChange = (rowIdx: number, colIdx: number, dataStr: string) => {        
+    //     // goto colIdx and update the value
+    //     const data = props.row?.data[colIdx];
+    //     if (data) data.value = dataStr;
+    // }
 
     return (
         props.row && 
         <tr>
             <>
-                {orderedData.map((data, idx) => {
-                    return <Cell key={idx} dataStr={data} rowIdx={props.row.rowIdx} colIdx={idx} handleCellChange={handleCellChange}/>
-                })}
                 <td>
+                    {props.row.name}
+                    {props.row.weather}
+                    {props.row.trails}
+                    {props.row.acreage}
+                    {props.row.base}
+                    {props.row.snowfall}
+                    {props.row.price}
                 </td>
             </>
         </tr>
