@@ -38,7 +38,8 @@ public class RecHandler {
     List<String> best = new ArrayList<>();
     for (String s: nearest){
       best.add(new MongoHelper("notSkiQL").getDb("notSkiQL").getCollection("areas").find(Filters.eq("name", s)).first().toJson());
+      System.out.println(best.get(best.size()-1));
     }
-    return nearest;
+    return best;
   }
 }
