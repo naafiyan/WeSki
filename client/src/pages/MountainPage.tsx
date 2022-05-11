@@ -62,6 +62,7 @@ function MountainPage() {
 
 
     async function useFetchRecommend() {
+        
         const res = await fetch("http://localhost:4567/recommend", {
             method: 'POST',
             headers: {
@@ -78,10 +79,9 @@ function MountainPage() {
         })
         const resJson = await res.json();
         console.log(resJson);
-        setCurrentRecommendation({name: resJson[0].name});
-        setRecommendationShowing(true);
         if (resJson.success) {
-            
+            setCurrentRecommendation({name: resJson[0].name});
+            setRecommendationShowing(true);
         }
     }
 
@@ -274,7 +274,7 @@ function MountainPage() {
                 }>
                     Find a mountain
                 </Button>
-                <Reccomendation setShowing = { setRecommendationShowing } rec={ currentRecommendation }></Reccomendation>
+                <Reccomendation setShowing = { setRecommendationShowing } currentlyShowing= { recommendationShowing } rec={ currentRecommendation }></Reccomendation>
             </div>
         </>
     );

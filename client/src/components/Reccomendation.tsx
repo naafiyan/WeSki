@@ -19,27 +19,21 @@ const Transition = React.forwardRef(function Transition(
 type InformationProps = {
     setShowing: React.Dispatch<React.SetStateAction<boolean>>
     rec: recommendation
+    currentlyShowing: boolean
 };
 type recommendation = {
     name: string
 }
 export default function Reccomendation(props: InformationProps) {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-    props.setShowing(true);
-  };
 
   const handleClose = () => {
-    setOpen(false);
     props.setShowing(false);
   };
 
   return (
     <div>
       <Dialog
-        open={open}
+        open={props.currentlyShowing}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
