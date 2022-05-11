@@ -4,24 +4,30 @@ import com.brown.main.database.Database;
 import com.brown.main.database.MongoHelper;
 import com.brown.main.recsys.Areas;
 import com.brown.main.recsys.Recommendation;
+import com.brown.main.recsys.TreeInfo;
 import com.google.common.collect.ImmutableMap;
-import com.mongodb.client.model.Filters;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.brown.main.recsys.TreeInfo;
-import com.google.gson.Gson;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import spark.Request;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class RecHandler {
 
   public static List<String> recommend(MongoDatabase db, Request req) {
+    // validate user
+    if (!UsersHandler.validateUserToken(db, req)) {
+      return null;
+    }
+
+
     String reqJson = req.body();
     Gson gson = new Gson();
     Map<String, String> reqMap = gson.fromJson(reqJson, Map.class);
@@ -37,8 +43,8 @@ public class RecHandler {
     List<String> nearest = new Recommendation(info).getNearest();
     List<String> best = new ArrayList<>();
     for (String s: nearest){
-      best.add(new MongoHelper("notSkiQL").getDb("notSkiQL").getCollection("areas").find(Filters.eq("name", s)).first().toJson());
+      best.add(db.getCollection("areas").find(Filters.eq("name", s)).first().toJson());
     }
-    return nearest;
+    return best;
   }
 }

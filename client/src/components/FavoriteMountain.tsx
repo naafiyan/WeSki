@@ -4,6 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useState } from 'react';
 
 type FavMountainProps = {
+  favMountain: string;
   setFavMountain: (value: string) => void;
 }
 export default function FavoriteMountain(props: FavMountainProps) {
@@ -48,7 +49,7 @@ export default function FavoriteMountain(props: FavMountainProps) {
       onInputChange={(event, newInputValue) => {
         props.setFavMountain(newInputValue);
       }}
-      renderInput={(params) => <TextField {...params} label="Favorite Ski Mountain" />}
+      renderInput={(params) => <TextField {...params} label={props.favMountain}/>}
     />
   );
 }
