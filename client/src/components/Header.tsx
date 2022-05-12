@@ -3,7 +3,6 @@ import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { signInWithGoogle } from "../auth/firebase";
 import { UserContext } from "../providers/UserProvider";
-import Button from '@mui/material/Button';
 
 export default function Header() {
     const user = useContext(UserContext);
