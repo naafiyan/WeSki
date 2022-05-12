@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class RecHandler {
 
-  public static List<String> recommend(MongoDatabase db, Request req) {
+  public static List<String> recommend(MongoDatabase db, Request req, List<TreeInfo> list) {
     // validate user
     if (!UsersHandler.validateUserToken(db, req)) {
       return null;
@@ -40,7 +40,7 @@ public class RecHandler {
     info.setsize(Double.parseDouble(reqMap.get("trailsPref")));
     info.setSkillLevel(Double.parseDouble(reqMap.get("difficultyPref")));
     info.setDistance(1-Double.parseDouble(reqMap.get("locPref")));
-    List<String> nearest = new Recommendation(info).getNearest();
+    List<String> nearest = new Recommendation(info, list).getNearest();
     List<String> best = new ArrayList<>();
     for (String s: nearest){
       best.add(db.getCollection("areas").find(Filters.eq("name", s)).first().toJson());
