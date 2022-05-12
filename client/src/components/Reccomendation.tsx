@@ -22,13 +22,53 @@ type InformationProps = {
     currentlyShowing: boolean
 };
 type recommendation = {
-    name: string
+  name?: string
+  dificulty?: number
+  location?: string
+  num_lifts?: number
+  num_trails?: number
+  price?: number
+  snow_quality?: number
+  temperature?: number
+  vert_drop?: number
 }
 export default function Reccomendation(props: InformationProps) {
 
   const handleClose = () => {
     props.setShowing(false);
   };
+
+  const getDifficulty = (rating: number | undefined): String => {
+    if(rating) {
+      if (rating < 0.20) {
+          return "very easy"
+      } else if (0.20 <= rating && rating < 0.45) {
+        return "easy"
+      } else if (0.45 <= rating && rating < 0.80) {
+        return "medium"
+      } else {
+        return "hard"
+      }
+    } else {
+      return "easy"
+    }
+  };
+  const getWeather = (rating: number | undefined): String => {
+    if(rating) {
+      if (rating < 0.10) {
+          return "very bad"
+      } else if (0.10 <= rating && rating < 0.4) {
+        return "alright"
+      } else if (0.4 <= rating && rating < 0.80) {
+        return "good"
+      } else {
+        return "great"
+      }
+    } else {
+      return "easy"
+    }
+  };
+
 
   return (
     <div>
@@ -39,16 +79,16 @@ export default function Reccomendation(props: InformationProps) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle>{"You were recommended "}  { props.rec.name}{"!"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running. Name is { props.rec.name }
+            {props.rec.name} has a difficulty rated as { getDifficulty(props.rec.dificulty) }. This mountain
+            is located at the zipcode {props.rec.location}. There are also {props.rec.num_trails} trails open, { props.rec.num_lifts } lifts that are open, and { props.rec.vert_drop } feet of vertical drop. The temperature
+            at the mountain during your trip will be { props.rec.temperature } degrees fahrenheit. The ticket prices will be ${props.rec.price} each, and the weather conditions are { getWeather(props.rec.snow_quality)}.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose}>Agree</Button>
+          <Button onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>
     </div>
