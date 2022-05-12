@@ -47,11 +47,23 @@ public class TripsHandler {
     return res;
   }
 
+  /**
+   * Retrieves a specific trip from the database, by ID
+   * @param db mongo atlas connection
+   * @param id objectID of the trip to get informatino about
+   * @return json representation of the trip object
+   */
   public static String getTrip(MongoDatabase db, String id) {
     ArrayList<Document> tripsDocs = db.getCollection("trips").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
     return tripsDocs.get(0).toJson();
   }
 
+  /**
+   * Retrieves a specific comment from the database.
+   * @param db mongo atlas connection
+   * @param id objectID of the comment to retrieve
+   * @return string representing the comment object
+   */
   public static String getComments(MongoDatabase db, String id) {
     ArrayList<Document> commentsDocs = db.getCollection("comments").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
     Gson gson = new Gson();

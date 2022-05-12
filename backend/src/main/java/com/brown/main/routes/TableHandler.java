@@ -9,7 +9,16 @@ import com.google.gson.Gson;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+/**
+ * Handles routes related to the table page
+ */
 public class TableHandler {
+
+  /**
+   * Gathers and returns necessary info for the frontend table vizualization
+   * @param db mongo database connection
+   * @return json object contianing information for the table handler
+   */
   public static String getTable(MongoDatabase db) {
     ArrayList<Document> areaList = db.getCollection("areas").find().into(new ArrayList<>());
     ArrayList<ArrayList<String>> headersList = new ArrayList<>();
