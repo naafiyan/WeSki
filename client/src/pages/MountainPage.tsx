@@ -41,7 +41,9 @@ function MountainPage() {
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
     const [zipcode, setZipcode] = useState<string>("02912");
     const [recommendationShowing, setRecommendationShowing] = useState<boolean>(false);
-    const [currentRecommendation, setCurrentRecommendation] = useState<recommendation>({});
+    const [firstRecommendation, setFirstRecommendation] = useState<recommendation>({});
+    const [secondRecommendation, setSecondRecommendation] = useState<recommendation>({});
+    const [thirdRecommendation, setThirdRecommendation] = useState<recommendation>({});
 
     const handleFetchPrefs = async () => {
         auth.onAuthStateChanged(async (userFb) => {
@@ -99,8 +101,7 @@ function MountainPage() {
         const resJson = await res.json();
         console.log(resJson);
         // if (resJson.success) {
-        setCurrentRecommendation({ 
-            
+        setFirstRecommendation({
             name: resJson[0].name,
             dificulty: resJson[0].dificulty,
             location: resJson[0].location,
@@ -110,7 +111,29 @@ function MountainPage() {
             snow_quality: resJson[0].snow_quality,
             temperature: resJson[0].temperature,
             vert_drop: resJson[0].vert_drop });
-    
+
+        setSecondRecommendation({
+            name: resJson[1].name,
+            dificulty: resJson[1].dificulty,
+            location: resJson[1].location,
+            num_lifts: resJson[1].num_lifts,
+            num_trails: resJson[1].num_trails,
+            price: resJson[1].price,
+            snow_quality: resJson[1].snow_quality,
+            temperature: resJson[1].temperature,
+            vert_drop: resJson[1].vert_drop });
+
+        setThirdRecommendation({
+            name: resJson[2].name,
+            dificulty: resJson[2].dificulty,
+            location: resJson[2].location,
+            num_lifts: resJson[2].num_lifts,
+            num_trails: resJson[2].num_trails,
+            price: resJson[2].price,
+            snow_quality: resJson[2].snow_quality,
+            temperature: resJson[2].temperature,
+            vert_drop: resJson[2].vert_drop });
+
         setRecommendationShowing(true);
         // }
     }
@@ -304,7 +327,8 @@ function MountainPage() {
                 }>
                     Find a mountain
                 </Button>
-                <Reccomendation setShowing={setRecommendationShowing} currentlyShowing={recommendationShowing} rec={currentRecommendation}></Reccomendation>
+                <Reccomendation setShowing={setRecommendationShowing} currentlyShowing={recommendationShowing}
+                                rec={firstRecommendation} rec2={secondRecommendation} rec3={thirdRecommendation}></Reccomendation>
             </div>
         </>
     );
