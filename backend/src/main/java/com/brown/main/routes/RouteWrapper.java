@@ -1,8 +1,12 @@
 package com.brown.main.routes;
 
+import com.brown.main.recsys.Areas;
+import com.brown.main.recsys.TreeInfo;
 import com.mongodb.client.MongoDatabase;
 import spark.Spark;
 import spark.Request;
+
+import java.util.List;
 
 public class RouteWrapper {
 
@@ -52,7 +56,8 @@ public class RouteWrapper {
   }
 
   private void initTripsRoutes() {
-    Spark.post("/recommend", (req, res) -> RecHandler.recommend(db, req));
+    List<TreeInfo> list1 = new Areas().getInfo();
+    Spark.post("/recommend", (req, res) -> RecHandler.recommend(db, req, list1));
     Spark.get("/trips", (req, res) -> TripsHandler.getAllTrips(db));
     Spark.get("/trips/:id", (req, res) -> TripsHandler.getTrip(db, req.params(":id")));
     // get comments for a trip
