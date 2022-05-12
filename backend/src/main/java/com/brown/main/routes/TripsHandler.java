@@ -13,9 +13,18 @@ import java.util.Map;
 
 import static com.mongodb.client.model.Filters.eq;
 
+/**
+ * Class that contains methods for handling routes related to trips
+ */
 public class TripsHandler {
 
+  /**
+   * Handles the API endpoint /trips and returns all trips stored in the database.
+   * @param db MongoDatabase object of the connection to the Atlas db
+   * @return JsonObject that contains a list of the trips in the database
+   */
   public static JsonObject getAllTrips(MongoDatabase db) {
+    //Gather all trips into an arraylist
     ArrayList<Document> tripsDocs = db.getCollection("trips").find().into(new ArrayList<Document>());
     // convert areasDocs to json
     List<String> tripStrings = new ArrayList<>();
@@ -25,6 +34,7 @@ public class TripsHandler {
 
     ArrayList<JsonObject> trips = new ArrayList<JsonObject>();
 
+    //Iterate over the list and add the json object of each trip to a new arraylist
     Gson gson = new Gson();
     String jsonString = null;
     for (Document doc : tripsDocs) {
