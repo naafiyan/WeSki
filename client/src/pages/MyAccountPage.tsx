@@ -111,10 +111,12 @@ export function MyAccountPage() {
                         User Settings
                     </Typography>
                         <br />
+                        <text>Current Location</text>
                         <LocationSelector setLocation={setZipcode}></LocationSelector>
                     </div>
                     <div className="FavoriteMountainTextBox">
                         <br />
+                        <text>Favorite Mountain</text>
                         <FavoriteMountain setFavMountain = { setFavoriteMountain } favMountain={favoriteMountain}></FavoriteMountain>
                     </div>
                 </div>
