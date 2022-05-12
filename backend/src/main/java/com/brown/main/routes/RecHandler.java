@@ -1,33 +1,34 @@
 package com.brown.main.routes;
 
-import com.brown.main.database.Database;
-import com.brown.main.database.MongoHelper;
 import com.brown.main.recsys.Areas;
 import com.brown.main.recsys.Recommendation;
 import com.brown.main.recsys.TreeInfo;
-import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 import spark.Request;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class is used to handle the request for recommendations.
+ */
 public class RecHandler {
 
+  /**
+   * This method is used to get the recommendations for the user.
+   * @param db The database to get the recommendations from.
+   * @param req Request
+   * @param list List of areas
+   * @return
+   */
   public static List<String> recommend(MongoDatabase db, Request req, List<TreeInfo> list) {
     // validate user
     if (!UsersHandler.validateUserToken(db, req)) {
       return null;
     }
-
-
     String reqJson = req.body();
     Gson gson = new Gson();
     Map<String, String> reqMap = gson.fromJson(reqJson, Map.class);

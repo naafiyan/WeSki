@@ -12,11 +12,18 @@ public class RouteWrapper {
 
   private MongoDatabase db;
 
+  /**
+   * Tnis is the constructor for the RouteWrapper class, whicn initializes the API routes.
+   * @param db
+   */
   public RouteWrapper(MongoDatabase db) {
     this.db = db;
     this.initRoutes();
   }
 
+  /**
+   * This method initializes all routes.
+   */
   public void initRoutes() {
     // route handled by static methods called inside lamba functions in individual handler classes
     Spark.get("/", (req, res) -> AreasHandler.getAllAreas(db));
@@ -26,20 +33,25 @@ public class RouteWrapper {
     this.initTableRoutes();
   }
 
+  /**
+   * This method initializes the table routes.
+   */
   private void initTableRoutes() {
     Spark.get("/table", (req, res) -> TableHandler.getTable(db));
   }
 
+  /**
+   * This method initializes the area routes.
+   */
   private void initAreaRoutes() {
     // AreasHandler.addArea(db);
     Spark.get("/areas", (req, res) -> AreasHandler.getAllAreas(db));
     Spark.get("/area/:id", (req, res) -> AreasHandler.getArea(db, req.params(":id")));
   }
 
-  // private void initRecRoutes() {
-  //   Spark.post("/recommend", (req, res) -> RecHandler.recommend(db, req.body()));
-  // }
-
+  /**
+   * This method initializes the user routes.
+   */
   private void initUserRoute() {
 
     // validate jwt!
@@ -55,6 +67,9 @@ public class RouteWrapper {
     // Spark.get("/users/:id/prefs", (req, res) -> UsersHandler.getUserPrefs(db, req.params(":id")));
   }
 
+  /**
+   * This method initializes the trip routes.
+   */
   private void initTripsRoutes() {
     List<TreeInfo> list1 = new Areas().getInfo();
     Spark.post("/recommend", (req, res) -> RecHandler.recommend(db, req, list1));
