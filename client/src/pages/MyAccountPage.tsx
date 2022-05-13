@@ -39,8 +39,10 @@ export function MyAccountPage() {
     const [trailsPref, setTrailsPref] = useState<number>(0);
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
     const [zipcode, setZipcode] = useState<string>("");
+    const [favoriteMountain, setFavoriteMountain] = useState<string>("");
 
     const handleUpdatePrefs = async () => {
+        console.log(favoriteMountain);
         const token = await user?.getIdToken();
         const res = await fetch("http://localhost:4567/user/" + user?.uid + "/prefs", {
             method: "PUT",
@@ -55,6 +57,7 @@ export function MyAccountPage() {
                 trailsPref: trailsPref,
                 difficultyPref: difficultyPref,
                 zipcode: zipcode,
+                favoriteMountain: favoriteMountain,
             }),
         });
         const resJson = await res.json();
@@ -77,14 +80,8 @@ export function MyAccountPage() {
                 setTrailsPref(parseFloat(resJson.trailsPref));
                 setDifficultyPref(parseFloat(resJson.difficultyPref));
                 setZipcode(resJson.zipcode);
+                setFavoriteMountain(resJson.favoriteMountain);
                 console.log(resJson);
-                // go through prefs and set name and value pairs
-                // const prefsMap = new Map();
-                // for (const pref of resJson.prefs) {
-                //     prefsMap.set(pref.name, pref.value);
-                // }
-                // console.log(prefsMap);
-                // setPrefs(prefsMap);
             }
         });
     }
@@ -114,11 +111,13 @@ export function MyAccountPage() {
                         User Settings
                     </Typography>
                         <br />
-                        <LocationSelector></LocationSelector>
+                        <text>Current Location</text>
+                        <LocationSelector setLocation={setZipcode}></LocationSelector>
                     </div>
                     <div className="FavoriteMountainTextBox">
                         <br />
-                        <FavoriteMountain></FavoriteMountain>
+                        <text>Favorite Mountain</text>
+                        <FavoriteMountain setFavMountain = { setFavoriteMountain } favMountain={favoriteMountain}></FavoriteMountain>
                     </div>
                 </div>
                 <br />

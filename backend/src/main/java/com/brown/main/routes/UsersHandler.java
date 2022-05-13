@@ -87,6 +87,7 @@ public class UsersHandler {
           newUserDoc.append("type", "Ski");
           newUserDoc.append("location", "");
           // TODO: probably assign default values to pref area
+          newUserDoc.append("pref_area", new Object());
           newUserDoc.append("pref_area", new ObjectId());
           System.out.println("Getting here!!!");
           db.getCollection("users").insertOne(newUserDoc);
@@ -145,7 +146,13 @@ public class UsersHandler {
           res.addProperty("success", false);
           return res;
         }
+
+        System.out.println(userDoc.get("pref_area"));
+        System.out.println("pref area is above^");
+        Document favMtnDoc = db.getCollection("areas").find(eq("_id", new ObjectId(userDoc.get("pref_area").toString()))).first();
+
         JsonObject res = new JsonObject();
+        System.out.println(userDoc.get("zipcode").toString());
         res.addProperty("success", true);
         res.addProperty("zipcode", userDoc.get("zipcode").toString());
         res.addProperty("ticketPref", userDoc.get("ticket_pref").toString());
@@ -154,6 +161,7 @@ public class UsersHandler {
         res.addProperty("trailsPref", userDoc.get("trails_pref").toString());
         res.addProperty("difficultyPref", userDoc.get("difficulty_pref").toString());
         res.addProperty("type", userDoc.get("type").toString());
+        res.addProperty("favoriteMountain", favMtnDoc.get("name").toString());
         return res;
       }
 
@@ -177,14 +185,22 @@ public class UsersHandler {
         }
         // get request body
         JsonObject body = new Gson().fromJson(req.body(), JsonObject.class);
+
+//        System.out.println(body);
+//        System.out.println(db.getCollection("areas").find(eq("name", "Cannon Mountain")).first());
+//        System.out.println(body.get("favoriteMountain").toString().replace("\"", ""));
+        Document areaDoc = db.getCollection("areas").find(eq("name", body.get("favoriteMountain").toString().replace("\"", ""))).first();
+//        System.out.println(body.get("favoriteMountain"));
+
         // update user doc with new prefs
+        System.out.println(body.get("zipcode"));
         userDoc.replace("zipcode", body.get("zipcode").getAsString());
         userDoc.replace("ticket_pref", body.get("ticketPref").getAsDouble());
         userDoc.replace("loc_pref", body.get("locPref").getAsDouble());
         userDoc.replace("weather_pref", body.get("weatherPref").getAsDouble());
         userDoc.replace("trails_pref", body.get("trailsPref").getAsDouble());
         userDoc.replace("difficulty_pref", body.get("difficultyPref").getAsDouble());
-
+        userDoc.replace("pref_area", areaDoc.get("_id"));
         // update user doc in database
         db.getCollection("users").replaceOne(eq("uid", userId), userDoc);
         // return json object where success is true

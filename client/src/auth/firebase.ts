@@ -90,6 +90,9 @@ export const signInWithGoogle = () => {
     }
 };
 
+/**
+ * This method signs the user out of the website.
+ */
 export const signOutWithGoogle = () => {
     signOut(auth).then(() => {
         console.log("User signed out");
@@ -97,34 +100,3 @@ export const signOutWithGoogle = () => {
         console.log(error)
     });
 }
-
-export const isAuth = async () => {
-    if (user) {
-        const idToken = user.getIdToken();
-        const res = await fetch("http://localhost:4567/user/authcheck", {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + idToken,
-            }
-        })
-        const resJson = await res.json();
-        return resJson.status == 200;
-    } else {
-        return false;
-    }
-}
-
-export const getUser = (): User | null => {
-    return user;
-}
-
-export const userToUserDoc = (): UserDoc | null => {
-    if (user && user.displayName && user.photoURL) {
-        return {
-            displayName: user.displayName,
-            photoUrl: user.photoURL,
-            uid: user.uid
-        }
-    } else return null;
-}
-

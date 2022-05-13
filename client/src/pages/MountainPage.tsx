@@ -13,11 +13,25 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../auth/firebase";
 import LocationSelector from "../components/LocationSelector";
+import Reccomendation from "../components/Reccomendation";
 
 function MountainPage() {
     const navigate = useNavigate();
 
     const user = useContext(UserContext);
+
+
+    type recommendation = {
+        name?: string
+        dificulty?: number
+        location?: string
+        num_lifts?: number
+        num_trails?: number
+        price?: number
+        snow_quality?: number
+        temperature?: number
+        vert_drop?: number
+    }
 
     // state variables
     const [ticketPref, setTicketPref] = useState<number>(0);
@@ -25,7 +39,9 @@ function MountainPage() {
     const [weatherPref, setWeatherPref] = useState<number>(0);
     const [trailsPref, setTrailsPref] = useState<number>(0);
     const [difficultyPref, setDifficultyPref] = useState<number>(0);
-    const [zipcode, setZipcode] = useState<string>("");
+    const [zipcode, setZipcode] = useState<string>("02912");
+    const [recommendationShowing, setRecommendationShowing] = useState<boolean>(false);
+    const [currentRecommendation, setCurrentRecommendation] = useState<recommendation>({});
 
     const handleFetchPrefs = async () => {
         auth.onAuthStateChanged(async (userFb) => {
@@ -42,8 +58,11 @@ function MountainPage() {
                 setWeatherPref(parseFloat(resJson.weatherPref));
                 setTrailsPref(parseFloat(resJson.trailsPref));
                 setDifficultyPref(parseFloat(resJson.difficultyPref));
-                setZipcode(resJson.zipcode);
-                console.log(resJson);
+                if (!resJson.zipcode) {
+                    setZipcode("02912");
+                } else {
+                    setZipcode(resJson.zipcode);
+                }
             }
         });
     }
@@ -69,7 +88,6 @@ function MountainPage() {
 
         console.log(jsonBody);
         const token = await user?.getIdToken();
-
         const res = await fetch("http://localhost:4567/recommend", {
             method: 'POST',
             headers: {
@@ -80,9 +98,21 @@ function MountainPage() {
         })
         const resJson = await res.json();
         console.log(resJson);
-        if (resJson.success) {
-            // navigate('../recommend', { replace: true });
-        }
+        // if (resJson.success) {
+        setCurrentRecommendation({ 
+            
+            name: resJson[0].name,
+            dificulty: resJson[0].dificulty,
+            location: resJson[0].location,
+            num_lifts: resJson[0].num_lifts,
+            num_trails: resJson[0].num_trails,
+            price: resJson[0].price,
+            snow_quality: resJson[0].snow_quality,
+            temperature: resJson[0].temperature,
+            vert_drop: resJson[0].vert_drop });
+    
+        setRecommendationShowing(true);
+        // }
     }
 
     const theme = createTheme({
@@ -174,7 +204,7 @@ function MountainPage() {
                             value={user?.email}
                         />
                         <br />
-                        <LocationSelector></LocationSelector>
+                        <LocationSelector setLocation={setZipcode}></LocationSelector>
                         <Box >
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <br />
@@ -274,6 +304,7 @@ function MountainPage() {
                 }>
                     Find a mountain
                 </Button>
+                <Reccomendation setShowing={setRecommendationShowing} currentlyShowing={recommendationShowing} rec={currentRecommendation}></Reccomendation>
             </div>
         </>
     );
