@@ -29,13 +29,8 @@ export default function CompareVenue() {
 
     // useEffect with tables dependency to map and set the table names
     useEffect(() => {
-        handleLoadData();
-    }, []);
-
-    // handle loading the data when button is pressed
-    const handleLoadData = () => {
         fetchTables();
-    }
+    }, []);
 
     // table styling
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -66,6 +61,7 @@ export default function CompareVenue() {
 
     const sortTable = () => {
         console.log("tryna sort")
+        console.log(sortCol);
         var ro: number = 0
         switch(sortCol) {
             case "Ski Area": default:
@@ -87,50 +83,67 @@ export default function CompareVenue() {
                 ro = 5;
                 break;
         }
-        for(var i=0; i<rows.length; i+=1) {
-            for(var j=i; j<rows.length; j+=1) {
-                if(isNumeric(rows[j][ro])){
-                    if (parseFloat(rows[j][ro]) < parseFloat(rows[i][ro])) {
-                        var temp = rows[j];
-                        rows[j] = rows[i];
-                        rows[i] = temp;
+        const rowCopy = rows.map(r => r);
+        console.log("first", rows);
+        for(var i=0; i<rowCopy.length; i+=1) {
+            for(var j=i; j<rowCopy.length; j+=1) {
+                if(isNumeric(rowCopy[j][ro])){
+                    if (parseFloat(rowCopy[j][ro]) < parseFloat(rowCopy[i][ro])) {
+                        var temp = rowCopy[j];
+                        rowCopy[j] = rowCopy[i];
+                        rowCopy[i] = temp;
                     };
                 } else {
-                    if (rows[j][ro] < rows[i][ro]) {
-                        var temp = rows[j];
-                        rows[j] = rows[i];
-                        rows[i] = temp;
+                    if (rowCopy[j][ro] < rowCopy[i][ro]) {
+                        var temp = rowCopy[j];
+                        rowCopy[j] = rowCopy[i];
+                        rowCopy[i] = temp;
                     };
                 }
             };
         };
+        console.log("second", rows);
+        setRows(rowCopy);
     };
 
-    // useEffect(sortTable, [sortCol]);
+
+    useEffect(sortTable, [sortCol]);
 
     return (
         <div>
             {/* Page Title */}
             <h1>Compare Venues</h1>
             <div id="body">
-                <select name='colselect' id='col-select' onChange={e => setSortCol(e.target.value)}>
+                {/* <select name='colselect' id='col-select' onChange={e => setSortCol(e.target.value)}>
                     <option>Ski Area</option>
                     <option># Trails Open</option>
                     <option>Acreage Open</option>
                     <option>Price</option>
                     <option>Temperature</option>
                     <option>Difficulty</option>
-                </select>
+                </select> */}
                 <TableContainer component={Paper}> {/* Styling component for table */}
                     <Table aria-label="table with ski venue data">
                         <TableHead>
                             <StyledTableRow> {/* Styled Table Row for Headers */}
-                                <StyledTableCell>Ski Area</StyledTableCell>
-                                <StyledTableCell># Trails Open</StyledTableCell>
-                                <StyledTableCell>Acreage Open</StyledTableCell>
-                                <StyledTableCell>Price</StyledTableCell>
-                                <StyledTableCell>Temperature</StyledTableCell>
-                                <StyledTableCell>Difficulty</StyledTableCell>
+                                <StyledTableCell>Ski Area
+                                    <button onClick={() => {setSortCol("Ski Area")}}>sort</button>
+                                </StyledTableCell>
+                                <StyledTableCell># Trails Open
+                                    <button onClick={() => {setSortCol("# Trails Open")}}>sort</button>
+                                </StyledTableCell>
+                                <StyledTableCell>Acreage Open
+                                    <button onClick={() => setSortCol("Acreage Open")}>sort</button>
+                                </StyledTableCell>
+                                <StyledTableCell>Price
+                                    <button onClick={() => setSortCol("Price")}>sort</button>
+                                </StyledTableCell>
+                                <StyledTableCell>Temperature
+                                    <button onClick={() => setSortCol("Temperature")}>sort</button>
+                                </StyledTableCell>
+                                <StyledTableCell>Difficulty
+                                    <button onClick={() => setSortCol("Difficulty")}>sort</button>
+                                </StyledTableCell>
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
