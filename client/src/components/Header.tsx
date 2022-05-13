@@ -3,7 +3,6 @@ import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { signInWithGoogle } from "../auth/firebase";
 import { UserContext } from "../providers/UserProvider";
-import Button from '@mui/material/Button';
 
 export default function Header() {
     const user = useContext(UserContext);
@@ -34,7 +33,7 @@ export default function Header() {
             <div className="title">
                 <Navbar.Brand as={Link} to="/" text-align="center">
                     WeSki
-                    <img src={require('../images/handwriting.png')} width="50" height="40" alt="WeSki logo"/>
+                    <img src={require('../images/handwriting.png')} width="50" height="40" alt="WeSki logo" />
                 </Navbar.Brand>
             </div>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" align-items={"center"} />
@@ -44,9 +43,6 @@ export default function Header() {
                 </Nav.Link>
                 <Nav.Link as={Link} to="/trips">
                     Trips
-                </Nav.Link>
-                <Nav.Link as={Link} to="/recommendation">
-                    Recommendation
                 </Nav.Link>
             </Nav>
 

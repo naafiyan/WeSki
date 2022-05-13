@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class models the Comment data structure.
+ */
 public class Area implements Model{
   private ObjectId id;
   private String name;

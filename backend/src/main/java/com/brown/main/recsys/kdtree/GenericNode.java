@@ -20,6 +20,10 @@ public class GenericNode implements TreeNode {
     this.vals = vals;
   }
 
+  /**
+   * Setters and getters for the fields of the node.
+   */
+
   @Override
   public TreeNode getRight() {
     return this.rightChild;

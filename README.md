@@ -1,4 +1,4 @@
-Final Project yuh
+# WeSki
 
 # Running Frontend
 For first install run ```npm install``` to install all the dependencies.

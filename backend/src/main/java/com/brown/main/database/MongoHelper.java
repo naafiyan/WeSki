@@ -28,6 +28,11 @@ public class MongoHelper implements Database<MongoDatabase> {
     this.initDb(db);
   }
 
+  /**
+   * Initializes the connection to the database
+   * @param db string to database file
+   * @return the mongo database object
+   */
   @Override
   public MongoDatabase initDb(String db) {
     System.out.println(System.getProperty("mongodb.uri"));
@@ -47,15 +52,27 @@ public class MongoHelper implements Database<MongoDatabase> {
     return MongoHelper.client.getDatabase(db);
   }
 
+  /**
+   * Retrieves client settings for creating a connection to the mongo database
+   * @return clientsettings object
+   */
   public MongoClientSettings getClientSettings() {
     return this.clientSettings;
   }
 
+  /**
+   * Retrieves the current active database
+   * @param db string to database file
+   * @return mongodatabase object
+   */
   @Override
   public MongoDatabase getDb(String db) {
     return MongoHelper.client.getDatabase(db);
   }
 
+  /**
+   * Closes the connection to the mongodatabase
+   */
   @Override
   public void close() {
     MongoHelper.client.close();

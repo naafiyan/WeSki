@@ -1,5 +1,8 @@
 package com.brown.main.recsys;
 
+/**
+ * This is the TreeInfo class, which models the user and areas as items in the database.
+ */
 public class TreeInfo {
 
     private String name;
@@ -10,31 +13,38 @@ public class TreeInfo {
     private double distance;
     private double[] location;
 
+    /**
+     * This is the constructor for the TreeInfo class.  It takes in the name, skill level,
+     * weather, price, size, and distance.
+     */
     public  TreeInfo(){
     }
 
-    public TreeInfo(String name, double skillLevel, double weather, double price, double size, double[] location){
-        this.name=name;
-        this.skillLevel=skillLevel;
-        this.weather=weather;
-        this.price=price;
-        this.size=size;
-        this.location=location;
-    }
-
+    /**
+     * This method takes in two pairs of latitude and longitude and returns the distance between
+     * them in miles.
+     * @return
+     */
     public static double calDistance(double lat1, double lon1, double lat2, double lon2) {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
         }
         else {
             double theta = lon1 - lon2;
-            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2))
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.cos(Math.toRadians(theta));
             dist = Math.acos(dist);
             dist = Math.toDegrees(dist);
             dist = dist * 60 * 1.1515;
             return dist;
         }
     }
+
+    /**
+     * Below are the getters and setters for the fields.  I'm not going to bother commenting all
+     * of them but they exist.
+     */
 
     public void setLocation(double[] coords){
         this.location=coords;

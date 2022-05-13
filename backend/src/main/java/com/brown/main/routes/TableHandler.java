@@ -9,7 +9,16 @@ import com.google.gson.Gson;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+/**
+ * Handles routes related to the table page
+ */
 public class TableHandler {
+
+  /**
+   * Gathers and returns necessary info for the frontend table vizualization
+   * @param db mongo database connection
+   * @return json object contianing information for the table handler
+   */
   public static String getTable(MongoDatabase db) {
     ArrayList<Document> areaList = db.getCollection("areas").find().into(new ArrayList<>());
     ArrayList<ArrayList<String>> headersList = new ArrayList<>();
@@ -26,12 +35,12 @@ public class TableHandler {
     System.out.println(areaList.get(0));
     for(Document area: areaList) {
       ArrayList<String> row = new ArrayList<>();
-      row.add(area.get("name").toString());
-      row.add(area.get("num_trails").toString());
-      row.add(area.get("acreage").toString());
-      row.add(area.get("price").toString());
-      row.add(area.get("temperature").toString());
-      row.add(area.get("difficulty").toString());
+      row.add(area.get("Ski Area").toString());
+      row.add(area.get("# Trails Open").toString());
+      row.add(area.get("Acreage Open").toString());
+      row.add(area.get("Price").toString());
+      row.add(area.get("Temperature").toString());
+      row.add(area.get("Difficulty").toString());
       rows.add(row);
     }
 

@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
-import { auth, getUser, signInWithGoogle, signOutWithGoogle } from '../auth/firebase';
+import { signOutWithGoogle } from '../auth/firebase';
 import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
-import { User } from 'firebase/auth';
 import { UserContext } from '../providers/UserProvider';
 import { Link } from 'react-router-dom';
 
@@ -42,13 +40,13 @@ function ProfilePicture() {
                         <Link to={"/"}>
                             <Button sx={{ width: 475 }}
                                 variant="contained" size={"medium"} onClick={signOutWithGoogle}
-                                    style={{
-                                        borderRadius: 20,
-                                        backgroundColor: "#5A9B85",
-                                        padding: "14px 30px",
-                                        fontSize: "18px",
-                                        fontFamily: "Roboto"
-                                    }}>
+                                style={{
+                                    borderRadius: 20,
+                                    backgroundColor: "#5A9B85",
+                                    padding: "14px 30px",
+                                    fontSize: "18px",
+                                    fontFamily: "Roboto"
+                                }}>
                                 Sign Out
                             </Button>
                         </Link>

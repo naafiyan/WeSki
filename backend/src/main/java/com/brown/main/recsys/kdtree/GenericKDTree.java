@@ -31,6 +31,10 @@ public class GenericKDTree{
     this.values = new HashMap<>();
   }
 
+  /**
+   * Loads a list of TreeInfos into a KD tree.
+   * @param collection list of TreeInfos to build the tree
+   */
   public void load(List<TreeInfo> collection) {
     Map<String, double[]> toLoad = new HashMap<>();
     for (TreeInfo info : collection) {
@@ -39,6 +43,10 @@ public class GenericKDTree{
     this.loadUp(toLoad);
   }
 
+  /**
+   * Helper method for load
+   * @param toLoad map to load tree from
+   */
   public void loadUp(Map<String, double[]> toLoad) {
     ArrayList<TreeNode> nodes = new ArrayList<>();
     for (Map.Entry<String, double[]> entry : toLoad.entrySet()) {
@@ -48,6 +56,12 @@ public class GenericKDTree{
     this.create(nodes);
   }
 
+  /**
+   * Calculates the k most similar nodes to the node with the given id
+   * @param k number of similar nodes to find
+   * @param id id of the node to find neighbors of
+   * @return list of ids of the closest neighbors
+   */
   public List<String> similar(int k, String id) {
     //Check inputs for validity
     if (k < 0) {
@@ -82,10 +96,17 @@ public class GenericKDTree{
     return closest;
   }
 
+  /**
+   * Prints the kd-tree.
+   */
   public void print() {
     System.out.println(this.preOrderTraverse(this.root));
   }
 
+  /**
+   * Retrieves the distance metric of this kd tree.
+   * @return a map.
+   */
   public Map<String, Double> getMetrics() {
     return this.metrics;
   }
