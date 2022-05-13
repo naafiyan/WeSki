@@ -14,13 +14,15 @@ public class TreeInfo {
     private double[] location;
 
     /**
-     * This is the constructor for the TreeInfo class.  It takes in the name, skill level, weather, price, size, and distance.
+     * This is the constructor for the TreeInfo class.  It takes in the name, skill level,
+     * weather, price, size, and distance.
      */
     public  TreeInfo(){
     }
 
     /**
-     * This method takes in two pairs of latitude and longitude and returns the distance between them in miles.
+     * This method takes in two pairs of latitude and longitude and returns the distance between
+     * them in miles.
      * @return
      */
     public static double calDistance(double lat1, double lon1, double lat2, double lon2) {
@@ -29,7 +31,9 @@ public class TreeInfo {
         }
         else {
             double theta = lon1 - lon2;
-            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2))
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.cos(Math.toRadians(theta));
             dist = Math.acos(dist);
             dist = Math.toDegrees(dist);
             dist = dist * 60 * 1.1515;
@@ -38,8 +42,8 @@ public class TreeInfo {
     }
 
     /**
-     * Below are the getters and setters for the fields.  I'm not going to bother commenting all of them but they exist.
-     * @param coords
+     * Below are the getters and setters for the fields.  I'm not going to bother commenting all
+     * of them but they exist.
      */
 
     public void setLocation(double[] coords){
