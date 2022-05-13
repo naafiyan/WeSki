@@ -35,12 +35,12 @@ public class TableHandler {
     System.out.println(areaList.get(0));
     for(Document area: areaList) {
       ArrayList<String> row = new ArrayList<>();
-      row.add(area.get("name").toString());
-      row.add(area.get("num_trails").toString());
-      row.add(area.get("acreage").toString());
-      row.add(area.get("price").toString());
-      row.add(area.get("temperature").toString());
-      row.add(area.get("difficulty").toString());
+      row.add(area.get("Ski Area").toString());
+      row.add(area.get("# Trails Open").toString());
+      row.add(area.get("Acreage Open").toString());
+      row.add(area.get("Price").toString());
+      row.add(area.get("Temperature").toString());
+      row.add(area.get("Difficulty").toString());
       rows.add(row);
     }
 
