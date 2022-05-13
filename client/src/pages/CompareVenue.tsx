@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 
 
 export default function CompareVenue() {
@@ -119,22 +120,22 @@ export default function CompareVenue() {
                         <TableHead>
                             <StyledTableRow> {/* Styled Table Row for Headers */}
                                 <StyledTableCell>Ski Area
-                                    <button onClick={() => {setSortCol("Ski Area")}}>sort</button>
+                                    <Button onClick={() => {setSortCol("Ski Area")}}>sort</Button>
                                 </StyledTableCell>
                                 <StyledTableCell># Trails Open
-                                    <button onClick={() => {setSortCol("# Trails Open")}}>sort</button>
+                                    <Button onClick={() => {setSortCol("# Trails Open")}}>sort</Button>
                                 </StyledTableCell>
                                 <StyledTableCell>Acreage Open
-                                    <button onClick={() => setSortCol("Acreage Open")}>sort</button>
+                                    <Button onClick={() => setSortCol("Acreage Open")}>sort</Button>
                                 </StyledTableCell>
                                 <StyledTableCell>Price
-                                    <button onClick={() => setSortCol("Price")}>sort</button>
+                                    <Button onClick={() => setSortCol("Price")}>sort</Button>
                                 </StyledTableCell>
                                 <StyledTableCell>Temperature
-                                    <button onClick={() => setSortCol("Temperature")}>sort</button>
+                                    <Button onClick={() => setSortCol("Temperature")}>sort</Button>
                                 </StyledTableCell>
                                 <StyledTableCell>Difficulty
-                                    <button onClick={() => setSortCol("Difficulty")}>sort</button>
+                                    <Button onClick={() => setSortCol("Difficulty")}>sort</Button>
                                 </StyledTableCell>
                             </StyledTableRow>
                         </TableHead>
