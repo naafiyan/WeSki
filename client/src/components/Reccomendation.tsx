@@ -105,7 +105,9 @@ export default function Reccomendation(props: InformationProps) {
                 backgroundColor: "white",
                 opacity: "0.8",
               }}>
-                <DialogContentText id="alert-dialog-slide-description">
+                <DialogContentText id="alert-dialog-slide-description" style={{
+                  fontSize: 14,
+                }}>
                   {props.rec.name} has a difficulty rated as { getDifficulty(props.rec.dificulty) }. This mountain
                   is located at the zipcode {props.rec.location}. There are also {props.rec.num_trails} trails open, { props.rec.num_lifts } lifts that are open, and { props.rec.vert_drop } feet of vertical drop. The temperature
                   at the mountain during your trip will be { props.rec.temperature } degrees fahrenheit. The ticket prices will be ${props.rec.price} each, and the weather conditions are { getWeather(props.rec.snow_quality)}.
@@ -133,7 +135,9 @@ export default function Reccomendation(props: InformationProps) {
                 backgroundColor: "white",
                 opacity: "0.8",
               }}>
-                <DialogContentText id="alert-dialog-slide-description">
+                <DialogContentText id="alert-dialog-slide-description" style={{
+                  fontSize: 14,
+                }}>
                   {props.rec2.name} has a difficulty rated as { getDifficulty(props.rec2.dificulty) }. This mountain
                   is located at the zipcode {props.rec2.location}. There are also {props.rec2.num_trails} trails open, { props.rec2.num_lifts } lifts that are open, and { props.rec2.vert_drop } feet of vertical drop. The temperature
                   at the mountain during your trip will be { props.rec2.temperature } degrees fahrenheit. The ticket prices will be ${props.rec2.price} each, and the weather conditions are { getWeather(props.rec2.snow_quality)}.
@@ -160,7 +164,9 @@ export default function Reccomendation(props: InformationProps) {
                 backgroundColor: "white",
                 opacity: "0.8",
               }}>
-                <DialogContentText id="alert-dialog-slide-description">
+                <DialogContentText id="alert-dialog-slide-description" style={{
+                  fontSize: 14,
+                }}>
                   {props.rec3.name} has a difficulty rated as { getDifficulty(props.rec3.dificulty) }. This mountain
                   is located at the zipcode {props.rec3.location}. There are also {props.rec3.num_trails} trails open, { props.rec3.num_lifts } lifts that are open, and { props.rec3.vert_drop } feet of vertical drop. The temperature
                   at the mountain during your trip will be { props.rec3.temperature } degrees fahrenheit. The ticket prices will be ${props.rec3.price} each, and the weather conditions are { getWeather(props.rec3.snow_quality)}.

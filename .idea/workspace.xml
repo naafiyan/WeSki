@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2662c4fa-4510-4c7b-a598-52f1c597fd9d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Reccomendation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Reccomendation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/MountainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/MountainPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

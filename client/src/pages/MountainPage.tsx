@@ -135,7 +135,6 @@ function MountainPage() {
             vert_drop: resJson[2].vert_drop });
 
         setRecommendationShowing(true);
-        // }
     }
 
     const theme = createTheme({
