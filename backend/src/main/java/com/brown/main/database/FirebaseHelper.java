@@ -11,8 +11,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 
+/**
+ * Contains helper methods for connecting to the firebase authentication server
+ */
 public class FirebaseHelper {
-    
+
+    /**
+     * Initiates the connection to the firebase database
+     */
     public static void initFirebase() {
         FileInputStream serviceAccount;
         try {
@@ -35,6 +41,11 @@ public class FirebaseHelper {
         FirebaseApp.initializeApp(options);
     }
 
+    /**
+     * Validates the user's token
+     * @param idToken token of the user
+     * @throws FirebaseAuthException if the user's token is invalid
+     */
     public static void validateToken(String idToken) throws FirebaseAuthException{
         FirebaseAuth.getInstance().verifyIdToken(idToken);
     }
