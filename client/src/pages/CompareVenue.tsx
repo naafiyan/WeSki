@@ -114,14 +114,6 @@ export default function CompareVenue() {
             {/* Page Title */}
             <h1>Compare Venues</h1>
             <div id="body">
-                {/* <select name='colselect' id='col-select' onChange={e => setSortCol(e.target.value)}>
-                    <option>Ski Area</option>
-                    <option># Trails Open</option>
-                    <option>Acreage Open</option>
-                    <option>Price</option>
-                    <option>Temperature</option>
-                    <option>Difficulty</option>
-                </select> */}
                 <TableContainer component={Paper}> {/* Styling component for table */}
                     <Table aria-label="table with ski venue data">
                         <TableHead>
