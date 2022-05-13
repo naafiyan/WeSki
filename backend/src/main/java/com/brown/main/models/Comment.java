@@ -4,6 +4,9 @@ import org.bson.types.ObjectId;
 
 import java.util.Objects;
 
+/**
+ * This class models the Comment data structure.
+ */
 public class Comment implements Model{
   private ObjectId id;
   private ObjectId ski_area;
@@ -11,8 +14,18 @@ public class Comment implements Model{
   private int rating;
   private String text;
 
+  /**
+   * Empty constructor for mongo codex.
+   */
   public Comment(){}
 
+  /**
+   * Normal constructor to create the comment class.
+   * @param ski_area area the comment is for.
+   * @param user user the comment is by.
+   * @param rating rating out of 5 stars
+   * @param text plain-text of the comment
+   */
   public Comment(ObjectId ski_area, ObjectId user, int rating, String text) {
     this.ski_area=ski_area;
     this.user=user;
@@ -20,6 +33,10 @@ public class Comment implements Model{
     this.text=text;
   }
 
+  /**
+   * These methods are required for codexes.
+   * @return
+   */
   @Override
   public Class<Comment> getThisClass() {
     return Comment.class;
@@ -55,6 +72,9 @@ public class Comment implements Model{
     return 1;
   }
 
+  /**
+   * Getters and setters for the fields in Comment
+   */
   public ObjectId getSki_area() {
     return ski_area;
   }

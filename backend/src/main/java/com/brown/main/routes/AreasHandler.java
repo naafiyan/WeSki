@@ -15,8 +15,16 @@ import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
+/**
+ * Class that contains methods for routes relating to areas
+ */
 public class AreasHandler {
 
+  /**
+   * Retrieves all areas from the database.
+   * @param db mongo atlas connection
+   * @return json object containing a list of area objects
+   */
   public static JsonObject getAllAreas(MongoDatabase db) {
     ArrayList<Document> areasDocs = db.getCollection("areas").find().into(new ArrayList<Document>());
     // convert areasDocs to json
@@ -38,7 +46,13 @@ public class AreasHandler {
     res.add("areas", gson.toJsonTree(areas));
     return res;
   }
-  
+
+  /**
+   * Retrieves a specific area, given its id number
+   * @param db mongo database connection
+   * @param req post parameters
+   * @return area corresponding to the input id
+   */
   public static JsonObject getAreaById(MongoDatabase db, Request req) {
     String id = req.params(":id");
     Document areaDoc = db.getCollection("areas").find(new Document("_id", id)).first();
@@ -46,6 +60,11 @@ public class AreasHandler {
     return area;
   }
 
+  /**
+   * Adds a new area to the database.
+   * @param db mongo database connection
+   * @return list of all areas in the database
+   */
   public static JsonObject addArea(MongoDatabase db) {
     // Document areaDoc = new Document();
     // areaDoc.append("name", "Test 1");
@@ -95,6 +114,12 @@ public class AreasHandler {
     return getAllAreas(db);
   }
 
+  /**
+   * Gets a specifric area based on the input objectid
+   * @param db mongo connection
+   * @param id id number of area
+   * @return json string representing the area object
+   */
   public static String getArea(MongoDatabase db, String id) {
     ArrayList<Document> areasDocs = db.getCollection("areas").find(eq("_id", new ObjectId(id))).into(new ArrayList<Document>());
     return areasDocs.get(0).toJson();

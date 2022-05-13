@@ -16,8 +16,16 @@ import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
+/**
+ * Contians methods used for routes relating to users in the database.
+ */
 public class UsersHandler {
 
+  /**
+   * Handles an endpoint to retrieve all users from the database.
+   * @param db MongoDatabase connection to the Atlas database.
+   * @return JsonObject contianing list of all users in the database
+   */
     public static JsonObject getAllUsers(MongoDatabase db) {
         ArrayList<Document> areasDocs = db.getCollection("areas").find().into(new ArrayList<Document>());
         // convert areasDocs to json
@@ -39,22 +47,36 @@ public class UsersHandler {
         res.add("areas", gson.toJsonTree(areas));
         return res;
       }
-      
-      public static JsonObject getUserById(MongoDatabase db, String id) {
-        Document userDoc = db.getCollection("users").find(eq("uid", id)).first();
-        // create new JsonObject with success if userDoc not null and fail if userDoc is null
-        JsonObject user;
-        if (userDoc != null) {
 
-          user = new Gson().fromJson(userDoc.toJson(), JsonObject.class);
-          user.addProperty("success", true);
-        } else {
-          user = new JsonObject();
-          user.addProperty("success", false);
-        }
-        return user;
+  /**
+   * Fetches a specific user's information when given their id.
+   * @param db connection to the Atlas database.
+   * @param id user id number of the user to fetch info from.
+   * @return JsonObject representing the specified user
+   */
+  public static JsonObject getUserById(MongoDatabase db, String id) {
+      Document userDoc = db.getCollection("users").find(eq("uid", id)).first();
+      // create new JsonObject with success if userDoc not null and fail if userDoc is null
+      JsonObject user;
+      if (userDoc != null) {
+
+        user = new Gson().fromJson(userDoc.toJson(), JsonObject.class);
+        user.addProperty("success", true);
+      } else {
+        user = new JsonObject();
+        user.addProperty("success", false);
       }
+      return user;
+    }
 
+  /**
+   * Handles a user logging in on the backend by either:
+   * a) creating a new user if the user does not exist, or
+   * b) fetching the user's information if they do exist
+   * @param db mongodatabase connection to the atlas database
+   * @param req post request parameters
+   * @return jsonobject of the user's information
+   */
       public static synchronized JsonObject userLogin(MongoDatabase db, Request req) {
         // Post request body should be in the form of:
         // {
@@ -99,11 +121,12 @@ public class UsersHandler {
         }
       }
 
-      public static JsonObject newUser(MongoDatabase db, Request req) {
-      // use auth0 to verify jwt from req
-        return null;
-      }
-
+  /**
+   * Validates the user's identity using the firebase authorization token.
+   * @param db connection to mongo atlas database
+   * @param req post request parameters
+   * @return true if user is valid, otherwise false
+   */
       public static boolean validateUserToken(MongoDatabase db, Request req) {
         // Bearer token
         String bearerToken = req.headers("Authorization");
@@ -127,7 +150,13 @@ public class UsersHandler {
         }
       }
 
-      public static JsonObject getUserPrefs(MongoDatabase db, Request req) {
+  /**
+   * Retrieves a user's preferences for ski trips.
+   * @param db connection to mongo atlas database
+   * @param req post parameters
+   * @return JsonObject containing the user's preferences
+   */
+  public static JsonObject getUserPrefs(MongoDatabase db, Request req) {
         // get user id from req params
         String userId = req.params("id");
 
@@ -165,7 +194,13 @@ public class UsersHandler {
         return res;
       }
 
-      public static JsonObject updateUserPrefs(MongoDatabase db, Request req) {
+  /**
+   * Updates a user's preferences.
+   * @param db mongo database connection
+   * @param req post parameters
+   * @return jsonobject saying whether the request was successful or not
+   */
+  public static JsonObject updateUserPrefs(MongoDatabase db, Request req) {
         // get user id from req params
         String userId = req.params("id");
         // get header bearer token
